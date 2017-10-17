@@ -1,11 +1,13 @@
 package gui;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.JToolBar;
 import javax.swing.JButton;
 import javax.swing.JMenuBar;
@@ -22,6 +24,8 @@ public class JWorkFlownetzFrame extends JFrame {
 	 * Create the frame.
 	 */
 	public JWorkFlownetzFrame() {
+		JPanel panel = new JPanel();
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		
@@ -61,7 +65,9 @@ public class JWorkFlownetzFrame extends JFrame {
 		JButton buttonKanten = new JButton("Kanten");
 		toolBar.add(buttonKanten);
 		
-		JPanel panel = new JPanel();
+		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
+		panel.setBackground(new Color(255, 255, 255));
+
 		contentPane.add(panel, BorderLayout.CENTER);
 	}
 
