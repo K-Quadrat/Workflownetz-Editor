@@ -3,5 +3,6 @@ import gui.*;
 import model.*;
 
 public class ToDraw {
+	//
 
 }
