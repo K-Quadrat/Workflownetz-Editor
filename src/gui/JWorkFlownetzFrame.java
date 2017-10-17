@@ -1,4 +1,7 @@
 package gui;
+import gui.*;
+import model.*;
+import controller.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -115,18 +118,31 @@ public class JWorkFlownetzFrame extends JFrame {
 		// MouseListener
 		panel.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				int x = e.getX();
-				int y = e.getY();
-				g2d = (Graphics2D) panel.getGraphics();
-				g2d.setColor(Color.black);
-//				g2d.drawString("Hallo", x, y);
-				g2d.drawRect (e.getX(), e.getY(), 20, 20);
+//				int x = e.getX();
+//				int y = e.getY();
+//				g2d = (Graphics2D) panel.getGraphics();
+//				g2d.setColor(Color.black);
+////				g2d.drawString("Hallo", x, y);
+//				g2d.drawRect (e.getX(), e.getY(), 20, 20);
+				
+
+				ToDraw ToDraw = new ToDraw();
+				ToDraw.drawRect(e.getX(), e.getY());
+				
+				ToDraw.setG2d((Graphics2D) panel.getGraphics());
+//				g2d = (Graphics2D) panel.getGraphics();
+				
+				
+				
 			}
 		});
 		// MouseListener Ende
 
 	}
 
+	
+	
+	
 	private void paintTransition(int x, int y) {
 		int OFFSET = 1;
 		if ((transitionX != x) || (transitionY != y)) {
