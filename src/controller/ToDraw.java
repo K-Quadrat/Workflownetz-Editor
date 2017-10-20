@@ -11,15 +11,25 @@ import model.*;
 
 public class ToDraw {
 
-	private Graphics2D g2d;
+	public Graphics2D g2d;
+	
+	
+    void drawKreuz(int row, int col, Graphics2D g2d) {
+        g2d.setColor(Color.MAGENTA);
+        g2d.drawLine((col * 100) + 20, (row * 100) + 20, (col * 100) + 80, (row * 100) + 80);
+        g2d.drawLine((col * 100) + 20, (row * 100) + 80, (col * 100) + 80, (row * 100) + 20);
+    }
 
-	public void drawRect(int x, int y) {
+	
+	
 
+	void drawRect(int x, int y, Graphics2D g2d) {
 		g2d.setColor(Color.black);
-		// g2d.drawString("Hallo", x, y);
 		g2d.drawRect(x, y, 20, 20);
 	}
 
+	
+	
 	public Graphics2D getG2d() {
 		return g2d;
 	}
@@ -28,10 +38,6 @@ public class ToDraw {
 		this.g2d = g2d;
 	}
 	
-	public int meineMethode(int x, int y) {
-		int c = x+y;
-		return c;
 
-	}
 
 }

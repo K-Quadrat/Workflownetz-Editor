@@ -1,4 +1,5 @@
 package gui;
+
 import gui.*;
 import model.*;
 import controller.*;
@@ -27,18 +28,18 @@ import javax.swing.JMenuItem;
 public class JWorkFlownetzFrame extends JFrame {
 
 	private JPanel contentPane;
-	private String stelleTranstionKante;
+	private int stelleTranstionKante = 5;
 	private int transitionX = 50;
 	private int transitionY = 50;
 	private int transitionW = 20;
 	private int transitionH = 20;
 	private Graphics2D g2d;
+	private JPanel panel = new JPanel();
 
 	/**
 	 * Create the frame.
 	 */
 	public JWorkFlownetzFrame() {
-		JPanel panel = new JPanel();
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -86,8 +87,8 @@ public class JWorkFlownetzFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonStellen) {
-					stelleTranstionKante = "stelle";
-					System.out.println("stelleTranstionKante = " + stelleTranstionKante);
+					stelleTranstionKante = 0;
+					System.out.println("stelleTranstionKante = " + stelleTranstionKante + " Stelle");
 				}
 			}
 		});
@@ -97,8 +98,8 @@ public class JWorkFlownetzFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonTransitionen) {
-					stelleTranstionKante = "transition";
-					System.out.println("stelleTranstionKante = " + stelleTranstionKante);
+					stelleTranstionKante = 1;
+					System.out.println("stelleTranstionKante = " + stelleTranstionKante + " Transtion");
 				}
 			}
 		});
@@ -108,8 +109,8 @@ public class JWorkFlownetzFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonKanten) {
-					stelleTranstionKante = "kante";
-					System.out.println("stelleTranstionKante = " + stelleTranstionKante);
+					stelleTranstionKante = 2;
+					System.out.println("stelleTranstionKante = " + stelleTranstionKante + " Kante");
 				}
 			}
 		});
@@ -118,31 +119,50 @@ public class JWorkFlownetzFrame extends JFrame {
 		// MouseListener
 		panel.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-//				int x = e.getX();
-//				int y = e.getY();
-//				g2d = (Graphics2D) panel.getGraphics();
-//				g2d.setColor(Color.black);
-////				g2d.drawString("Hallo", x, y);
-//				g2d.drawRect (e.getX(), e.getY(), 20, 20);
-				
+				int x = e.getX();
+				int y = e.getY();
 
-				ToDraw ToDraw = new ToDraw();
-				ToDraw.drawRect(e.getX(), e.getY());
-				
-				ToDraw.setG2d((Graphics2D) panel.getGraphics());
-//				g2d = (Graphics2D) panel.getGraphics();
-				
-				
-				
+				// drawTransition(e.getX(), e.getY(), g2d);
+				//
+				switch (stelleTranstionKante) {
+				case 0:
+					drawStelle(x, y, g2d);
+					break;
+				case 1:
+					drawTransition(x, y, g2d);
+					break;
+				case 2:
+					drawKante(x, y, g2d);
+					break;
+				default:
+					break;
+				}
+
 			}
 		});
 		// MouseListener Ende
 
 	}
 
-	
-	
-	
+	void drawStelle(int x, int y, Graphics2D g2d) {
+		g2d = (Graphics2D) panel.getGraphics();
+		g2d.setColor(Color.black);
+		g2d.drawOval(x, y, 20, 20);
+	}
+
+	void drawTransition(int x, int y, Graphics2D g2d) {
+		g2d = (Graphics2D) panel.getGraphics();
+		g2d.setColor(Color.black);
+		g2d.drawRect(x, y, 20, 20);
+	}
+
+	void drawKante(int x, int y, Graphics2D g2d) {
+		g2d = (Graphics2D) panel.getGraphics();
+		g2d.setColor(Color.black);
+		g2d.drawString("Hallo", x, y);
+		// g2d.drawLine(x1, y1, x2, y2);
+	}
+
 	private void paintTransition(int x, int y) {
 		int OFFSET = 1;
 		if ((transitionX != x) || (transitionY != y)) {
