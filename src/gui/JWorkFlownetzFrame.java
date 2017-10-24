@@ -28,7 +28,7 @@ import javax.swing.JMenuItem;
 public class JWorkFlownetzFrame extends JFrame {
 
 	private JPanel contentPane;
-	private int stelleTranstionKante = 5;
+	private int placeTranstionArcPTArcTP = 5;
 	private int transitionX = 50;
 	private int transitionY = 50;
 	private int transitionW = 20;
@@ -67,14 +67,24 @@ public class JWorkFlownetzFrame extends JFrame {
 		JToolBar toolBar = new JToolBar();
 		contentPane.add(toolBar, BorderLayout.NORTH);
 
-		JButton buttonStellen = new JButton("Stellen");
-		toolBar.add(buttonStellen);
+		JButton buttonSelect = new JButton("Select");
+		toolBar.add(buttonSelect);
+		
+		JButton buttonMarquee = new JButton("Marquee");
+		toolBar.add(buttonMarquee);
 
-		JButton buttonTransitionen = new JButton("Transitionen");
-		toolBar.add(buttonTransitionen);
+		
+		JButton buttonPlace = new JButton("Place");
+		toolBar.add(buttonPlace);
 
-		JButton buttonKanten = new JButton("Kanten");
-		toolBar.add(buttonKanten);
+		JButton buttonTransition = new JButton("Transition");
+		toolBar.add(buttonTransition);
+
+		JButton buttonArcPT = new JButton("ArcPT");
+		toolBar.add(buttonArcPT);
+		
+		JButton buttonArcTP = new JButton("ArcTP");
+		toolBar.add(buttonArcTP);
 
 		// Rahmen und Hintergrund des Panels
 		panel.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -82,35 +92,69 @@ public class JWorkFlownetzFrame extends JFrame {
 
 		contentPane.add(panel, BorderLayout.CENTER);
 
-		buttonStellen.addActionListener(new ActionListener() {
+		
+		buttonSelect.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonStellen) {
-					stelleTranstionKante = 0;
-					System.out.println("stelleTranstionKante = " + stelleTranstionKante + " Stelle");
+				if (e.getSource() == buttonSelect) {
+//					placeTranstionArcPTArcTP = 1;
+					System.out.println("Select");
+				}
+			}
+		});
+		
+		buttonMarquee.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonMarquee) {
+//					placeTranstionArcPTArcTP = 1;
+					System.out.println("Marquee");
+				}
+			}
+		});
+		
+		buttonPlace.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonPlace) {
+					placeTranstionArcPTArcTP = 0;
+					System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " Place");
 				}
 			}
 		});
 
-		buttonTransitionen.addActionListener(new ActionListener() {
+		buttonTransition.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonTransitionen) {
-					stelleTranstionKante = 1;
-					System.out.println("stelleTranstionKante = " + stelleTranstionKante + " Transtion");
+				if (e.getSource() == buttonTransition) {
+					placeTranstionArcPTArcTP = 1;
+					System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " Transtion");
 				}
 			}
 		});
 
-		buttonKanten.addActionListener(new ActionListener() {
+		buttonArcPT.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonKanten) {
-					stelleTranstionKante = 2;
-					System.out.println("stelleTranstionKante = " + stelleTranstionKante + " Kante");
+				if (e.getSource() == buttonArcPT) {
+					placeTranstionArcPTArcTP = 2;
+					System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " ArcPT");
+				}
+			}
+		});
+		
+		buttonArcTP.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonArcTP) {
+					placeTranstionArcPTArcTP = 3;
+					System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " ArcTP");
 				}
 			}
 		});
@@ -124,7 +168,7 @@ public class JWorkFlownetzFrame extends JFrame {
 
 				// drawTransition(e.getX(), e.getY(), g2d);
 				//
-				switch (stelleTranstionKante) {
+				switch (placeTranstionArcPTArcTP) {
 				case 0:
 					drawStelle(x, y, g2d);
 					break;
@@ -132,8 +176,12 @@ public class JWorkFlownetzFrame extends JFrame {
 					drawTransition(x, y, g2d);
 					break;
 				case 2:
-					drawKante(x, y, g2d);
+					drawArcPT(x, y, g2d);
 					break;
+				case 3:
+					drawArcTP(x, y, g2d);
+					break;
+
 				default:
 					break;
 				}
@@ -154,14 +202,23 @@ public class JWorkFlownetzFrame extends JFrame {
 		g2d = (Graphics2D) panel.getGraphics();
 		g2d.setColor(Color.black);
 		g2d.drawRect(x, y, 20, 20);
+		System.out.println(g2d);
 	}
 
-	void drawKante(int x, int y, Graphics2D g2d) {
+	void drawArcPT(int x, int y, Graphics2D g2d) {
 		g2d = (Graphics2D) panel.getGraphics();
 		g2d.setColor(Color.black);
-		g2d.drawString("Hallo", x, y);
+		g2d.drawString("ArcPT", x, y);
 		// g2d.drawLine(x1, y1, x2, y2);
 	}
+	
+	void drawArcTP(int x, int y, Graphics2D g2d) {
+		g2d = (Graphics2D) panel.getGraphics();
+		g2d.setColor(Color.black);
+		g2d.drawString("ArcTP", x, y);
+		// g2d.drawLine(x1, y1, x2, y2);
+	}
+
 
 	private void paintTransition(int x, int y) {
 		int OFFSET = 1;
