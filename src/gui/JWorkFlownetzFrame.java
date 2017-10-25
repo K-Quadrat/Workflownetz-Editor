@@ -1,8 +1,8 @@
 package gui;
 
 import gui.*;
+import logic.*;
 import model.*;
-import controller.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -14,13 +14,19 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.JToolBar;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JMenuBar;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
@@ -69,11 +75,10 @@ public class JWorkFlownetzFrame extends JFrame {
 
 		JButton buttonSelect = new JButton("Select");
 		toolBar.add(buttonSelect);
-		
+
 		JButton buttonMarquee = new JButton("Marquee");
 		toolBar.add(buttonMarquee);
 
-		
 		JButton buttonPlace = new JButton("Place");
 		toolBar.add(buttonPlace);
 
@@ -82,7 +87,7 @@ public class JWorkFlownetzFrame extends JFrame {
 
 		JButton buttonArcPT = new JButton("ArcPT");
 		toolBar.add(buttonArcPT);
-		
+
 		JButton buttonArcTP = new JButton("ArcTP");
 		toolBar.add(buttonArcTP);
 
@@ -92,29 +97,51 @@ public class JWorkFlownetzFrame extends JFrame {
 
 		contentPane.add(panel, BorderLayout.CENTER);
 
+		menuItemOpen.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == menuItemOpen) {
+					System.out.println("menuItemOpen");
+					OpenFile();
+				}
+			}
+		});
+
+		menuItemSave.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == menuItemSave) {
+					System.out.println("menuItemSave");
+					SaveFile();
+				}
+			}
+		});
+
 		
 		buttonSelect.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonSelect) {
-//					placeTranstionArcPTArcTP = 1;
+					// placeTranstionArcPTArcTP = 1;
 					System.out.println("Select");
 				}
 			}
 		});
-		
+
 		buttonMarquee.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonMarquee) {
-//					placeTranstionArcPTArcTP = 1;
+					// placeTranstionArcPTArcTP = 1;
 					System.out.println("Marquee");
 				}
 			}
 		});
-		
+
 		buttonPlace.addActionListener(new ActionListener() {
 
 			@Override
@@ -147,7 +174,7 @@ public class JWorkFlownetzFrame extends JFrame {
 				}
 			}
 		});
-		
+
 		buttonArcTP.addActionListener(new ActionListener() {
 
 			@Override
@@ -211,14 +238,52 @@ public class JWorkFlownetzFrame extends JFrame {
 		g2d.drawString("ArcPT", x, y);
 		// g2d.drawLine(x1, y1, x2, y2);
 	}
-	
+
 	void drawArcTP(int x, int y, Graphics2D g2d) {
 		g2d = (Graphics2D) panel.getGraphics();
 		g2d.setColor(Color.black);
 		g2d.drawString("ArcTP", x, y);
 		// g2d.drawLine(x1, y1, x2, y2);
 	}
+	
+	
+	private void OpenFile() {
+		// Create a file chooser
+		JFileChooser chooser = new JFileChooser();
 
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNML File", "pnml");
+		chooser.setFileFilter(filter);
+		int returnVal = chooser.showOpenDialog(JWorkFlownetzFrame.this);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			System.out.println("You chose to open this file: " + chooser.getSelectedFile());
+		}
+
+		try (BufferedReader br = new BufferedReader(new FileReader(chooser.getSelectedFile()))) {
+
+			String sCurrentLine;
+
+			while ((sCurrentLine = br.readLine()) != null) {
+				System.out.println(sCurrentLine);
+			}
+
+		} catch (Exception e2) {
+			// TODO: handle exception
+		}
+
+	}
+	
+	private void SaveFile() {
+		// Create a file chooser
+		JFileChooser chooser = new JFileChooser();
+		
+		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNML File", "pnml");
+		chooser.setFileFilter(filter);
+		int returnVal = chooser.showSaveDialog(JWorkFlownetzFrame.this);
+		if (returnVal == JFileChooser.APPROVE_OPTION) {
+			System.out.println("You chose to open this file: " + chooser.getSelectedFile());
+		}
+		
+	}
 
 	private void paintTransition(int x, int y) {
 		int OFFSET = 1;

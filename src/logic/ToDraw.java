@@ -1,7 +1,7 @@
-package controller;
+package logic;
 import gui.*;
+import logic.*;
 import model.*;
-import controller.*;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
