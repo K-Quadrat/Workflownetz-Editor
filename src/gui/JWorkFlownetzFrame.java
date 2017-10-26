@@ -40,6 +40,11 @@ public class JWorkFlownetzFrame extends JFrame {
 	private int transitionW = 20;
 	private int transitionH = 20;
 	private Graphics2D g2d;
+	private int click1X;
+	private int click1Y;
+	private int click2X;
+	private int click2Y;
+	private Boolean firstClick = true;
 	private JPanel panel = new JPanel();
 
 	/**
@@ -203,7 +208,16 @@ public class JWorkFlownetzFrame extends JFrame {
 					drawTransition(x, y, g2d);
 					break;
 				case 2:
-					drawArcPT(x, y, g2d);
+					if (firstClick) {
+						click1X = x;
+						click1Y = y;
+						firstClick = false;
+					} else if (!firstClick) {
+						click2X = x;
+						click2Y = y;
+						drawArcPT(click1X, click1Y, click2X, click2Y, g2d);
+						firstClick = true;
+					}
 					break;
 				case 3:
 					drawArcTP(x, y, g2d);
@@ -222,28 +236,28 @@ public class JWorkFlownetzFrame extends JFrame {
 	void drawStelle(int x, int y, Graphics2D g2d) {
 		g2d = (Graphics2D) panel.getGraphics();
 		g2d.setColor(Color.black);
-		g2d.drawOval(x, y, 20, 20);
+		g2d.drawOval(x, y, 50, 50);
 	}
 
 	void drawTransition(int x, int y, Graphics2D g2d) {
 		g2d = (Graphics2D) panel.getGraphics();
 		g2d.setColor(Color.black);
-		g2d.drawRect(x, y, 20, 20);
+		g2d.drawRect(x, y, 50, 50);
 		System.out.println(g2d);
 	}
 
-	void drawArcPT(int x, int y, Graphics2D g2d) {
+	void drawArcPT(int x1, int y1, int x2, int y2, Graphics2D g2d) {
 		g2d = (Graphics2D) panel.getGraphics();
 		g2d.setColor(Color.black);
-		g2d.drawString("ArcPT", x, y);
-		// g2d.drawLine(x1, y1, x2, y2);
+//		g2d.drawString("ArcPT", x, y);
+		 g2d.drawLine(click1X, click1Y, click2X, click2Y);
 	}
 
 	void drawArcTP(int x, int y, Graphics2D g2d) {
 		g2d = (Graphics2D) panel.getGraphics();
 		g2d.setColor(Color.black);
 		g2d.drawString("ArcTP", x, y);
-		// g2d.drawLine(x1, y1, x2, y2);
+//	 g2d.drawLine(x1, y1, x2, y2);
 	}
 	
 	
@@ -294,5 +308,5 @@ public class JWorkFlownetzFrame extends JFrame {
 			repaint(transitionX, transitionY, transitionW + OFFSET, transitionH + OFFSET);
 		}
 	}
-
+	
 }
