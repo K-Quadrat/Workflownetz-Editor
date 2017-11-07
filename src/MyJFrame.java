@@ -28,9 +28,9 @@ public class MyJFrame extends JFrame {
 
 	// TODO Methode mit getter und setter bauen
 	public int placeTranstionArcPTArcTP = 5;
-	private Model model;
+	private IModel model;
 
-	public MyJFrame(Model model) {
+	public MyJFrame(IModel model) {
 		this.model = model;
 
 //		EventQueue.invokeLater(new Runnable() {

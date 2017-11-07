@@ -27,10 +27,10 @@ public class MyJPanel extends JPanel {
 	private int click2X;
 	private int click2Y;
 	private Boolean firstClick = true;
-	private Model model;
+	private IModel model;
 	
 
-	public MyJPanel(Model model) {
+	public MyJPanel(IModel model) {
 		this.model = model;
 
 		// Generate few places

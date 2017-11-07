@@ -13,7 +13,7 @@ public class TestMyJFrame {
 				try {
 
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-					Model model = new Model();
+					IModel model = new Model();
 					new MyJFrame(model);
 										
 					
