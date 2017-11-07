@@ -32,24 +32,15 @@ public class MyJPanel extends JPanel {
 
 	public MyJPanel(Model model) {
 		this.model = model;
+
 		// Generate few places
-//		places.add(new Place(100, 100, 50));
-//		places.add(new Place(90, 110, 50));
-//		places.add(new Place(110, 90, 50));
-//		places.add(new Place(130, 70, 50));
-//		model.setPlace(100, 200, 50);
-//		model.setPlace(100, 200, 50);
-		
-//		model.setPlace(100, 200, 50);
 		model.setNode(200, 300, 50, ENode.PLACE, "Place number 1", false);
-		model.setNode(200, 400, 50, ENode.TRANSITION, "Transition number 2", false);
 
 		// Generate few transitions
-//		transitions.add(new Transition(200, 100, 50));
-//		transitions.add(new Transition(170, 190, 50));
-//		transitions.add(new Transition(190, 170, 50));
-//		transitions.add(new Transition(210, 150, 50));
-
+		model.setNode(200, 400, 50, ENode.TRANSITION, "Transition number 2", false);
+		
+		
+		
 		addMouseListener(mouseListener);
 		addMouseMotionListener(motionListener);
 
@@ -79,18 +70,12 @@ public class MyJPanel extends JPanel {
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// Find the place or transition that was clicked
+			// Find the node that was clicked
 			Node n = model.getNode(e.getX(), e.getY());
-//					findPlace(e.getX(), e.getY());
-			Transition t = findTransition(e.getX(), e.getY());
 			if (n != null) {
 				selectedNode = n;
 				repaint();
 				// getContentPane().setCursor(CURSOR_MOVE);
-			}
-			if (t != null) {
-				selectedTransition = t;
-				repaint();
 			}
 		}
 
@@ -156,16 +141,9 @@ public class MyJPanel extends JPanel {
 		@Override
 		public void mouseDragged(MouseEvent e) {
 			if (selectedNode != null) {
-				// Change coordinates of the place
+				// Change coordinates of the node
 				selectedNode.setX(e.getX());
 				selectedNode.setY(e.getY());
-				repaint();
-			}
-
-			if (selectedTransition != null) {
-				// Change coordinates of the transition
-				selectedTransition.setX(e.getX());
-				selectedTransition.setY(e.getY());
 				repaint();
 			}
 		}
@@ -189,25 +167,17 @@ public class MyJPanel extends JPanel {
 //		return null;
 //	}
 
-	public Transition findTransition(int x, int y) {
-		for (Transition t : transitions) {
-			if (t.containsPoint(x, y)) {
-				return t;
-			}
-		}
-		return null;
-	}
 
 	@Override
 	public Dimension getPreferredSize() {
 		return new Dimension(800, 600);
 	}
 
-	// sämtliche kreise zeichnen
-	private void drawPlaces(Graphics2D g2d) {
+	// draw all nodes
+	private void drawNodes(Graphics2D g2d) {
 		for (Node n : model.getAllNodes()) {
-			// der momentan ausgewählte kreis erhält zur besseren übersicht einen roten rand
-			// die anderen kreise bekommen einen schwarzen rahmen
+			// der momentan ausgewählte node erhält zur besseren übersicht einen roten rand
+			// die anderen nodes bekommen einen schwarzen rahmen
 			if (n.equals(selectedNode)) {
 				g2d.setColor(Color.RED);
 			} else {
@@ -216,7 +186,7 @@ public class MyJPanel extends JPanel {
 			if (n.getNodeType() == ENode.PLACE) {
 				g2d.drawOval(n.getX(), n.getY(), n.getRadius(), n.getRadius());	
 			}
-			else if (n.getNodeType() == ENode.TRANSITION) {
+			if (n.getNodeType() == ENode.TRANSITION) {
 				g2d.drawRect(n.getX(), n.getY(), n.getRadius(), n.getRadius());
 
 			}
@@ -224,40 +194,27 @@ public class MyJPanel extends JPanel {
 		}
 	}
 
-	// sämtliche transitions zeichnen
-	private void drawTransitions(Graphics2D g2d) {
-		for (Transition t : transitions) {
-			// der momentan ausgewählte kreis erhält zur besseren übersicht einen roten rand
-			// die anderen kreise bekommen einen schwarzen rahmen
-			if (t.equals(selectedTransition)) {
-				g2d.setColor(Color.RED);
-			} else {
+	
+	
+	private void drawArcTest(Graphics2D g2d) {
+		for (Node nt : model.getAllTransitions()) {
+			for (Node np : model.getAllPlaces()) {
 				g2d.setColor(Color.BLACK);
+				if(np.getX()<nt.getX()) {
+					g2d.drawLine(np.getX()+np.getRadius(), np.getY()+np.getRadius()/2, nt.getX(), nt.getY()+nt.getRadius()/2);
+				}
+				else if (np.getX()>nt.getX()) {
+					g2d.drawLine(np.getX(), np.getY()+np.getRadius()/2, nt.getX()+nt.getRadius(), nt.getY()+nt.getRadius()/2);
+				}
+				else if (np.getY()>nt.getY()) {
+					g2d.drawLine(np.getX()+np.getRadius()/2, np.getY(), nt.getX()+np.getRadius()/2, nt.getY()+nt.getRadius());
+				}
+				else if (np.getY()<nt.getY()) {
+				g2d.drawLine(nt.getX()+nt.getRadius()/2, nt.getY(), np.getX()+np.getRadius()/2, np.getY()+np.getRadius());
+				}
 			}
-			g2d.drawRect(t.getX(), t.getY(), t.getRadius(), t.getRadius());
 		}
 	}
-	
-	
-//	private void drawArcTest(Graphics2D g2d) {
-//		for (Transition t : transitions) {
-//			for (Place p : places) {
-//				g2d.setColor(Color.BLACK);
-//				if(p.getX()<t.getX()) {
-//					g2d.drawLine(p.getX()+p.getRadius(), p.getY()+p.getRadius()/2, t.getX(), t.getY()+t.getRadius()/2);
-//				}
-//				else if (p.getX()>t.getX()) {
-//					g2d.drawLine(p.getX(), p.getY()+p.getRadius()/2, t.getX()+t.getRadius(), t.getY()+t.getRadius()/2);
-//				}
-//				else if (p.getY()>t.getY()) {
-//					g2d.drawLine(p.getX()+p.getRadius()/2, p.getY(), t.getX()+p.getRadius()/2, t.getY()+t.getRadius());
-//				}
-//				else if (p.getY()<t.getY()) {
-//				g2d.drawLine(t.getX()+t.getRadius()/2, t.getY(), p.getX()+p.getRadius()/2, p.getY()+p.getRadius());
-//				}
-//			}
-//		}
-//	}
 
 
 	protected void paintComponent(Graphics g) {
@@ -278,10 +235,9 @@ public class MyJPanel extends JPanel {
 //		g2d.fillRect(0, 0, 8000, 4000);
 		
 
-		drawPlaces(g2d);
-		drawTransitions(g2d);
+		drawNodes(g2d);
 
-//		drawArcTest(g2d);
+		drawArcTest(g2d);
 
 	}
 
