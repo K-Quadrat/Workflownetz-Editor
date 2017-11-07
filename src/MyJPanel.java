@@ -27,23 +27,25 @@ public class MyJPanel extends JPanel {
 	private int click2X;
 	private int click2Y;
 	private Boolean firstClick = true;
-//	private IModel model;
+	private Model model;
 	
 
-	public MyJPanel() {
+	public MyJPanel(Model model) {
+		this.model = model;
 		// Generate few places
-		places.add(new Place(100, 100, 50));
+//		places.add(new Place(100, 100, 50));
 //		places.add(new Place(90, 110, 50));
 //		places.add(new Place(110, 90, 50));
 //		places.add(new Place(130, 70, 50));
 //		model.setPlace(100, 200, 50);
 //		model.setPlace(100, 200, 50);
 		
-//		this.model = model;
 //		model.setPlace(100, 200, 50);
+		model.setNode(200, 300, 50, ENode.PLACE, "Place number 1", false);
+		model.setNode(200, 400, 50, ENode.TRANSITION, "Transition number 2", false);
 
 		// Generate few transitions
-		transitions.add(new Transition(200, 100, 50));
+//		transitions.add(new Transition(200, 100, 50));
 //		transitions.add(new Transition(170, 190, 50));
 //		transitions.add(new Transition(190, 170, 50));
 //		transitions.add(new Transition(210, 150, 50));
@@ -53,6 +55,7 @@ public class MyJPanel extends JPanel {
 
 		// Create frame for panel
 		setBorder(new LineBorder(new Color(0, 0, 0)));
+		setBackground(Color.WHITE);
 
 	}
 
@@ -61,24 +64,15 @@ public class MyJPanel extends JPanel {
 	// defaultcursor
 	private Cursor CURSOR_DEF = new Cursor(Cursor.DEFAULT_CURSOR);
 
-	// List with places
-	private List<Place> places = new ArrayList<Place>();
-	// Selected place
-	private Place selectedPlace = null;
-
-	// List with transitions
-	private List<Transition> transitions = new ArrayList<Transition>();
-	// Selected transition
-	private Transition selectedTransition = null;
+	// Selected node
+	private Node selectedNode = null;
 
 	private MouseListener mouseListener = new MouseListener() {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// No place selected anymore!
-			selectedPlace = null;
-			// No transition selected anymore!
-			selectedTransition = null;
+			// No node selected anymore!
+			selectedNode = null;
 			// getContentPane().setCursor(CURSOR_DEF);
 			repaint();
 		}
@@ -86,10 +80,11 @@ public class MyJPanel extends JPanel {
 		@Override
 		public void mousePressed(MouseEvent e) {
 			// Find the place or transition that was clicked
-			Place p = findPlace(e.getX(), e.getY());
+			Node n = model.getNode(e.getX(), e.getY());
+//					findPlace(e.getX(), e.getY());
 			Transition t = findTransition(e.getX(), e.getY());
-			if (p != null) {
-				selectedPlace = p;
+			if (n != null) {
+				selectedNode = n;
 				repaint();
 				// getContentPane().setCursor(CURSOR_MOVE);
 			}
@@ -160,10 +155,10 @@ public class MyJPanel extends JPanel {
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
-			if (selectedPlace != null) {
+			if (selectedNode != null) {
 				// Change coordinates of the place
-				selectedPlace.setX(e.getX());
-				selectedPlace.setY(e.getY());
+				selectedNode.setX(e.getX());
+				selectedNode.setY(e.getY());
 				repaint();
 			}
 
@@ -185,14 +180,14 @@ public class MyJPanel extends JPanel {
 	 *            der y-Wert
 	 * @return Kreis welcher den Punkt x/y enthält, sonst null
 	 */
-	public Place findPlace(int x, int y) {
-		for (Place p : places) {
-			if (p.containsPoint(x, y)) {
-				return p;
-			}
-		}
-		return null;
-	}
+//	public Place findPlace(int x, int y) {
+//		for (Place p : places) {
+//			if (p.containsPoint(x, y)) {
+//				return p;
+//			}
+//		}
+//		return null;
+//	}
 
 	public Transition findTransition(int x, int y) {
 		for (Transition t : transitions) {
@@ -210,15 +205,22 @@ public class MyJPanel extends JPanel {
 
 	// sämtliche kreise zeichnen
 	private void drawPlaces(Graphics2D g2d) {
-		for (Place p : places) {
+		for (Node n : model.getAllNodes()) {
 			// der momentan ausgewählte kreis erhält zur besseren übersicht einen roten rand
 			// die anderen kreise bekommen einen schwarzen rahmen
-			if (p.equals(selectedPlace)) {
+			if (n.equals(selectedNode)) {
 				g2d.setColor(Color.RED);
 			} else {
 				g2d.setColor(Color.BLACK);
 			}
-			g2d.drawOval(p.getX(), p.getY(), p.getRadius(), p.getRadius());
+			if (n.getNodeType() == ENode.PLACE) {
+				g2d.drawOval(n.getX(), n.getY(), n.getRadius(), n.getRadius());	
+			}
+			else if (n.getNodeType() == ENode.TRANSITION) {
+				g2d.drawRect(n.getX(), n.getY(), n.getRadius(), n.getRadius());
+
+			}
+			
 		}
 	}
 
@@ -237,25 +239,25 @@ public class MyJPanel extends JPanel {
 	}
 	
 	
-	private void drawArcTest(Graphics2D g2d) {
-		for (Transition t : transitions) {
-			for (Place p : places) {
-				g2d.setColor(Color.BLACK);
-				if(p.getX()<t.getX()) {
-					g2d.drawLine(p.getX()+p.getRadius(), p.getY()+p.getRadius()/2, t.getX(), t.getY()+t.getRadius()/2);
-				}
-				else if (p.getX()>t.getX()) {
-					g2d.drawLine(p.getX(), p.getY()+p.getRadius()/2, t.getX()+t.getRadius(), t.getY()+t.getRadius()/2);
-				}
-				else if (p.getY()>t.getY()) {
-					g2d.drawLine(p.getX()+p.getRadius()/2, p.getY(), t.getX()+p.getRadius()/2, t.getY()+t.getRadius());
-				}
-				else if (p.getY()<t.getY()) {
-				g2d.drawLine(t.getX()+t.getRadius()/2, t.getY(), p.getX()+p.getRadius()/2, p.getY()+p.getRadius());
-				}
-			}
-		}
-	}
+//	private void drawArcTest(Graphics2D g2d) {
+//		for (Transition t : transitions) {
+//			for (Place p : places) {
+//				g2d.setColor(Color.BLACK);
+//				if(p.getX()<t.getX()) {
+//					g2d.drawLine(p.getX()+p.getRadius(), p.getY()+p.getRadius()/2, t.getX(), t.getY()+t.getRadius()/2);
+//				}
+//				else if (p.getX()>t.getX()) {
+//					g2d.drawLine(p.getX(), p.getY()+p.getRadius()/2, t.getX()+t.getRadius(), t.getY()+t.getRadius()/2);
+//				}
+//				else if (p.getY()>t.getY()) {
+//					g2d.drawLine(p.getX()+p.getRadius()/2, p.getY(), t.getX()+p.getRadius()/2, t.getY()+t.getRadius());
+//				}
+//				else if (p.getY()<t.getY()) {
+//				g2d.drawLine(t.getX()+t.getRadius()/2, t.getY(), p.getX()+p.getRadius()/2, p.getY()+p.getRadius());
+//				}
+//			}
+//		}
+//	}
 
 
 	protected void paintComponent(Graphics g) {
@@ -272,13 +274,14 @@ public class MyJPanel extends JPanel {
 		// g2d.drawRect(x, y, width, height);
 		// g2d.dispose();
 		// weißes quadrat mahlen
-		g2d.setColor(Color.WHITE);
-		g2d.fillRect(0, 0, 400, 400);
+//		g2d.setColor(Color.WHITE);
+//		g2d.fillRect(0, 0, 8000, 4000);
+		
 
 		drawPlaces(g2d);
 		drawTransitions(g2d);
 
-		drawArcTest(g2d);
+//		drawArcTest(g2d);
 
 	}
 

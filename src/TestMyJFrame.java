@@ -13,7 +13,10 @@ public class TestMyJFrame {
 				try {
 
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-					new MyJFrame();
+					Model model = new Model();
+					new MyJFrame(model);
+										
+					
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException ex) {
 //				} catch (Exception ex) {

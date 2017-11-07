@@ -28,8 +28,10 @@ public class MyJFrame extends JFrame {
 
 	// TODO Methode mit getter und setter bauen
 	public int placeTranstionArcPTArcTP = 5;
+	private Model model;
 
-	public MyJFrame() {
+	public MyJFrame(Model model) {
+		this.model = model;
 
 //		EventQueue.invokeLater(new Runnable() {
 //			@Override
@@ -69,7 +71,7 @@ public class MyJFrame extends JFrame {
 				contentPaneForMenu.add(menuBar, BorderLayout.NORTH);
 
 				// Create ScrollPane and add MyJanel to contentPane
-				JScrollPane scrollPane = new JScrollPane(new MyJPanel());
+				JScrollPane scrollPane = new JScrollPane(new MyJPanel(model));
 				contentPane.add(scrollPane, BorderLayout.CENTER);
 
 				// Add ToolBar to contentPane
