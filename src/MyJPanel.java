@@ -20,7 +20,7 @@ import javax.swing.border.LineBorder;
 
 import sun.java2d.loops.DrawRect;
 
-public class MyJPanel extends JPanel {
+public class MyJPanel extends JPanel implements IView{
 
 	private int click1X;
 	private int click1Y;
@@ -240,5 +240,12 @@ public class MyJPanel extends JPanel {
 		drawArcTest(g2d);
 
 	}
+
+	@Override
+	public void refresh() {
+		repaint();
+	}
+    
+
 
 }

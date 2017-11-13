@@ -28,172 +28,204 @@ public class MyJFrame extends JFrame {
 
 	// TODO Methode mit getter und setter bauen
 	public int placeTranstionArcPTArcTP = 5;
-	private IModel model;
+	private ViewController viewController;
+	private MyJPanel myJPanel;
 
-	public MyJFrame(IModel model) {
-		this.model = model;
+	public MyJFrame(ViewController viewController, MyJPanel myJPanel) {
+		this.viewController = viewController;
+		this.myJPanel = myJPanel;
 
-//		EventQueue.invokeLater(new Runnable() {
-//			@Override
-//			public void run() {
-//				try {
-//					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-//				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-//						| UnsupportedLookAndFeelException ex) {
-//					ex.printStackTrace();
-//				}
+		// EventQueue.invokeLater(new Runnable() {
+		// @Override
+		// public void run() {
+		// try {
+		// UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		// } catch (ClassNotFoundException | InstantiationException |
+		// IllegalAccessException
+		// | UnsupportedLookAndFeelException ex) {
+		// ex.printStackTrace();
+		// }
 
-				JFrame frame = new JFrame("Testing 2");
-				frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JFrame frame = new JFrame("Testing 2");
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-				// Create contentPane with Border Layout
-				JPanel contentPaneForMenu = new JPanel(new BorderLayout());
-				JPanel contentPane = new JPanel(new BorderLayout());
+		// Create contentPane with Border Layout
+		JPanel contentPaneForMenu = new JPanel(new BorderLayout());
+		JPanel contentPane = new JPanel(new BorderLayout());
 
-				// Create menuBar
-				JMenuBar menuBar = new JMenuBar();
-				setJMenuBar(menuBar);
+		// Create menuBar
+		JMenuBar menuBar = new JMenuBar();
+		setJMenuBar(menuBar);
 
-				JMenu menuFile = new JMenu("File");
-				menuBar.add(menuFile);
+		JMenu menuFile = new JMenu("File");
+		menuBar.add(menuFile);
 
-				JMenuItem menuItemOpen = new JMenuItem("Open File...");
-				menuFile.add(menuItemOpen);
+		JMenuItem menuItemOpen = new JMenuItem("Open File...");
+		menuFile.add(menuItemOpen);
 
-				JMenuItem menuItemSave = new JMenuItem("Save As...");
-				menuFile.add(menuItemSave);
+		JMenuItem menuItemSave = new JMenuItem("Save As...");
+		menuFile.add(menuItemSave);
 
-				JMenuItem menuItemExit = new JMenuItem("Exit");
-				menuFile.add(menuItemExit);
+		JMenuItem menuItemExit = new JMenuItem("Exit");
+		menuFile.add(menuItemExit);
 
-				// Add contentPane and menuBar to contentPaneForMenu
-				contentPaneForMenu.add(contentPane, BorderLayout.CENTER);
-				contentPaneForMenu.add(menuBar, BorderLayout.NORTH);
+		// Add contentPane and menuBar to contentPaneForMenu
+		contentPaneForMenu.add(contentPane, BorderLayout.CENTER);
+		contentPaneForMenu.add(menuBar, BorderLayout.NORTH);
 
-				// Create ScrollPane and add MyJanel to contentPane
-				JScrollPane scrollPane = new JScrollPane(new MyJPanel(model));
-				contentPane.add(scrollPane, BorderLayout.CENTER);
+		// Create ScrollPane and add MyJanel to contentPane
+//		JScrollPane scrollPane = new JScrollPane(new MyJPanel(model));
+		JScrollPane scrollPane = new JScrollPane(myJPanel);
+		contentPane.add(scrollPane, BorderLayout.CENTER);
 
-				// Add ToolBar to contentPane
-				JToolBar toolBar = new JToolBar();
-				contentPane.add(toolBar, BorderLayout.NORTH);
+		// Add ToolBar to contentPane
+		JToolBar toolBar = new JToolBar();
+		contentPane.add(toolBar, BorderLayout.NORTH);
 
-				JButton buttonSelect = new JButton("Select");
-				toolBar.add(buttonSelect);
+		JButton buttonSelect = new JButton("Select");
+		toolBar.add(buttonSelect);
 
-				JButton buttonMarquee = new JButton("Marquee");
-				toolBar.add(buttonMarquee);
+		JButton buttonMarquee = new JButton("Marquee");
+		toolBar.add(buttonMarquee);
 
-				JButton buttonPlace = new JButton("Place");
-				toolBar.add(buttonPlace);
+		JButton buttonPlace = new JButton("Place");
+		toolBar.add(buttonPlace);
 
-				JButton buttonTransition = new JButton("Transition");
-				toolBar.add(buttonTransition);
+		JButton buttonTransition = new JButton("Transition");
+		toolBar.add(buttonTransition);
 
-				JButton buttonArcPT = new JButton("ArcPT");
-				toolBar.add(buttonArcPT);
+		JButton buttonArcPT = new JButton("ArcPT");
+		toolBar.add(buttonArcPT);
 
-				JButton buttonArcTP = new JButton("ArcTP");
-				toolBar.add(buttonArcTP);
+		JButton buttonArcTP = new JButton("ArcTP");
+		toolBar.add(buttonArcTP);
 
-				frame.add(contentPaneForMenu);
+		JButton buttonBigger = new JButton("Bigger +");
+		toolBar.add(buttonBigger);
 
-				frame.pack();
-				frame.setLocationRelativeTo(null);
-				frame.setVisible(true);
+		JButton buttonSmaller = new JButton("Smaller -");
+		toolBar.add(buttonSmaller);
 
-				menuItemOpen.addActionListener(new ActionListener() {
+		frame.add(contentPaneForMenu);
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if (e.getSource() == menuItemOpen) {
-							System.out.println("menuItemOpen");
-							OpenFile();
-						}
-					}
-				});
+		frame.pack();
+		frame.setLocationRelativeTo(null);
+		frame.setVisible(true);
 
-				menuItemSave.addActionListener(new ActionListener() {
+		menuItemOpen.addActionListener(new ActionListener() {
 
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if (e.getSource() == menuItemSave) {
-							System.out.println("menuItemSave");
-							SaveFile();
-						}
-					}
-				});
-
-				buttonSelect.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if (e.getSource() == buttonSelect) {
-							// placeTranstionArcPTArcTP = 1;
-							System.out.println("Select");
-						}
-					}
-				});
-
-				buttonMarquee.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if (e.getSource() == buttonMarquee) {
-							// placeTranstionArcPTArcTP = 1;
-							System.out.println("Marquee");
-						}
-					}
-				});
-
-				buttonPlace.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if (e.getSource() == buttonPlace) {
-							placeTranstionArcPTArcTP = 0;
-							System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " Place");
-						}
-					}
-				});
-
-				buttonTransition.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if (e.getSource() == buttonTransition) {
-							placeTranstionArcPTArcTP = 1;
-							System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " Transtion");
-						}
-					}
-				});
-
-				buttonArcPT.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if (e.getSource() == buttonArcPT) {
-							placeTranstionArcPTArcTP = 2;
-							System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " ArcPT");
-						}
-					}
-				});
-
-				buttonArcTP.addActionListener(new ActionListener() {
-
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						if (e.getSource() == buttonArcTP) {
-							placeTranstionArcPTArcTP = 3;
-							System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " ArcTP");
-						}
-					}
-				});
-
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == menuItemOpen) {
+					System.out.println("menuItemOpen");
+					OpenFile();
+				}
 			}
-//		});
+		});
 
-//	}
+		menuItemSave.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == menuItemSave) {
+					System.out.println("menuItemSave");
+					SaveFile();
+				}
+			}
+		});
+
+		buttonSelect.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonSelect) {
+					// placeTranstionArcPTArcTP = 1;
+					System.out.println("Select");
+				}
+			}
+		});
+
+		buttonMarquee.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonMarquee) {
+					// placeTranstionArcPTArcTP = 1;
+					System.out.println("Marquee");
+				}
+			}
+		});
+
+		buttonPlace.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonPlace) {
+					placeTranstionArcPTArcTP = 0;
+					System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " Place");
+				}
+			}
+		});
+
+		buttonTransition.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonTransition) {
+					placeTranstionArcPTArcTP = 1;
+					System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " Transtion");
+				}
+			}
+		});
+
+		buttonArcPT.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonArcPT) {
+					placeTranstionArcPTArcTP = 2;
+					System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " ArcPT");
+				}
+			}
+		});
+
+		buttonArcTP.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonArcTP) {
+					placeTranstionArcPTArcTP = 3;
+					System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " ArcTP");
+				}
+			}
+		});
+
+		buttonBigger.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonBigger) {
+					// Implement here
+					viewController.nodesBigger();
+				}
+			}
+		});
+
+		buttonSmaller.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonSmaller) {
+					// Implement here
+					viewController.nodesSmaller();
+				}
+			}
+		});
+
+	}
+	// });
+
+	// }
 
 	private void OpenFile() {
 		// Create a file chooser

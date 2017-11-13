@@ -14,7 +14,13 @@ public class TestMyJFrame {
 
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					IModel model = new Model();
-					new MyJFrame(model);
+					MyJPanel myJPanel = new MyJPanel(model);
+					IView iView = myJPanel;
+					ViewController viewController = new ViewController(model, iView);
+					MyJFrame myJFrame = new MyJFrame(viewController, myJPanel);
+
+
+					
 										
 					
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException

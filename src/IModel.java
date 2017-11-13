@@ -15,5 +15,5 @@ public interface IModel {
 	Node getTransition(int x, int y);
 
 	List<Node> getAllTransitions();
-
+	
 }

@@ -4,6 +4,7 @@ import java.util.List;
 public class Model implements IModel {
 
 	private List<Node> nodes = new ArrayList<Node>();
+	private int radius;
 
 	@Override
 	public void setNode(int x, int y, int radius, ENode nodeType, String name, boolean markedOrActivated) {
