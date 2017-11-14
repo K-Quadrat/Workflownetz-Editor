@@ -46,7 +46,7 @@ public class MyJFrame extends JFrame {
 		// ex.printStackTrace();
 		// }
 
-		JFrame frame = new JFrame("Testing 2");
+		JFrame frame = new JFrame("Workflownetz Editor");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Create contentPane with Border Layout

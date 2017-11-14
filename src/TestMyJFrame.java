@@ -14,7 +14,8 @@ public class TestMyJFrame {
 
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					IModel model = new Model();
-					MyJPanel myJPanel = new MyJPanel(model);
+					PopupMenuController popupMenuController = new PopupMenuController(model);
+					MyJPanel myJPanel = new MyJPanel(model, popupMenuController);
 					IView iView = myJPanel;
 					ViewController viewController = new ViewController(model, iView);
 					MyJFrame myJFrame = new MyJFrame(viewController, myJPanel);

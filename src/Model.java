@@ -5,10 +5,12 @@ public class Model implements IModel {
 
 	private List<Node> nodes = new ArrayList<Node>();
 	private int radius;
+	private int index;
+	private boolean containsPoint = false;
 
 	@Override
-	public void setNode(int x, int y, int radius, ENode nodeType, String name, boolean markedOrActivated) {
-		nodes.add(new Node(x, y, radius, nodeType, name, markedOrActivated));
+	public void setNode(String id, int x, int y, int radius, ENode nodeType, String name, boolean markedOrActivated) {
+		nodes.add(new Node(id, x, y, radius, nodeType, name, markedOrActivated));
 
 	}
 
@@ -68,6 +70,24 @@ public class Model implements IModel {
 			}
 		}
 		return allTransitionsList;
+	}
+
+	@Override
+	public void deleteNode(int x, int y) {
+		for (Node n : nodes) {
+			if (n.containsPoint(x, y)) {
+				index = nodes.indexOf(n);
+				containsPoint=true;
+			}
+
+		}
+		
+		if(containsPoint) {
+			nodes.remove(index);
+			containsPoint=false;
+		}
+		
+		
 	}
 
 }

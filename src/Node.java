@@ -1,5 +1,6 @@
 
 public class Node {
+	private String id;
 	private int x;
 	private int y;
 	private int radius;
@@ -7,7 +8,9 @@ public class Node {
 	private String name;
 	private boolean markedOrActivated;
 	
-	public Node(int x, int y, int radius, ENode nodeType, String name, boolean markedOrActivated) {
+	public Node(String id, int x, int y, int radius, ENode nodeType, String name, boolean markedOrActivated) {
+		
+		this.id = id;
 		this.x = x;
 		this.y = y;
 		this.radius = radius;
@@ -17,6 +20,22 @@ public class Node {
 	}
 	
 	
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+
+
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
+
+
 	/**
 	 * @return the nodeType
 	 */
