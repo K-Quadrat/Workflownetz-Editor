@@ -36,19 +36,22 @@ public class MyJPanel extends JPanel implements IView {
 	private int clickY;
 	private Boolean firstClick = true;
 	private IModel model;
-	public JPopupMenu rightClickMenu;
-	public PopupMenuController popupMenuController;
+	private JPopupMenu rightClickMenu;
+	private PopupMenuController popupMenuController;
+	private ViewController viewController;
+	private ToolBarController toolBarController;
 
-	public MyJPanel(IModel model, PopupMenuController popupMenuController) {
+	public MyJPanel(IModel model, PopupMenuController popupMenuController, ViewController viewController, ToolBarController toolBarController) {
 		this.model = model;
 		this.popupMenuController = popupMenuController;
+		this.viewController = viewController;
+		this.toolBarController = toolBarController;
 
 		// Generate few places
 		model.setNode("S1", 200, 300, 50, ENode.PLACE, "Place number 1", false);
 		model.setNode("S2", 300, 300, 50, ENode.PLACE, "Place number 1", false);
 		model.setNode("S3", 400, 300, 50, ENode.PLACE, "Place number 1", false);
 		model.setNode("S4", 500, 300, 50, ENode.PLACE, "Place number 1", false);
-
 
 		// Generate few transitions
 		model.setNode("T1", 200, 400, 50, ENode.TRANSITION, "Transition number 2", false);
@@ -85,13 +88,13 @@ public class MyJPanel extends JPanel implements IView {
 		rightClickMenu.add(item = new JMenuItem("Connect"));
 		item.setHorizontalTextPosition(JMenuItem.RIGHT);
 		item.addActionListener(menuListener);
-		
+
 		rightClickMenu.addSeparator();
 
 		rightClickMenu.add(item = new JMenuItem("Delete"));
 		item.setHorizontalTextPosition(JMenuItem.RIGHT);
 		item.addActionListener(menuListener);
-		
+
 	}
 
 	// standartcursor für bewegungen
@@ -144,39 +147,33 @@ public class MyJPanel extends JPanel implements IView {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
+			
+			switch (toolBarController.getToolBarSwitch()) {
+			case 2:
+				viewController.addPlace(e.getX(), e.getY());
+				break;
+			case 3:
+				viewController.addTransition(e.getX(), e.getY());
+				break;
+//			case 2:
+//				if (firstClick) {
+//					click1X = x;
+//					click1Y = y;
+//					firstClick = false;
+//				} else if (!firstClick) {
+//					click2X = x;
+//					click2Y = y;
+//					drawArcPT(click1X, click1Y, click2X, click2Y, g2d);
+//					firstClick = true;
+//				}
+//				break;
+//			case 3:
+//				drawArcTP(x, y, g2d);
+//				break;
 
-			// TODO mouse click
-			// int x = e.getX();
-			// int y = e.getY();
-			//
-			// // drawTransition(e.getX(), e.getY(), g2d);
-			// //
-			// switch (placeTranstionArcPTArcTP) {
-			// case 0:
-			// drawStelle(x, y, g2d);
-			// break;
-			// case 1:
-			// drawTransition(x, y, g2d);
-			// break;
-			// case 2:
-			// if (firstClick) {
-			// click1X = x;
-			// click1Y = y;
-			// firstClick = false;
-			// } else if (!firstClick) {
-			// click2X = x;
-			// click2Y = y;
-			// drawArcPT(click1X, click1Y, click2X, click2Y, g2d);
-			// firstClick = true;
-			// }
-			// break;
-			// case 3:
-			// drawArcTP(x, y, g2d);
-			// break;
-			//
-			// default:
-			// break;
-			// }
+			default:
+				break;
+			}
 
 		}
 

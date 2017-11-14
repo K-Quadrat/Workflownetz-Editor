@@ -26,14 +26,14 @@ import gui.JWorkFlownetzFrame;
 
 public class MyJFrame extends JFrame {
 
-	// TODO Methode mit getter und setter bauen
-	public int placeTranstionArcPTArcTP = 5;
-	private ViewController viewController;
+	private ViewRefresh viewController;
 	private MyJPanel myJPanel;
+	private ToolBarController toolBarController;
 
-	public MyJFrame(ViewController viewController, MyJPanel myJPanel) {
+	public MyJFrame(ViewRefresh viewController, MyJPanel myJPanel, ToolBarController toolBarController) {
 		this.viewController = viewController;
 		this.myJPanel = myJPanel;
+		this.toolBarController = toolBarController;
 
 		// EventQueue.invokeLater(new Runnable() {
 		// @Override
@@ -74,7 +74,7 @@ public class MyJFrame extends JFrame {
 		contentPaneForMenu.add(menuBar, BorderLayout.NORTH);
 
 		// Create ScrollPane and add MyJanel to contentPane
-//		JScrollPane scrollPane = new JScrollPane(new MyJPanel(model));
+		// JScrollPane scrollPane = new JScrollPane(new MyJPanel(model));
 		JScrollPane scrollPane = new JScrollPane(myJPanel);
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 
@@ -139,8 +139,8 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonSelect) {
-					// placeTranstionArcPTArcTP = 1;
-					System.out.println("Select");
+					toolBarController.setToolBarSwitch(0);
+					System.out.println("Select " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
@@ -150,8 +150,8 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonMarquee) {
-					// placeTranstionArcPTArcTP = 1;
-					System.out.println("Marquee");
+					toolBarController.setToolBarSwitch(1);
+					System.out.println("Marquee " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
@@ -161,8 +161,8 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonPlace) {
-					placeTranstionArcPTArcTP = 0;
-					System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " Place");
+					toolBarController.setToolBarSwitch(2);
+					System.out.println("Place " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
@@ -172,8 +172,8 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonTransition) {
-					placeTranstionArcPTArcTP = 1;
-					System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " Transtion");
+					toolBarController.setToolBarSwitch(3);
+					System.out.println("Transition " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
@@ -183,8 +183,8 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonArcPT) {
-					placeTranstionArcPTArcTP = 2;
-					System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " ArcPT");
+					toolBarController.setToolBarSwitch(4);
+					System.out.println("ArcPT " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
@@ -194,8 +194,8 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonArcTP) {
-					placeTranstionArcPTArcTP = 3;
-					System.out.println("placeTranstionArcPTArcTP = " + placeTranstionArcPTArcTP + " ArcTP");
+					toolBarController.setToolBarSwitch(5);
+					System.out.println("ArcTP " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
@@ -205,7 +205,6 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonBigger) {
-					// Implement here
 					viewController.nodesBigger();
 				}
 			}
@@ -216,7 +215,6 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonSmaller) {
-					// Implement here
 					viewController.nodesSmaller();
 				}
 			}
