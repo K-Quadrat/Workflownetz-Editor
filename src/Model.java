@@ -4,6 +4,7 @@ import java.util.List;
 public class Model implements IModel {
 
 	private List<Node> nodes = new ArrayList<Node>();
+	private List<Arc> arcs = new ArrayList<Arc>();
 	private int radius;
 	private int index;
 	private boolean containsPoint = false;
@@ -77,17 +78,27 @@ public class Model implements IModel {
 		for (Node n : nodes) {
 			if (n.containsPoint(x, y)) {
 				index = nodes.indexOf(n);
-				containsPoint=true;
+				containsPoint = true;
 			}
 
 		}
-		
-		if(containsPoint) {
+
+		if (containsPoint) {
 			nodes.remove(index);
-			containsPoint=false;
+			containsPoint = false;
 		}
-		
-		
+
+	}
+
+	@Override
+	public void setArc(String id, String source, String target) {
+		arcs.add(new Arc(id, source, target));
+
+	}
+
+	@Override
+	public List<Arc> getArcs() {
+		return arcs;
 	}
 
 }

@@ -18,4 +18,8 @@ public interface IModel {
 
 	List<Node> getAllTransitions();
 	
+	void setArc(String id, String source, String target);
+	
+	List<Arc> getArcs();
+	
 }
