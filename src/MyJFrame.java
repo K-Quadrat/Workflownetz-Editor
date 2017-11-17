@@ -26,12 +26,12 @@ import gui.JWorkFlownetzFrame;
 
 public class MyJFrame extends JFrame {
 
-	private ViewRefresh viewController;
+	private SizeController sizeController;
 	private MyJPanel myJPanel;
 	private ToolBarController toolBarController;
 
-	public MyJFrame(ViewRefresh viewController, MyJPanel myJPanel, ToolBarController toolBarController) {
-		this.viewController = viewController;
+	public MyJFrame(SizeController sizeController, MyJPanel myJPanel, ToolBarController toolBarController) {
+		this.sizeController = sizeController;
 		this.myJPanel = myJPanel;
 		this.toolBarController = toolBarController;
 
@@ -205,7 +205,7 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonBigger) {
-					viewController.nodesBigger();
+					sizeController.nodesBigger();
 				}
 			}
 		});
@@ -215,7 +215,7 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonSmaller) {
-					viewController.nodesSmaller();
+					sizeController.nodesSmaller();
 				}
 			}
 		});

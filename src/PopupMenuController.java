@@ -1,21 +1,30 @@
+import java.awt.Color;
 
 public class PopupMenuController {
-	
+
 	private IModel model;
-	private Node selectedNode;
+	private SelectedNode selectedNode;
 
-
-	public PopupMenuController(IModel model) {
-		this.model = model;	}
+	public PopupMenuController(IModel model, SelectedNode selectedNode) {
+		this.model = model;
+		this.selectedNode = selectedNode;
+	}
 
 	public void connect() {
 		System.out.println("Method connect in PopupMenuController");
 
 	}
 
-//	public void delete(int clickX, int clickY) {
-//		model.deleteNode(clickX, clickY);
-//
-//	}
+	public void setName() {
+
+	}
+
+	
+	
+
+	// public void delete(int clickX, int clickY) {
+	// model.deleteNode(clickX, clickY);
+	//
+	// }
 
 }

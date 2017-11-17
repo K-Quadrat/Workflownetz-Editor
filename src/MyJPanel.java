@@ -40,24 +40,27 @@ public class MyJPanel extends JPanel implements IView {
 	private PopupMenuController popupMenuController;
 	private ViewController viewController;
 	private ToolBarController toolBarController;
+	private SelectedNode selectedNode;
 
-	public MyJPanel(IModel model, PopupMenuController popupMenuController, ViewController viewController, ToolBarController toolBarController) {
+	public MyJPanel(IModel model, PopupMenuController popupMenuController, ViewController viewController,
+			ToolBarController toolBarController, SelectedNode selectedNode) {
 		this.model = model;
 		this.popupMenuController = popupMenuController;
 		this.viewController = viewController;
 		this.toolBarController = toolBarController;
+		this.selectedNode = selectedNode;
 
 		// Generate few places
-		model.setNode("S1", 200, 300, 50, ENode.PLACE, "Place number 1", false);
-		model.setNode("S2", 300, 300, 50, ENode.PLACE, "Place number 1", false);
-		model.setNode("S3", 400, 300, 50, ENode.PLACE, "Place number 1", false);
-		model.setNode("S4", 500, 300, 50, ENode.PLACE, "Place number 1", false);
+		model.setNode("S1", 200, 300, 50, ENode.PLACE, "P1", false);
+		model.setNode("S2", 300, 300, 50, ENode.PLACE, "P2", false);
+		model.setNode("S3", 400, 300, 50, ENode.PLACE, "P3", false);
+		model.setNode("S4", 500, 300, 50, ENode.PLACE, "P4", false);
 
 		// Generate few transitions
-		model.setNode("T1", 200, 400, 50, ENode.TRANSITION, "Transition number 2", false);
-		model.setNode("T2", 300, 400, 50, ENode.TRANSITION, "Transition number 2", false);
-		model.setNode("T3", 400, 400, 50, ENode.TRANSITION, "Transition number 2", false);
-		model.setNode("T4", 500, 400, 50, ENode.TRANSITION, "Transition number 2", false);
+		model.setNode("T1", 200, 400, 50, ENode.TRANSITION, "Wohnzimmer aufräumen", false);
+		model.setNode("T2", 300, 400, 50, ENode.TRANSITION, "Wohnzimmer fegen", false);
+		model.setNode("T3", 400, 400, 50, ENode.TRANSITION, "Spülmaschiene einräumen", false);
+		model.setNode("T4", 500, 400, 50, ENode.TRANSITION, "Spülmaschiene starten", false);
 
 		addMouseListener(mouseListener);
 		addMouseMotionListener(motionListener);
@@ -79,8 +82,16 @@ public class MyJPanel extends JPanel implements IView {
 					repaint();
 
 				}
-				// System.out.println("Popup menu item [" + event.getActionCommand() + "] was
-				// pressed.");
+				if (event.getActionCommand().equals("Set name")) {
+
+					for (Node n : model.getAllNodes()) {
+						if (n.equals(selectedNode.getSelectedNodeRightClick())) {
+							ViewSetName viewSetName = new ViewSetName(n);
+							selectedNode.setSelectedNodeRightClick(null);
+						}
+
+					}
+				}
 			}
 		};
 
@@ -95,6 +106,10 @@ public class MyJPanel extends JPanel implements IView {
 		item.setHorizontalTextPosition(JMenuItem.RIGHT);
 		item.addActionListener(menuListener);
 
+		rightClickMenu.add(item = new JMenuItem("Set name"));
+		item.setHorizontalTextPosition(JMenuItem.RIGHT);
+		item.addActionListener(menuListener);
+
 	}
 
 	// standartcursor für bewegungen
@@ -102,29 +117,31 @@ public class MyJPanel extends JPanel implements IView {
 	// defaultcursor
 	private Cursor CURSOR_DEF = new Cursor(Cursor.DEFAULT_CURSOR);
 
-	// Selected node
-	private Node selectedNode = null;
-
 	private MouseListener mouseListener = new MouseListener() {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
 			// No node selected anymore!
-			selectedNode = null;
+			selectedNode.setSelectedNode(null);
 			// getContentPane().setCursor(CURSOR_DEF);
 			repaint();
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-
+			// Right Click
 			if (e.isPopupTrigger()) {
+				// Find the node that was clicked
+				Node n = model.getNode(e.getX(), e.getY());
+				if (n != null) {
+					selectedNode.setSelectedNodeRightClick(n);
+				}
 				rightClickMenu.show(e.getComponent(), clickX = e.getX(), clickY = e.getY());
 			} else {
 				// Find the node that was clicked
 				Node n = model.getNode(e.getX(), e.getY());
 				if (n != null) {
-					selectedNode = n;
+					selectedNode.setSelectedNode(n);
 					repaint();
 					// getContentPane().setCursor(CURSOR_MOVE);
 				}
@@ -147,7 +164,7 @@ public class MyJPanel extends JPanel implements IView {
 
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			
+
 			switch (toolBarController.getToolBarSwitch()) {
 			case 2:
 				viewController.addPlace(e.getX(), e.getY());
@@ -155,21 +172,21 @@ public class MyJPanel extends JPanel implements IView {
 			case 3:
 				viewController.addTransition(e.getX(), e.getY());
 				break;
-//			case 2:
-//				if (firstClick) {
-//					click1X = x;
-//					click1Y = y;
-//					firstClick = false;
-//				} else if (!firstClick) {
-//					click2X = x;
-//					click2Y = y;
-//					drawArcPT(click1X, click1Y, click2X, click2Y, g2d);
-//					firstClick = true;
-//				}
-//				break;
-//			case 3:
-//				drawArcTP(x, y, g2d);
-//				break;
+			// case 2:
+			// if (firstClick) {
+			// click1X = x;
+			// click1Y = y;
+			// firstClick = false;
+			// } else if (!firstClick) {
+			// click2X = x;
+			// click2Y = y;
+			// drawArcPT(click1X, click1Y, click2X, click2Y, g2d);
+			// firstClick = true;
+			// }
+			// break;
+			// case 3:
+			// drawArcTP(x, y, g2d);
+			// break;
 
 			default:
 				break;
@@ -189,10 +206,10 @@ public class MyJPanel extends JPanel implements IView {
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
-			if (selectedNode != null) {
+			if (selectedNode.getSelectedNode() != null) {
 				// Change coordinates of the node
-				selectedNode.setX(e.getX());
-				selectedNode.setY(e.getY());
+				selectedNode.getSelectedNode().setX(e.getX());
+				selectedNode.getSelectedNode().setY(e.getY());
 				repaint();
 			}
 		}
@@ -226,7 +243,7 @@ public class MyJPanel extends JPanel implements IView {
 		for (Node n : model.getAllNodes()) {
 			// der momentan ausgewählte node erhält zur besseren übersicht einen roten rand
 			// die anderen nodes bekommen einen schwarzen rahmen
-			if (n.equals(selectedNode)) {
+			if (n.equals(selectedNode.getSelectedNode())) {
 				g2d.setColor(Color.RED);
 			} else {
 				g2d.setColor(Color.BLACK);
@@ -263,6 +280,17 @@ public class MyJPanel extends JPanel implements IView {
 		}
 	}
 
+	private void drawName(Graphics2D g2d) {
+		for (Node n : model.getAllNodes()) {
+			if (n.getNodeType() == ENode.PLACE) {
+				g2d.drawString(n.getName(), n.getX() + n.getRadius() / 2, n.getY() + n.getRadius() + 20);
+			}
+			if (n.getNodeType() == ENode.TRANSITION) {
+				g2d.drawString(n.getName(), n.getX() - n.getRadius() / 2, n.getY() + n.getRadius() + 20);
+			}
+		}
+	}
+
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
@@ -281,8 +309,9 @@ public class MyJPanel extends JPanel implements IView {
 		// g2d.fillRect(0, 0, 8000, 4000);
 
 		drawNodes(g2d);
+		// drawArcTest(g2d);
 
-		drawArcTest(g2d);
+		drawName(g2d);
 
 	}
 

@@ -1,10 +1,10 @@
 
-public class ViewRefresh {
+public class SizeController {
 
 	private IModel model;
 	private IView view;
 
-	public ViewRefresh(IModel model, IView view) {
+	public SizeController(IModel model, IView view) {
 		this.model = model;
 		this.view = view;
 	}

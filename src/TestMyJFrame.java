@@ -15,12 +15,14 @@ public class TestMyJFrame {
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					IModel model = new Model();
 					ToolBarController toolBarController = new ToolBarController();
-					PopupMenuController popupMenuController = new PopupMenuController(model);
+					SelectedNode selectedNode = new SelectedNode();
+					PopupMenuController popupMenuController = new PopupMenuController(model, selectedNode);
 					ViewController viewController = new ViewController(model);
-					MyJPanel myJPanel = new MyJPanel(model, popupMenuController, viewController, toolBarController);
+					MyJPanel myJPanel = new MyJPanel(model, popupMenuController, viewController, toolBarController, selectedNode);
 					IView iView = myJPanel;
-					ViewRefresh viewRefresh = new ViewRefresh(model, iView);
-					MyJFrame myJFrame = new MyJFrame(viewRefresh, myJPanel, toolBarController);
+
+					SizeController sizeController = new SizeController(model, iView);
+					MyJFrame myJFrame = new MyJFrame(sizeController, myJPanel, toolBarController);
 					
 					
 										
