@@ -282,6 +282,7 @@ public class MyJPanel extends JPanel implements IView {
 
 	private void drawName(Graphics2D g2d) {
 		for (Node n : model.getAllNodes()) {
+			g2d.setColor(Color.BLACK);
 			if (n.getNodeType() == ENode.PLACE) {
 				g2d.drawString(n.getName(), n.getX() + n.getRadius() / 2, n.getY() + n.getRadius() + 20);
 			}
