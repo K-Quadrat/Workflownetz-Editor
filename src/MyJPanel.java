@@ -4,6 +4,7 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,6 +25,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
+import sun.java2d.loops.DrawLine;
 import sun.java2d.loops.DrawRect;
 
 public class MyJPanel extends JPanel implements IView {
@@ -41,14 +43,22 @@ public class MyJPanel extends JPanel implements IView {
 	private ViewController viewController;
 	private ToolBarController toolBarController;
 	private SelectedNode selectedNode;
+	private ArcWithHeadController arcWithHeadController;
+	private Point sourcePoint;
+	private Point targetPoint;
+	private int radius;
+	private ArcsWithHeadModel arcsWithHeadModel;
 
 	public MyJPanel(IModel model, PopupMenuController popupMenuController, ViewController viewController,
-			ToolBarController toolBarController, SelectedNode selectedNode) {
+			ToolBarController toolBarController, SelectedNode selectedNode, ArcWithHeadController arcWithHeadController,
+			ArcsWithHeadModel arcsWithHeadModel) {
 		this.model = model;
 		this.popupMenuController = popupMenuController;
 		this.viewController = viewController;
 		this.toolBarController = toolBarController;
 		this.selectedNode = selectedNode;
+		this.arcWithHeadController = arcWithHeadController;
+		this.arcsWithHeadModel = arcsWithHeadModel;
 
 		// Generate few places
 		model.setNode("S1", 200, 300, 50, ENode.PLACE, "P1", false);
@@ -61,6 +71,11 @@ public class MyJPanel extends JPanel implements IView {
 		model.setNode("T2", 300, 400, 50, ENode.TRANSITION, "Wohnzimmer fegen", false);
 		model.setNode("T3", 400, 400, 50, ENode.TRANSITION, "Spülmaschiene einräumen", false);
 		model.setNode("T4", 500, 400, 50, ENode.TRANSITION, "Spülmaschiene starten", false);
+
+		// Generate few arcs
+		model.setArc("K1", "S1", "T1");
+		model.setArc("K2", "T1", "S2");
+		model.setArc("K3", "S2", "T3");
 
 		addMouseListener(mouseListener);
 		addMouseMotionListener(motionListener);
@@ -259,26 +274,30 @@ public class MyJPanel extends JPanel implements IView {
 		}
 	}
 
-	private void drawArcTest(Graphics2D g2d) {
-		for (Node nt : model.getAllTransitions()) {
-			for (Node np : model.getAllPlaces()) {
-				g2d.setColor(Color.BLACK);
-				if (np.getX() < nt.getX()) {
-					g2d.drawLine(np.getX() + np.getRadius(), np.getY() + np.getRadius() / 2, nt.getX(),
-							nt.getY() + nt.getRadius() / 2);
-				} else if (np.getX() > nt.getX()) {
-					g2d.drawLine(np.getX(), np.getY() + np.getRadius() / 2, nt.getX() + nt.getRadius(),
-							nt.getY() + nt.getRadius() / 2);
-				} else if (np.getY() > nt.getY()) {
-					g2d.drawLine(np.getX() + np.getRadius() / 2, np.getY(), nt.getX() + np.getRadius() / 2,
-							nt.getY() + nt.getRadius());
-				} else if (np.getY() < nt.getY()) {
-					g2d.drawLine(nt.getX() + nt.getRadius() / 2, nt.getY(), np.getX() + np.getRadius() / 2,
-							np.getY() + np.getRadius());
-				}
-			}
-		}
-	}
+	// private void drawArcTest(Graphics2D g2d) {
+	// for (Node nt : model.getAllTransitions()) {
+	// for (Node np : model.getAllPlaces()) {
+	// g2d.setColor(Color.BLACK);
+	// if (np.getX() < nt.getX()) {
+	// g2d.drawLine(np.getX() + np.getRadius(), np.getY() + np.getRadius() / 2,
+	// nt.getX(),
+	// nt.getY() + nt.getRadius() / 2);
+	// } else if (np.getX() > nt.getX()) {
+	// g2d.drawLine(np.getX(), np.getY() + np.getRadius() / 2, nt.getX() +
+	// nt.getRadius(),
+	// nt.getY() + nt.getRadius() / 2);
+	// } else if (np.getY() > nt.getY()) {
+	// g2d.drawLine(np.getX() + np.getRadius() / 2, np.getY(), nt.getX() +
+	// np.getRadius() / 2,
+	// nt.getY() + nt.getRadius());
+	// } else if (np.getY() < nt.getY()) {
+	// g2d.drawLine(nt.getX() + nt.getRadius() / 2, nt.getY(), np.getX() +
+	// np.getRadius() / 2,
+	// np.getY() + np.getRadius());
+	// }
+	// }
+	// }
+	// }
 
 	private void drawName(Graphics2D g2d) {
 		for (Node n : model.getAllNodes()) {
@@ -290,6 +309,17 @@ public class MyJPanel extends JPanel implements IView {
 				g2d.drawString(n.getName(), n.getX() - n.getRadius() / 2, n.getY() + n.getRadius() + 20);
 			}
 		}
+	}
+
+	public void drawArc(Graphics2D g2d) {
+		for (ArcWithHead a : arcsWithHeadModel.getArcsWithHead()) {
+		
+//			g2d.drawLine(a.getVon().x, a.getVon().y, a.getNach().x, a.getNach().y);
+//			g2d.fillPolygon(a.getPfeil());
+		}
+		
+		
+		
 	}
 
 	protected void paintComponent(Graphics g) {
@@ -310,9 +340,30 @@ public class MyJPanel extends JPanel implements IView {
 		// g2d.fillRect(0, 0, 8000, 4000);
 
 		drawNodes(g2d);
-		// drawArcTest(g2d);
-
 		drawName(g2d);
+		
+		arcWithHeadController.arcConverter();
+		drawArc(g2d);
+
+		// listeA.contains( elementAusListeB ); //true oder false
+
+		//
+		// if (a.getSource().equals(n.getName())) {
+		// sourcePoint.setLocation(n.getX(), n.getY());
+		// System.out.println(sourcePoint);
+		// }
+		//
+		// if (a.getTarget().equals(n.getName())) {
+		// targetPoint.setLocation(n.getX(), n.getY());
+		// radius = n.getRadius();
+		// System.out.println(targetPoint);
+		// System.out.println(radius);
+		//
+		// }
+		//
+		// }
+
+		// }
 
 	}
 
