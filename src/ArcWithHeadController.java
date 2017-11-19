@@ -23,6 +23,8 @@ public class ArcWithHeadController {
 	private int targetX;
 	private int targetY;
 	private ArcsWithHeadModel arcsWithHeadModel;
+	private ENode sourceNodeType;
+	private ENode targetNodeType;
 
 	public ArcWithHeadController(IModel model, ArcsWithHeadModel arcsWithHeadModel) {
 		this.model = model;
@@ -42,6 +44,7 @@ public class ArcWithHeadController {
 					System.out.println("Treffer source");
 					sourceX = n.getX();
 					sourceY = n.getY();
+					sourceNodeType = n.getNodeType();
 					sourcePoint = new Point(sourceX, sourceY);
 					System.out.println(n.getId());
 					System.out.println(sourceX);
@@ -52,12 +55,13 @@ public class ArcWithHeadController {
 						System.out.println("Treffer target");
 						targetX = n.getX();
 						targetY = n.getY();
+						targetNodeType = n.getNodeType();
 						targetPoint = new Point(targetX, targetY);
 						System.out.println(n.getId());
 						System.out.println(targetX);
 						System.out.println(targetY);
 						radius = n.getRadius();
-						arcsWithHeadModel.setArcWithHead(sourcePoint, targetPoint, 10.0d);
+						arcsWithHeadModel.setArcWithHead(sourcePoint, targetPoint, 10.0d, sourceNodeType, targetNodeType);
 						sourcePoint = null;
 					}
 					
@@ -72,9 +76,9 @@ public class ArcWithHeadController {
 			}
 
 		}
-		arcsWithHeadModel.setArcWithHead(new Point(150, 50), new Point(250, 100), 10.0d);
-		arcsWithHeadModel.setArcWithHead(new Point(250, 100), new Point(150, 250), 10.0d);
-		arcsWithHeadModel.setArcWithHead(new Point(50, 200), new Point(150, 50), 10.0d);
+//		arcsWithHeadModel.setArcWithHead(new Point(150, 50), new Point(250, 100), 10.0d);
+//		arcsWithHeadModel.setArcWithHead(new Point(250, 100), new Point(150, 250), 10.0d);
+//		arcsWithHeadModel.setArcWithHead(new Point(50, 200), new Point(150, 50), 10.0d);
 
 	}
 

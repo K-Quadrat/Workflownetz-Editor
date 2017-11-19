@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileReader;
 
 import javax.swing.JButton;
@@ -29,12 +30,16 @@ public class MyJFrame extends JFrame {
 	private SizeController sizeController;
 	private MyJPanel myJPanel;
 	private ToolBarController toolBarController;
+	private File currentPath;
+	private IModel model;
+	private IView iView;
 
-	public MyJFrame(SizeController sizeController, MyJPanel myJPanel, ToolBarController toolBarController) {
+	public MyJFrame(SizeController sizeController, MyJPanel myJPanel, ToolBarController toolBarController, IModel model,
+			IView iView) {
 		this.sizeController = sizeController;
 		this.myJPanel = myJPanel;
 		this.toolBarController = toolBarController;
-
+		this.iView = iView;
 		// EventQueue.invokeLater(new Runnable() {
 		// @Override
 		// public void run() {
@@ -74,7 +79,6 @@ public class MyJFrame extends JFrame {
 		contentPaneForMenu.add(menuBar, BorderLayout.NORTH);
 
 		// Create ScrollPane and add MyJanel to contentPane
-		// JScrollPane scrollPane = new JScrollPane(new MyJPanel(model));
 		JScrollPane scrollPane = new JScrollPane(myJPanel);
 		contentPane.add(scrollPane, BorderLayout.CENTER);
 
@@ -118,7 +122,7 @@ public class MyJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == menuItemOpen) {
 					System.out.println("menuItemOpen");
-					OpenFile();
+					OpenFile(model);
 				}
 			}
 		});
@@ -225,28 +229,44 @@ public class MyJFrame extends JFrame {
 
 	// }
 
-	private void OpenFile() {
+	private void OpenFile(IModel model) {
 		// Create a file chooser
-		JFileChooser chooser = new JFileChooser();
+		System.out.println(currentPath);
+		// TODO set to currentPath
+		JFileChooser chooser = new JFileChooser("/home/jens/FernUniHagen/ProPra/Aufgabenstellung/Beispiele");
+		// JFileChooser chooser = new JFileChooser(currentPath);
 
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNML File", "pnml");
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showOpenDialog(MyJFrame.this);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			System.out.println("You chose to open this file: " + chooser.getSelectedFile());
-		}
+			currentPath = chooser.getCurrentDirectory();
 
-		try (BufferedReader br = new BufferedReader(new FileReader(chooser.getSelectedFile()))) {
-
-			String sCurrentLine;
-
-			while ((sCurrentLine = br.readLine()) != null) {
-				System.out.println(sCurrentLine);
+			File pnmlDatei = new File(chooser.getSelectedFile(), "");
+			if (pnmlDatei.exists()) {
+				PNMLParserImpl pnmlParserImpl = new PNMLParserImpl(pnmlDatei, model, iView);
+				pnmlParserImpl.initParser();
+				pnmlParserImpl.parse();
+			} else {
+				System.err.println("Die Datei " + pnmlDatei.getAbsolutePath() + " wurde nicht gefunden!");
 			}
-
-		} catch (Exception e2) {
-			// TODO: handle exception
+		} else {
+			System.out.println("Bitte eine Datei als Parameter angeben!");
 		}
+
+		// try (BufferedReader br = new BufferedReader(new
+		// FileReader(chooser.getSelectedFile()))) {
+		//
+		// String sCurrentLine;
+		//
+		// while ((sCurrentLine = br.readLine()) != null) {
+		// System.out.println(sCurrentLine);
+		// }
+		//
+		// } catch (Exception e2) {
+		// // TODO: handle exception
+		// }
 
 	}
 

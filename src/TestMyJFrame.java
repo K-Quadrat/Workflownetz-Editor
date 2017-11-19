@@ -24,8 +24,7 @@ public class TestMyJFrame {
 					IView iView = myJPanel;
 
 					SizeController sizeController = new SizeController(model, iView);
-					new MyJFrame(sizeController, myJPanel, toolBarController);
-					
+					new MyJFrame(sizeController, myJPanel, toolBarController, model, iView);
 					
 										
 					

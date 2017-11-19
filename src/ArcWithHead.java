@@ -12,12 +12,16 @@ class ArcWithHead {
     private double xAlt, yAlt;          // x-,y-Werte vor der Rotation,relativ zur Pfeilspitze 
     private double xNeu, yNeu;          // x-,y-Werte nach der Rotation,absolut 
     private double xSpitze, ySpitze;    // x-,y-Werte der Pfeilspitze 
+    private ENode sourceNodeType;
+    private ENode targetNodeType; 
     
-    public ArcWithHead(Point k1, Point k2, double length) { 
+    public ArcWithHead(Point k1, Point k2, double length, ENode sourceNodeType, ENode targetNodeType) { 
     	
         this.von = k1;
         this.nach = k2; 
         this.s = length;
+        this.sourceNodeType = sourceNodeType;
+        this.targetNodeType = targetNodeType;
         phi = m.atan( ((double)nach.y  -  (double)von.y ) / ((double)nach.x  -  (double)von.x ) ); 
         if(nach.x < von.x ) 
             phi = phi + m.PI; 
@@ -79,6 +83,34 @@ class ArcWithHead {
 	 */
 	public void setPfeil(Polygon pfeil) {
 		this.pfeil = pfeil;
+	}
+
+	/**
+	 * @return the sourceNodeType
+	 */
+	public ENode getSourceNodeType() {
+		return sourceNodeType;
+	}
+
+	/**
+	 * @param sourceNodeType the sourceNodeType to set
+	 */
+	public void setSourceNodeType(ENode sourceNodeType) {
+		this.sourceNodeType = sourceNodeType;
+	}
+
+	/**
+	 * @return the targetNodeType
+	 */
+	public ENode getTargetNodeType() {
+		return targetNodeType;
+	}
+
+	/**
+	 * @param targetNodeType the targetNodeType to set
+	 */
+	public void setTargetNodeType(ENode targetNodeType) {
+		this.targetNodeType = targetNodeType;
 	}
     
     

@@ -19,7 +19,7 @@ public class ViewSetName extends JFrame {
 
 		this.node = node;
 
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		setTitle("Set name");
 

@@ -10,8 +10,8 @@ public class ArcsWithHeadModel {
 	 * @param arcsWithHead
 	 *            the arcsWithHead to set
 	 */
-	public void setArcWithHead(Point source, Point target, double radius) {
-		arcsWithHead.add(new ArcWithHead(source, target, radius));
+	public void setArcWithHead(Point source, Point target, double radius, ENode sourceNodeType, ENode targetNodeType) {
+		arcsWithHead.add(new ArcWithHead(source, target, radius, sourceNodeType, targetNodeType));
 
 	}
 
@@ -20,6 +20,11 @@ public class ArcsWithHeadModel {
 	 */
 	public List<ArcWithHead> getArcsWithHead() {
 		return arcsWithHead;
+	}
+	
+	
+	public void clearArcWithHead() {
+		arcsWithHead.clear();
 	}
 
 }
