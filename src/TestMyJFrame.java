@@ -22,9 +22,10 @@ public class TestMyJFrame {
 					ArcWithHeadController arcWithHeadController = new ArcWithHeadController(model, arcsWithHeadModel);
 					MyJPanel myJPanel = new MyJPanel(model, popupMenuController, viewController, toolBarController, selectedNode, arcWithHeadController, arcsWithHeadModel);
 					IView iView = myJPanel;
-
-					SizeController sizeController = new SizeController(model, iView);
-					new MyJFrame(sizeController, myJPanel, toolBarController, model, iView);
+					
+					GlobalSizeModel globalSizeModel = new GlobalSizeModel();
+					GlobalSizeController globalSizeController = new GlobalSizeController(model, iView, globalSizeModel);
+					new MyJFrame(globalSizeController, myJPanel, toolBarController, model, iView);
 					
 										
 					
