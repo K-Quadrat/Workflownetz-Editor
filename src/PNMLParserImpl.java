@@ -30,7 +30,7 @@ public class PNMLParserImpl extends PNMLParser {
 	 */
 	@Override
 	public void newPlace(String id) {
-		model.setNode(id, 0, 0, 50, ENode.TRANSITION, "", false);
+		model.setNode(id, 0, 0, 50, ENode.PLACE, "", false);
 		iView.refresh();
 	}
 
