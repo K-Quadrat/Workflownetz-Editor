@@ -1,15 +1,20 @@
 import java.awt.Color;
+import java.awt.Point;
 import java.io.File;
 
 public class PNMLParserImpl extends PNMLParser {
 	private IModel model;
 	private IView iView;
+	private ArcsModel arcsModel;
+	private GlobalSizeModel globalSizeModel;
 
 	// Constructor
-	public PNMLParserImpl(File pnml, IModel model, IView iView) {
+	public PNMLParserImpl(File pnml, IModel model, IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel) {
 		super(pnml);
 		this.model = model;
 		this.iView = iView;
+		this.arcsModel = arcsModel;
+		this.globalSizeModel = globalSizeModel;
 	}
 
 	/*
@@ -19,7 +24,7 @@ public class PNMLParserImpl extends PNMLParser {
 	 */
 	@Override
 	public void newTransition(String id) {
-		model.setNode(id, 0, 0, 50, ENode.TRANSITION, "");
+		model.setNode(id, 0, 0, globalSizeModel.getNodesSize(), ENode.TRANSITION, "");
 		iView.refresh();
 	}
 
@@ -30,7 +35,7 @@ public class PNMLParserImpl extends PNMLParser {
 	 */
 	@Override
 	public void newPlace(String id) {
-		model.setNode(id, 0, 0, 50, ENode.PLACE, "", false);
+		model.setNode(id, 0, 0, globalSizeModel.getNodesSize(), ENode.PLACE, "", false);
 		iView.refresh();
 	}
 
@@ -41,7 +46,7 @@ public class PNMLParserImpl extends PNMLParser {
 	 */
 	@Override
 	public void newArc(String id, String source, String target) {
-		model.setArc(id, source, target);
+		arcsModel.setArc(id, source, target, new Point(0, 0), new Point(0, 0), 0);
 		iView.refresh();
 	}
 

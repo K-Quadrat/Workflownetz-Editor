@@ -33,13 +33,17 @@ public class MyJFrame extends JFrame {
 	private File currentPath;
 	private IModel model;
 	private IView iView;
+	private ArcsModel arcsModel;
+	private GlobalSizeModel globalSizeModel;
 
 	public MyJFrame(GlobalSizeController globalSizeController, MyJPanel myJPanel, ToolBarController toolBarController, IModel model,
-			IView iView) {
+			IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel) {
 		this.globalSizeController = globalSizeController;
 		this.myJPanel = myJPanel;
 		this.toolBarController = toolBarController;
 		this.iView = iView;
+		this.arcsModel = arcsModel;
+		this.globalSizeModel = globalSizeModel;
 		// EventQueue.invokeLater(new Runnable() {
 		// @Override
 		// public void run() {
@@ -245,7 +249,7 @@ public class MyJFrame extends JFrame {
 
 			File pnmlDatei = new File(chooser.getSelectedFile(), "");
 			if (pnmlDatei.exists()) {
-				PNMLParserImpl pnmlParserImpl = new PNMLParserImpl(pnmlDatei, model, iView);
+				PNMLParserImpl pnmlParserImpl = new PNMLParserImpl(pnmlDatei, model, iView, arcsModel, globalSizeModel);
 				pnmlParserImpl.initParser();
 				pnmlParserImpl.parse();
 			} else {

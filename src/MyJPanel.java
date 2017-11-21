@@ -43,39 +43,42 @@ public class MyJPanel extends JPanel implements IView {
 	private ViewController viewController;
 	private ToolBarController toolBarController;
 	private SelectedNode selectedNode;
-	private ArcWithHeadController arcWithHeadController;
 	private Point sourcePoint;
 	private Point targetPoint;
 	private int radius;
-	private ArcsWithHeadModel arcsWithHeadModel;
+	private ArcsModel arcsModel;
+	private ArcsController arcsController;
+	private GlobalSizeModel globalSizeModel;
 
 	public MyJPanel(IModel model, PopupMenuController popupMenuController, ViewController viewController,
-			ToolBarController toolBarController, SelectedNode selectedNode, ArcWithHeadController arcWithHeadController,
-			ArcsWithHeadModel arcsWithHeadModel) {
+			ToolBarController toolBarController, SelectedNode selectedNode, ArcsModel arcsModel,
+			ArcsController arcsController, GlobalSizeModel globalSizeModel) {
 		this.model = model;
 		this.popupMenuController = popupMenuController;
 		this.viewController = viewController;
 		this.toolBarController = toolBarController;
 		this.selectedNode = selectedNode;
-		this.arcWithHeadController = arcWithHeadController;
-		this.arcsWithHeadModel = arcsWithHeadModel;
+		this.arcsModel = arcsModel;
+		this.arcsController = arcsController;
+		this.globalSizeModel = globalSizeModel;
 
 		// Generate few places
-//		model.setNode("S1", 200, 300, 50, ENode.PLACE, "P1", false);
-//		model.setNode("S2", 300, 300, 50, ENode.PLACE, "P2", false);
-//		model.setNode("S3", 400, 300, 50, ENode.PLACE, "P3", false);
-//		model.setNode("S4", 500, 300, 50, ENode.PLACE, "P4", false);
+		// model.setNode("S1", 200, 300, 50, ENode.PLACE, "P1", false);
+		// model.setNode("S2", 300, 300, 50, ENode.PLACE, "P2", false);
+		// model.setNode("S3", 400, 300, 50, ENode.PLACE, "P3", false);
+		// model.setNode("S4", 500, 300, 50, ENode.PLACE, "P4", false);
 
 		// Generate few transitions
-//		model.setNode("T1", 200, 400, 50, ENode.TRANSITION, "Wohnzimmer aufräumen");
-//		model.setNode("T2", 300, 400, 50, ENode.TRANSITION, "Wohnzimmer fegen");
-//		model.setNode("T3", 400, 400, 50, ENode.TRANSITION, "Spülmaschiene einräumen");
-//		model.setNode("T4", 500, 400, 50, ENode.TRANSITION, "Spülmaschiene starten");
+		// model.setNode("T1", 200, 400, 50, ENode.TRANSITION, "Wohnzimmer aufräumen");
+		// model.setNode("T2", 300, 400, 50, ENode.TRANSITION, "Wohnzimmer fegen");
+		// model.setNode("T3", 400, 400, 50, ENode.TRANSITION, "Spülmaschiene
+		// einräumen");
+		// model.setNode("T4", 500, 400, 50, ENode.TRANSITION, "Spülmaschiene starten");
 
 		// Generate few arcs
-//		model.setArc("K1", "S1", "T1");
-//		model.setArc("K2", "T1", "S2");
-//		model.setArc("K3", "S2", "T3");
+		// model.setArc("K1", "S1", "T1");
+		// model.setArc("K2", "T1", "S2");
+		// model.setArc("K3", "S2", "T3");
 
 		addMouseListener(mouseListener);
 		addMouseMotionListener(motionListener);
@@ -287,54 +290,64 @@ public class MyJPanel extends JPanel implements IView {
 	}
 
 	public void drawArc(Graphics2D g2d) {
-		
-		for (Node n : model.getAllNodes()) {
-			radius = n.getRadius();
-		}
-			
-		
-		
-		for (ArcWithHead a : arcsWithHeadModel.getArcsWithHead()) {
-			// if (a.getSourceNodeType() == ENode.PLACE && a.getTargetNodeType() ==
-			// ENode.TRANSITION) {
-			//
-			//
-			//
-			// if (a.getVon().x < a.getNach().x) {
-			// g2d.drawLine(a.getVon().x + radius, a.getVon().y + radius / 2, a.getNach().x,
-			// a.getNach().y + radius / 2);
-			// }
-			//
-			// else if (a.getVon().x > a.getNach().x) {
-			// g2d.drawLine(a.getVon().x, a.getVon().y + radius / 2, a.getNach().x + radius,
-			// a.getNach().y + radius / 2);
-			// }
-			//
-			//
-			// }
-			//
-			// if (a.getSourceNodeType() == ENode.TRANSITION && a.getTargetNodeType() ==
-			// ENode.PLACE) {
-			//
-			// if (a.getVon().y > a.getNach().y) {
-			// g2d.drawLine(a.getVon().x + radius / 2, a.getVon().y, a.getNach().x + radius
-			// / 2, a.getNach().y + radius);
-			// }
-			//
-			// else if (a.getVon().y < a.getNach().y) {
-			// g2d.drawLine(a.getNach().x + radius / 2, a.getNach().y, a.getVon().x + radius
-			// / 2, a.getVon().y + radius);
-			// }
-			// }
-			
-			
-			
-			
+
+		for (Arc a : arcsModel.getArcs()) {
 
 			g2d.drawLine(a.getVon().x, a.getVon().y, a.getNach().x, a.getNach().y);
 			g2d.fillPolygon(a.getPfeil());
 		}
-		arcsWithHeadModel.clearArcWithHead();
+
+		// for (Node n : model.getAllNodes()) {
+		// radius = n.getRadius();
+		// }
+		//
+		//
+		//
+		// for (ArcWithHead a : arcsWithHeadModel.getArcsWithHead()) {
+		// // if (a.getSourceNodeType() == ENode.PLACE && a.getTargetNodeType() ==
+		// // ENode.TRANSITION) {
+		// //
+		// //
+		// //
+		// // if (a.getVon().x < a.getNach().x) {
+		// // g2d.drawLine(a.getVon().x + radius, a.getVon().y + radius / 2,
+		// a.getNach().x,
+		// // a.getNach().y + radius / 2);
+		// // }
+		// //
+		// // else if (a.getVon().x > a.getNach().x) {
+		// // g2d.drawLine(a.getVon().x, a.getVon().y + radius / 2, a.getNach().x +
+		// radius,
+		// // a.getNach().y + radius / 2);
+		// // }
+		// //
+		// //
+		// // }
+		// //
+		// // if (a.getSourceNodeType() == ENode.TRANSITION && a.getTargetNodeType() ==
+		// // ENode.PLACE) {
+		// //
+		// // if (a.getVon().y > a.getNach().y) {
+		// // g2d.drawLine(a.getVon().x + radius / 2, a.getVon().y, a.getNach().x +
+		// radius
+		// // / 2, a.getNach().y + radius);
+		// // }
+		// //
+		// // else if (a.getVon().y < a.getNach().y) {
+		// // g2d.drawLine(a.getNach().x + radius / 2, a.getNach().y, a.getVon().x +
+		// radius
+		// // / 2, a.getVon().y + radius);
+		// // }
+		// // }
+		//
+		//
+		//
+		//
+		//
+		// g2d.drawLine(a.getVon().x, a.getVon().y, a.getNach().x, a.getNach().y);
+		// g2d.fillPolygon(a.getPfeil());
+		// }
+		// arcsWithHeadModel.clearArcWithHead();
 	}
 
 	// private void drawArcTest(Graphics2D g2d) {
@@ -382,8 +395,12 @@ public class MyJPanel extends JPanel implements IView {
 		drawNodes(g2d);
 		drawName(g2d);
 
-		arcWithHeadController.arcConverter();
+		arcsController.setPosition();
+
 		drawArc(g2d);
+
+		// arcWithHeadController.arcConverter();
+		// drawArc(g2d);
 
 		// listeA.contains( elementAusListeB ); //true oder false
 

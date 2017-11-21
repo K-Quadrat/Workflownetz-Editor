@@ -4,7 +4,6 @@ import java.util.List;
 public class Model implements IModel {
 
 	private List<Node> nodes = new ArrayList<Node>();
-	private List<Arc> arcs = new ArrayList<Arc>();
 	private int radius;
 	private int index;
 	private boolean containsPoint = false;
@@ -13,12 +12,12 @@ public class Model implements IModel {
 	public void setNode(String id, int x, int y, int radius, ENode nodeType, String name, boolean marking) {
 		nodes.add(new Node(id, x, y, radius, nodeType, name, marking));
 	}
-	
+
 	@Override
 	public void setNode(String id, int x, int y, int radius, ENode nodeType, String name) {
-		nodes.add(new Node(id, x, y, radius, nodeType, name));		
+		nodes.add(new Node(id, x, y, radius, nodeType, name));
 	}
-	
+
 	@Override
 	public Node getNode(int x, int y) {
 		for (Node n : nodes) {
@@ -93,18 +92,5 @@ public class Model implements IModel {
 		}
 
 	}
-
-	@Override
-	public void setArc(String id, String source, String target) {
-		arcs.add(new Arc(id, source, target));
-
-	}
-
-	@Override
-	public List<Arc> getArcs() {
-		return arcs;
-	}
-
-
 
 }

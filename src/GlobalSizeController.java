@@ -4,11 +4,13 @@ public class GlobalSizeController {
 	private IModel model;
 	private IView view;
 	private GlobalSizeModel globalSizeModel;
+	private ArcsModel arcsModel;
 
-	public GlobalSizeController(IModel model, IView view, GlobalSizeModel globalSizeModel) {
+	public GlobalSizeController(IModel model, IView view, GlobalSizeModel globalSizeModel, ArcsModel arcsModel) {
 		this.model = model;
 		this.view = view;
 		this.globalSizeModel = globalSizeModel;
+		this.arcsModel = arcsModel;
 	}
 
 	public void nodesBigger() {
@@ -21,7 +23,7 @@ public class GlobalSizeController {
 			view.refresh();
 		}
 
-		for (Arc a : model.getArcs()) {
+		for (Arc a : arcsModel.getArcs()) {
 //			a.setRadius(globalSizeModel.getArcsSize());
 			view.refresh();
 		}
@@ -36,7 +38,7 @@ public class GlobalSizeController {
 			view.refresh();
 		}
 
-		for (Arc a : model.getArcs()) {
+		for (Arc a : arcsModel.getArcs()) {
 //			a.setRadius(globalSizeModel.getArcsSize());
 			view.refresh();
 		}

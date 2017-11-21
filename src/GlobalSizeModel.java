@@ -1,11 +1,11 @@
 
 public class GlobalSizeModel {
 	private int nodesSize;
-	private double arcsSize;
+	private int arcsSize;
 
 	public GlobalSizeModel() {
 		nodesSize = 50;
-		arcsSize = 10d;
+		arcsSize = 10;
 	}
 
 	/**
@@ -25,14 +25,14 @@ public class GlobalSizeModel {
 	/**
 	 * @return the arcsSize
 	 */
-	public double getArcsSize() {
+	public int getArcsSize() {
 		return arcsSize;
 	}
 
 	/**
 	 * @param arcsSize the arcsSize to set
 	 */
-	public void setArcsSize(double arcsSize) {
+	public void setArcsSize(int arcsSize) {
 		this.arcsSize = arcsSize;
 	}
 

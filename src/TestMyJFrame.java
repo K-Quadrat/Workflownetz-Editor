@@ -14,18 +14,19 @@ public class TestMyJFrame {
 
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					IModel model = new Model();
-					ArcsWithHeadModel arcsWithHeadModel = new ArcsWithHeadModel();
+					ArcsModel arcsModel = new ArcsModel();
 					ToolBarController toolBarController = new ToolBarController();
 					SelectedNode selectedNode = new SelectedNode();
 					PopupMenuController popupMenuController = new PopupMenuController(model, selectedNode);
 					ViewController viewController = new ViewController(model);
-					ArcWithHeadController arcWithHeadController = new ArcWithHeadController(model, arcsWithHeadModel);
-					MyJPanel myJPanel = new MyJPanel(model, popupMenuController, viewController, toolBarController, selectedNode, arcWithHeadController, arcsWithHeadModel);
+					GlobalSizeModel globalSizeModel = new GlobalSizeModel();
+
+					ArcsController arcsController = new ArcsController(model, arcsModel, globalSizeModel);
+					MyJPanel myJPanel = new MyJPanel(model, popupMenuController, viewController, toolBarController, selectedNode, arcsModel, arcsController, globalSizeModel);
 					IView iView = myJPanel;
 					
-					GlobalSizeModel globalSizeModel = new GlobalSizeModel();
-					GlobalSizeController globalSizeController = new GlobalSizeController(model, iView, globalSizeModel);
-					new MyJFrame(globalSizeController, myJPanel, toolBarController, model, iView);
+					GlobalSizeController globalSizeController = new GlobalSizeController(model, iView, globalSizeModel, arcsModel);
+					new MyJFrame(globalSizeController, myJPanel, toolBarController, model, iView, arcsModel, globalSizeModel);
 					
 										
 					
