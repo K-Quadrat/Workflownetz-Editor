@@ -4,8 +4,8 @@ public class GlobalSizeModel {
 	private int arcsSize;
 
 	public GlobalSizeModel() {
-		nodesSize = 50;
-		arcsSize = 10;
+		nodesSize = 40;
+		arcsSize = 8;
 	}
 
 	/**

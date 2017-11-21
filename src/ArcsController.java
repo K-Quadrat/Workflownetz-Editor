@@ -37,40 +37,48 @@ public class ArcsController {
 	public void setPosition() {
 
 		for (Arc a : arcsModel.getArcs()) {
-//			System.out.println(a.getId());
-//			System.out.println(a.getSource());
-//			System.out.println(a.getTarget());
 
 			for (Node n : model.getAllNodes()) {
 				if (n.getId().equals(a.getSource())) {
-//					System.out.println("Treffer source");
 					sourcePoint = new Point(n.getX(), n.getY());
-//					System.out.println(n.getId());
-//					System.out.println(sourcePoint);
 					treffer = true;
 				}
 				if (treffer) {
 					for (Node ntarget : model.getAllNodes()) {
 						if (ntarget.getId().equals(a.getTarget())) {
-//							System.out.println("Treffer target");
 							targetPoint = new Point(ntarget.getX(), ntarget.getY());
-//							System.out.println(ntarget.getId());
-//							System.out.println(targetPoint);
+
+							if (sourcePoint.x < targetPoint.x) {
+								sourcePoint.x = sourcePoint.x + globalSizeModel.getNodesSize();
+								sourcePoint.y = sourcePoint.y + globalSizeModel.getNodesSize()/2;
+								targetPoint.y = targetPoint.y + globalSizeModel.getNodesSize()/2;
+
+							} else if (sourcePoint.x > targetPoint.x) {
+								sourcePoint.y = sourcePoint.y + globalSizeModel.getNodesSize()/2;
+								targetPoint.x = targetPoint.x + globalSizeModel.getNodesSize();
+								targetPoint.y = targetPoint.y + globalSizeModel.getNodesSize()/2;
+								
+							} else if (sourcePoint.y > targetPoint.y) {
+								sourcePoint.x = sourcePoint.x + globalSizeModel.getNodesSize()/2;
+								targetPoint.x = targetPoint.x + globalSizeModel.getNodesSize()/2;
+								targetPoint.y = targetPoint.y + globalSizeModel.getNodesSize();
+
+							} else if (sourcePoint.y < targetPoint.y) {
+								sourcePoint.x = sourcePoint.x + globalSizeModel.getNodesSize()/2;
+								targetPoint.x = targetPoint.x + globalSizeModel.getNodesSize()/2;
+								sourcePoint.y = sourcePoint.y + globalSizeModel.getNodesSize();
+//								
+							}
+
 							a.modifyArc(sourcePoint, targetPoint, globalSizeModel.getArcsSize());
 							treffer = false;
 						}
 					}
 
 				}
-//				System.out.println(n.getId());
-//				System.out.println(n.getX());
-//				System.out.println(n.getY());
 			}
 
 		}
 
-		
-		
-		
 	}
 }
