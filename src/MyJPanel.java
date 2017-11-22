@@ -97,6 +97,7 @@ public class MyJPanel extends JPanel implements IView {
 				}
 				if (event.getActionCommand().equals("Delete")) {
 					model.deleteNode(clickX, clickY);
+					arcsController.removeNotUsedArcs();
 					repaint();
 
 				}

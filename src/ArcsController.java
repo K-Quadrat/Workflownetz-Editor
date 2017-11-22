@@ -25,7 +25,9 @@ public class ArcsController {
 	private ENode sourceNodeType;
 	private ENode targetNodeType;
 	private GlobalSizeModel globalSizeModel;
-	private boolean treffer;
+	private boolean hit;
+	private boolean hitSource;
+	private boolean hitTarget;
 
 	public ArcsController(IModel model, ArcsModel arcsModel, GlobalSizeModel globalSizeModel) {
 		this.model = model;
@@ -41,9 +43,9 @@ public class ArcsController {
 			for (Node n : model.getAllNodes()) {
 				if (n.getId().equals(a.getSource())) {
 					sourcePoint = new Point(n.getX(), n.getY());
-					treffer = true;
+					hit = true;
 				}
-				if (treffer) {
+				if (hit) {
 					for (Node ntarget : model.getAllNodes()) {
 						if (ntarget.getId().equals(a.getTarget())) {
 							targetPoint = new Point(ntarget.getX(), ntarget.getY());
@@ -71,7 +73,7 @@ public class ArcsController {
 							}
 
 							a.modifyArc(sourcePoint, targetPoint, globalSizeModel.getArcsSize());
-							treffer = false;
+							hit = false;
 						}
 					}
 
@@ -80,5 +82,33 @@ public class ArcsController {
 
 		}
 
+	}
+	
+	public void removeNotUsedArcs(){
+		
+		for (int i = 0; i < arcsModel.getArcs().size(); i++) {
+			Arc a = arcsModel.getArcs().get(i);
+			
+			for (int j = 0; j < model.getAllNodes().size(); j++) {
+				Node n = model.getAllNodes().get(j);
+				if (n.getId().equals(a.getSource())) {
+					hitSource = true;
+				}
+				if(n.getId().equals(a.getTarget())){
+					hitTarget = true;
+				}
+				
+			}
+			
+			if(!hitSource||!hitTarget) {
+				arcsModel.deleteArcById(a.getId());
+				i--;
+				}
+			hitSource = false;
+			hitTarget = false;
+			
+
+		}
+		
 	}
 }

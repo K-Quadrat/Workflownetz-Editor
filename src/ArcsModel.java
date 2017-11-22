@@ -7,14 +7,23 @@ public class ArcsModel {
 
 	private List<Arc> arcs = new ArrayList<Arc>();
 	private int index;
-	
+
 	public void setArc(String id, String source, String target, Point k1, Point k2, double length) {
 		arcs.add(new Arc(id, source, target, k1, k2, length));
 	}
 
 	public List<Arc> getArcs() {
 		return arcs;
-		
+
 	}
-	
+
+	public void deleteArcById(String id) {
+		for (Arc a : getArcs()) {
+			if (a.getId().equals(id)) {
+				index = arcs.indexOf(a);
+			}
+		}
+		arcs.remove(index);
+	}
+
 }
