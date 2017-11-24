@@ -36,7 +36,10 @@ public class MyJPanel extends JPanel implements IView {
 	private int click2Y;
 	private int clickX;
 	private int clickY;
+	private String firstClickNodeId;
+	private String secondClickNodeId;
 	private Boolean firstClick = true;
+	private ENode nodeType;
 	private IModel model;
 	private JPopupMenu rightClickMenu;
 	private PopupMenuController popupMenuController;
@@ -205,21 +208,30 @@ public class MyJPanel extends JPanel implements IView {
 			case 3:
 				viewController.addTransition(e.getX(), e.getY());
 				break;
-			// case 2:
-			// if (firstClick) {
-			// click1X = x;
-			// click1Y = y;
-			// firstClick = false;
-			// } else if (!firstClick) {
-			// click2X = x;
-			// click2Y = y;
-			// drawArcPT(click1X, click1Y, click2X, click2Y, g2d);
-			// firstClick = true;
-			// }
-			// break;
-			// case 3:
-			// drawArcTP(x, y, g2d);
-			// break;
+			case 4:
+				// Find the node that was clicked
+				Node n = model.getNode(e.getX(), e.getY());
+
+				if (firstClick && n != null) {
+
+					nodeType = n.getNodeType();
+					firstClickNodeId = n.getId();
+					firstClick = false;
+
+				} else if (!firstClick && n != null && nodeType != n.getNodeType()) {
+					secondClickNodeId = n.getId();
+					viewController.addArc(firstClickNodeId, secondClickNodeId);
+
+					firstClick = true;
+					firstClickNodeId = null;
+					secondClickNodeId = null;
+					nodeType = null;
+					
+				} else if (n == null || nodeType == n.getNodeType()) {
+					firstClick = true;
+				}
+
+				break;
 
 			default:
 				break;

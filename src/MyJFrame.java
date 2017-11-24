@@ -35,17 +35,17 @@ public class MyJFrame extends JFrame {
 	private IView iView;
 	private ArcsModel arcsModel;
 	private GlobalSizeModel globalSizeModel;
-	private NodeId nodeId;
+	private ID id;
 
-	public MyJFrame(GlobalSizeController globalSizeController, MyJPanel myJPanel, ToolBarController toolBarController, IModel model,
-			IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel, NodeId nodeId) {
+	public MyJFrame(GlobalSizeController globalSizeController, MyJPanel myJPanel, ToolBarController toolBarController,
+			IModel model, IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel, ID id) {
 		this.globalSizeController = globalSizeController;
 		this.myJPanel = myJPanel;
 		this.toolBarController = toolBarController;
 		this.iView = iView;
 		this.arcsModel = arcsModel;
 		this.globalSizeModel = globalSizeModel;
-		this.nodeId = nodeId;
+		this.id = id;
 		// EventQueue.invokeLater(new Runnable() {
 		// @Override
 		// public void run() {
@@ -104,11 +104,8 @@ public class MyJFrame extends JFrame {
 		JButton buttonTransition = new JButton("Transition");
 		toolBar.add(buttonTransition);
 
-		JButton buttonArcPT = new JButton("ArcPT");
-		toolBar.add(buttonArcPT);
-
-		JButton buttonArcTP = new JButton("ArcTP");
-		toolBar.add(buttonArcTP);
+		JButton buttonArc = new JButton("Arc");
+		toolBar.add(buttonArc);
 
 		JButton buttonBigger = new JButton("Bigger +");
 		toolBar.add(buttonBigger);
@@ -127,7 +124,6 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == menuItemOpen) {
-					System.out.println("menuItemOpen");
 					OpenFile(model);
 				}
 			}
@@ -138,8 +134,17 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == menuItemSave) {
-					System.out.println("menuItemSave");
 					SaveFile();
+				}
+			}
+		});
+
+		menuItemExit.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == menuItemExit) {
+					System.exit(0);
 				}
 			}
 		});
@@ -188,24 +193,13 @@ public class MyJFrame extends JFrame {
 			}
 		});
 
-		buttonArcPT.addActionListener(new ActionListener() {
+		buttonArc.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonArcPT) {
+				if (e.getSource() == buttonArc) {
 					toolBarController.setToolBarSwitch(4);
-					System.out.println("ArcPT " + toolBarController.getToolBarSwitch());
-				}
-			}
-		});
-
-		buttonArcTP.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonArcTP) {
-					toolBarController.setToolBarSwitch(5);
-					System.out.println("ArcTP " + toolBarController.getToolBarSwitch());
+					System.out.println("Arc " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
@@ -260,8 +254,9 @@ public class MyJFrame extends JFrame {
 		} else {
 			System.out.println("Bitte eine Datei als Parameter angeben!");
 		}
-		nodeId.setBothIdForParser();
-		
+		id.setBothIdForParser();
+		id.setArcIdForParser();
+
 		// try (BufferedReader br = new BufferedReader(new
 		// FileReader(chooser.getSelectedFile()))) {
 		//

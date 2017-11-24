@@ -4,17 +4,22 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class NodeId {
+public class ID {
 	int placeIdCounter;
 	int transitionIdCounter;
+	int arcIdCounter;
 	String placeIdString;
 	String transitionIdString;
+	String arcIdString;
 	private List<Integer> placesIds = new ArrayList<Integer>();
 	private List<Integer> transitionsIds = new ArrayList<Integer>();
+	private List<Integer> arcsIds = new ArrayList<Integer>();
 	private IModel model;
+	private ArcsModel arcsModel;
 
-	public NodeId(IModel model) {
+	public ID(IModel model, ArcsModel arcsModel) {
 		this.model = model;
+		this.arcsModel = arcsModel;
 	}
 
 	/**
@@ -25,7 +30,7 @@ public class NodeId {
 		setPlaceIdString();
 		return placeIdString;
 	}
-	
+
 	public String getPlaceIdString() {
 		return placeIdString;
 	}
@@ -46,7 +51,7 @@ public class NodeId {
 		setTransitionIdString();
 		return transitionIdString;
 	}
-	
+
 	public String getTransitionIdString() {
 		return transitionIdString;
 	}
@@ -57,6 +62,20 @@ public class NodeId {
 	 */
 	public void setTransitionIdString() {
 		transitionIdString = "T" + Integer.toString(transitionIdCounter);
+	}
+
+	public String getNextArcIdString() {
+		arcIdCounter++;
+		setArcIdString();
+		return arcIdString;
+	}
+
+	public String getArcIdString() {
+		return arcIdString;
+	}
+
+	public void setArcIdString() {
+		arcIdString = "K" + Integer.toString(arcIdCounter);
 	}
 
 	/**
@@ -84,6 +103,18 @@ public class NodeId {
 
 		setPlaceIdString();
 		setTransitionIdString();
+
+	}
+
+	public void setArcIdForParser() {
+		for (Arc a : arcsModel.getArcs()) {
+			// Remove all "K", parse String to int and add all numbers to ArrayList
+			// placesIds
+			arcsIds.add(Integer.parseInt(a.getId().replaceAll("K", "")));
+
+		}
+		arcIdCounter = Collections.max(arcsIds);
+		setArcIdString();
 
 	}
 

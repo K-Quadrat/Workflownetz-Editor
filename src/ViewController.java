@@ -1,3 +1,4 @@
+import java.awt.Point;
 
 public class ViewController extends MyJPanel {
 
@@ -7,30 +8,38 @@ public class ViewController extends MyJPanel {
 	private int placeIdCounter;
 	private String transitionId;
 	private int transitionIdCounter;
-	private NodeId nodeId;
+	private ID id;
 	private GlobalSizeModel globalSizeModel;
+	private ArcsModel arcsModel;
 
-	public ViewController(IModel model, NodeId nodeId, GlobalSizeModel globalSizeModel) {
+	public ViewController(IModel model, ID id, GlobalSizeModel globalSizeModel, ArcsModel arcsModel) {
 		super();
 		this.model = model;
-		this.nodeId = nodeId;
+		this.id = id;
 		this.globalSizeModel = globalSizeModel;
+		this.arcsModel = arcsModel;
 	}
 
 
 
 	public void addPlace(int x, int y) {
-		model.setNode(nodeId.getNextPlaceIdString(), x, y, globalSizeModel.getNodesSize(), ENode.PLACE, nodeId.getPlaceIdString(),
+		model.setNode(id.getNextPlaceIdString(), x, y, globalSizeModel.getNodesSize(), ENode.PLACE, id.getPlaceIdString(),
 				false);
-		System.out.println(nodeId.getPlaceIdString());
+		System.out.println(id.getPlaceIdString());
 		refresh();
 
 	}
 
 	public void addTransition(int x, int y) {
-		model.setNode(nodeId.getNextTransitionIdString(), x, y, globalSizeModel.getNodesSize(), ENode.TRANSITION,
-				nodeId.getTransitionIdString(), false);
-		System.out.println(nodeId.getTransitionIdString());
+		model.setNode(id.getNextTransitionIdString(), x, y, globalSizeModel.getNodesSize(), ENode.TRANSITION,
+				id.getTransitionIdString(), false);
+		System.out.println(id.getTransitionIdString());
+		refresh();
+	}
+	
+	public void addArc(String firstClickNodeId, String secondClickNodeId) {
+		arcsModel.setArc(id.getNextArcIdString(), firstClickNodeId, secondClickNodeId, new Point(0, 0), new Point(0, 0), globalSizeModel.getArcsSize());
+		System.out.println(id.getArcIdString());
 		refresh();
 	}
 
