@@ -175,8 +175,9 @@ public class Arc {
 	
 	// pX, pY mouse click coordinates
 	public boolean containsPoint(int pX, int pY) {
-//		System.out.println(nach.x);
-		return Math.abs(this.nach.x - pX) <= radius && Math.abs(this.nach.y - pY) <= radius;
+		return Math.abs(this.nach.x - pX) <= 30 && Math.abs(this.nach.y - pY) <= 30;
 	}
 
+	
+	
 }

@@ -95,12 +95,19 @@ public class MyJPanel extends JPanel implements IView {
 				if (event.getActionCommand().equals("Connect")) {
 					popupMenuController.connect();
 				}
-				if (event.getActionCommand().equals("Delete")) {
+				if (event.getActionCommand().equals("Delete Node")) {
 					model.deleteNode(clickX, clickY);
 					arcsController.removeNotUsedArcs();
 					repaint();
 
 				}
+
+				if (event.getActionCommand().equals("Delete Arc")) {
+					 arcsModel.deleteArc(clickX, clickY);
+					repaint();
+
+				}
+
 				if (event.getActionCommand().equals("Set name")) {
 
 					for (Node n : model.getAllNodes()) {
@@ -121,7 +128,11 @@ public class MyJPanel extends JPanel implements IView {
 
 		rightClickMenu.addSeparator();
 
-		rightClickMenu.add(item = new JMenuItem("Delete"));
+		rightClickMenu.add(item = new JMenuItem("Delete Node"));
+		item.setHorizontalTextPosition(JMenuItem.RIGHT);
+		item.addActionListener(menuListener);
+
+		rightClickMenu.add(item = new JMenuItem("Delete Arc"));
 		item.setHorizontalTextPosition(JMenuItem.RIGHT);
 		item.addActionListener(menuListener);
 
