@@ -35,15 +35,17 @@ public class MyJFrame extends JFrame {
 	private IView iView;
 	private ArcsModel arcsModel;
 	private GlobalSizeModel globalSizeModel;
+	private NodeId nodeId;
 
 	public MyJFrame(GlobalSizeController globalSizeController, MyJPanel myJPanel, ToolBarController toolBarController, IModel model,
-			IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel) {
+			IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel, NodeId nodeId) {
 		this.globalSizeController = globalSizeController;
 		this.myJPanel = myJPanel;
 		this.toolBarController = toolBarController;
 		this.iView = iView;
 		this.arcsModel = arcsModel;
 		this.globalSizeModel = globalSizeModel;
+		this.nodeId = nodeId;
 		// EventQueue.invokeLater(new Runnable() {
 		// @Override
 		// public void run() {
@@ -258,7 +260,8 @@ public class MyJFrame extends JFrame {
 		} else {
 			System.out.println("Bitte eine Datei als Parameter angeben!");
 		}
-
+		nodeId.setBothIdForParser();
+		
 		// try (BufferedReader br = new BufferedReader(new
 		// FileReader(chooser.getSelectedFile()))) {
 		//

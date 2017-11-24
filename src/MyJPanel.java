@@ -103,7 +103,7 @@ public class MyJPanel extends JPanel implements IView {
 				}
 
 				if (event.getActionCommand().equals("Delete Arc")) {
-					 arcsModel.deleteArc(clickX, clickY);
+					arcsModel.deleteArc(clickX, clickY);
 					repaint();
 
 				}
@@ -140,6 +140,9 @@ public class MyJPanel extends JPanel implements IView {
 		item.setHorizontalTextPosition(JMenuItem.RIGHT);
 		item.addActionListener(menuListener);
 
+	}
+
+	public MyJPanel() {
 	}
 
 	// standartcursor für bewegungen
