@@ -4,14 +4,19 @@ public class PopupMenuController {
 
 	private IModel model;
 	private SelectedNode selectedNode;
+	private ArcsModel arcsModel;
 
-	public PopupMenuController(IModel model, SelectedNode selectedNode) {
+
+	public PopupMenuController(IModel model, SelectedNode selectedNode,  ArcsModel arcsModel) {
 		this.model = model;
 		this.selectedNode = selectedNode;
+		this.arcsModel = arcsModel;
 	}
 
 	public void connect() {
 		System.out.println("Method connect in PopupMenuController");
+		
+		
 
 	}
 

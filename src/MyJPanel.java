@@ -53,10 +53,11 @@ public class MyJPanel extends JPanel implements IView {
 	private ArcsController arcsController;
 	private GlobalSizeModel globalSizeModel;
 	private StatusBar statusBar;
+	private SwitchTransition switchTransition;
 
 	public MyJPanel(IModel model, PopupMenuController popupMenuController, ViewController viewController,
 			ToolBarController toolBarController, SelectedNode selectedNode, ArcsModel arcsModel,
-			ArcsController arcsController, GlobalSizeModel globalSizeModel, StatusBar statusBar) {
+			ArcsController arcsController, GlobalSizeModel globalSizeModel, StatusBar statusBar, SwitchTransition switchTransition) {
 		this.model = model;
 		this.popupMenuController = popupMenuController;
 		this.viewController = viewController;
@@ -66,6 +67,7 @@ public class MyJPanel extends JPanel implements IView {
 		this.arcsController = arcsController;
 		this.globalSizeModel = globalSizeModel;
 		this.statusBar = statusBar;
+		this.switchTransition = switchTransition;
 
 		// Generate few places
 		// model.setNode("S1", 200, 300, 50, ENode.PLACE, "P1", false);
@@ -98,7 +100,15 @@ public class MyJPanel extends JPanel implements IView {
 		ActionListener menuListener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				if (event.getActionCommand().equals("Connect")) {
-					popupMenuController.connect();
+
+					for (Node n : model.getAllTransitions()) {
+						if (n.equals(selectedNode.getSelectedNodeRightClick())) {
+							switchTransition.switchTransition(n);
+							selectedNode.setSelectedNodeRightClick(null);
+						}
+
+					}
+					refresh();
 				}
 				if (event.getActionCommand().equals("Delete Node")) {
 					model.deleteNode(clickX, clickY);
@@ -295,11 +305,21 @@ public class MyJPanel extends JPanel implements IView {
 			} else {
 				g2d.setColor(Color.BLACK);
 			}
+		
 			if (n.getNodeType() == ENode.PLACE) {
 				g2d.drawOval(n.getX(), n.getY(), n.getRadius(), n.getRadius());
 			}
 			if (n.getNodeType() == ENode.TRANSITION) {
-				g2d.drawRect(n.getX(), n.getY(), n.getRadius(), n.getRadius());
+				if(switchTransition.transitionActive(n.getId())) {
+					g2d.setColor(Color.GREEN);
+					g2d.fillRect(n.getX(), n.getY(), n.getRadius(), n.getRadius());
+					
+				}else {
+					g2d.drawRect(n.getX(), n.getY(), n.getRadius(), n.getRadius());
+				}
+					
+				
+				
 
 			}
 

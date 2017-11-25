@@ -24,7 +24,7 @@ public class PNMLParserImpl extends PNMLParser {
 	 */
 	@Override
 	public void newTransition(String id) {
-		model.setNode(id, 0, 0, globalSizeModel.getNodesSize(), ENode.TRANSITION, "");
+		model.setNode(id, 0, 0, globalSizeModel.getNodesSize(), ENode.TRANSITION, "", false);
 		iView.refresh();
 	}
 
@@ -91,7 +91,12 @@ public class PNMLParserImpl extends PNMLParser {
 	public void setMarking(String id, String marking) {
 		for (Node n : model.getAllNodes()) {
 			if (n.getId().equals(id)) {
-				n.setMarking(Boolean.parseBoolean(marking));
+				if(marking.equals("0")) {
+					n.setMarkOrActive(false);
+				}
+				if(marking.equals("1")) {
+					n.setMarkOrActive(true);
+				}
 			}
 		}
 		iView.refresh();
