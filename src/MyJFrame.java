@@ -36,9 +36,11 @@ public class MyJFrame extends JFrame {
 	private ArcsModel arcsModel;
 	private GlobalSizeModel globalSizeModel;
 	private ID id;
+	private StatusBar statusBar;
 
 	public MyJFrame(GlobalSizeController globalSizeController, MyJPanel myJPanel, ToolBarController toolBarController,
-			IModel model, IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel, ID id) {
+			IModel model, IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel, ID id,
+			StatusBar statusBar) {
 		this.globalSizeController = globalSizeController;
 		this.myJPanel = myJPanel;
 		this.toolBarController = toolBarController;
@@ -46,6 +48,7 @@ public class MyJFrame extends JFrame {
 		this.arcsModel = arcsModel;
 		this.globalSizeModel = globalSizeModel;
 		this.id = id;
+		this.statusBar = statusBar;
 		// EventQueue.invokeLater(new Runnable() {
 		// @Override
 		// public void run() {
@@ -87,6 +90,9 @@ public class MyJFrame extends JFrame {
 		// Create ScrollPane and add MyJanel to contentPane
 		JScrollPane scrollPane = new JScrollPane(myJPanel);
 		contentPane.add(scrollPane, BorderLayout.CENTER);
+
+		// Add statusBar
+		contentPaneForMenu.add(statusBar, java.awt.BorderLayout.SOUTH);
 
 		// Add ToolBar to contentPane
 		JToolBar toolBar = new JToolBar();

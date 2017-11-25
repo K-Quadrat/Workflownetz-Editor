@@ -13,6 +13,7 @@ public class TestMyJFrame {
 				try {
 
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+					StatusBar statusBar = new StatusBar();
 					IModel model = new Model();
 					ArcsModel arcsModel = new ArcsModel();
 					ID id = new ID(model, arcsModel);
@@ -24,11 +25,11 @@ public class TestMyJFrame {
 					
 
 					ArcsController arcsController = new ArcsController(model, arcsModel, globalSizeModel);
-					MyJPanel myJPanel = new MyJPanel(model, popupMenuController, viewController, toolBarController, selectedNode, arcsModel, arcsController, globalSizeModel);
+					MyJPanel myJPanel = new MyJPanel(model, popupMenuController, viewController, toolBarController, selectedNode, arcsModel, arcsController, globalSizeModel, statusBar);
 					IView iView = myJPanel;
 					
 					GlobalSizeController globalSizeController = new GlobalSizeController(model, iView, globalSizeModel, arcsModel);
-					new MyJFrame(globalSizeController, myJPanel, toolBarController, model, iView, arcsModel, globalSizeModel, id);
+					new MyJFrame(globalSizeController, myJPanel, toolBarController, model, iView, arcsModel, globalSizeModel, id, statusBar);
 					
 										
 					

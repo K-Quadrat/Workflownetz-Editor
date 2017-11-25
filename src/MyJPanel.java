@@ -52,10 +52,11 @@ public class MyJPanel extends JPanel implements IView {
 	private ArcsModel arcsModel;
 	private ArcsController arcsController;
 	private GlobalSizeModel globalSizeModel;
+	private StatusBar statusBar;
 
 	public MyJPanel(IModel model, PopupMenuController popupMenuController, ViewController viewController,
 			ToolBarController toolBarController, SelectedNode selectedNode, ArcsModel arcsModel,
-			ArcsController arcsController, GlobalSizeModel globalSizeModel) {
+			ArcsController arcsController, GlobalSizeModel globalSizeModel, StatusBar statusBar) {
 		this.model = model;
 		this.popupMenuController = popupMenuController;
 		this.viewController = viewController;
@@ -64,6 +65,7 @@ public class MyJPanel extends JPanel implements IView {
 		this.arcsModel = arcsModel;
 		this.arcsController = arcsController;
 		this.globalSizeModel = globalSizeModel;
+		this.statusBar = statusBar;
 
 		// Generate few places
 		// model.setNode("S1", 200, 300, 50, ENode.PLACE, "P1", false);
@@ -348,6 +350,7 @@ public class MyJPanel extends JPanel implements IView {
 		arcsController.setPosition();
 
 		drawArc(g2d);
+		statusBar.setMessage("Hello");
 
 		// arcWithHeadController.arcConverter();
 		// drawArc(g2d);
