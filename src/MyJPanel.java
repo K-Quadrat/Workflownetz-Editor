@@ -371,7 +371,19 @@ public class MyJPanel extends JPanel implements IView {
 
 		drawArc(g2d);
 		statusBar.setMessage("Hello");
-
+		
+		
+		
+//		if (switchTransition.areAllNetworkElementsOnThePath()) {
+//			statusBar.setMessage("All network elements on a path from start place to end place");
+//		}
+		if (!switchTransition.areAllNetworkElementsOnThePath()) {
+			statusBar.setMessage("Not all network elements on a path from start place to end place");
+		}
+		
+		statusBar.setMessage(switchTransition.hasStartingEndingPlaces());
+		
+		
 		// arcWithHeadController.arcConverter();
 		// drawArc(g2d);
 

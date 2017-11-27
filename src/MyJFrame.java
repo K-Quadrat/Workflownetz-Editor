@@ -161,7 +161,7 @@ public class MyJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonSelect) {
 					toolBarController.setToolBarSwitch(0);
-					System.out.println("Select " + toolBarController.getToolBarSwitch());
+//					System.out.println("Select " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
@@ -172,7 +172,7 @@ public class MyJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonMarquee) {
 					toolBarController.setToolBarSwitch(1);
-					System.out.println("Marquee " + toolBarController.getToolBarSwitch());
+//					System.out.println("Marquee " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
@@ -183,7 +183,7 @@ public class MyJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonPlace) {
 					toolBarController.setToolBarSwitch(2);
-					System.out.println("Place " + toolBarController.getToolBarSwitch());
+//					System.out.println("Place " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
@@ -194,7 +194,7 @@ public class MyJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonTransition) {
 					toolBarController.setToolBarSwitch(3);
-					System.out.println("Transition " + toolBarController.getToolBarSwitch());
+//					System.out.println("Transition " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
@@ -205,7 +205,7 @@ public class MyJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonArc) {
 					toolBarController.setToolBarSwitch(4);
-					System.out.println("Arc " + toolBarController.getToolBarSwitch());
+//					System.out.println("Arc " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});

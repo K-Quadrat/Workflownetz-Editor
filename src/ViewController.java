@@ -25,7 +25,7 @@ public class ViewController extends MyJPanel {
 	public void addPlace(int x, int y) {
 		model.setNode(id.getNextPlaceIdString(), x, y, globalSizeModel.getNodesSize(), ENode.PLACE, id.getPlaceIdString(),
 				false);
-		System.out.println(id.getPlaceIdString());
+//		System.out.println(id.getPlaceIdString());
 		refresh();
 
 	}
@@ -33,13 +33,13 @@ public class ViewController extends MyJPanel {
 	public void addTransition(int x, int y) {
 		model.setNode(id.getNextTransitionIdString(), x, y, globalSizeModel.getNodesSize(), ENode.TRANSITION,
 				id.getTransitionIdString(), false);
-		System.out.println(id.getTransitionIdString());
+//		System.out.println(id.getTransitionIdString());
 		refresh();
 	}
 	
 	public void addArc(String firstClickNodeId, String secondClickNodeId) {
 		arcsModel.setArc(id.getNextArcIdString(), firstClickNodeId, secondClickNodeId, new Point(0, 0), new Point(0, 0), globalSizeModel.getArcsSize());
-		System.out.println(id.getArcIdString());
+//		System.out.println(id.getArcIdString());
 		refresh();
 	}
 

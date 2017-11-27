@@ -19,15 +19,15 @@ public class Node {
 		this.markOrActive = markOrActive;
 	}
 	
-//	public Node(String id, int x, int y, int radius, ENode nodeType, String name) {
-//		
-//		this.id = id;
-//		this.x = x;
-//		this.y = y;
-//		this.radius = radius;
-//		this.nodeType = nodeType;
-//		this.name = name;
-//	}
+	public Node(String id, int x, int y, int radius, ENode nodeType, String name) {
+		
+		this.id = id;
+		this.x = x;
+		this.y = y;
+		this.radius = radius;
+		this.nodeType = nodeType;
+		this.name = name;
+	}
 	
 	/**
 	 * @return the id

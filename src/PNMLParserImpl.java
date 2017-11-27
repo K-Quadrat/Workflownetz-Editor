@@ -24,7 +24,7 @@ public class PNMLParserImpl extends PNMLParser {
 	 */
 	@Override
 	public void newTransition(String id) {
-		model.setNode(id, 0, 0, globalSizeModel.getNodesSize(), ENode.TRANSITION, "", false);
+		model.setNode(id, 0, 0, globalSizeModel.getNodesSize(), ENode.TRANSITION, "");
 		iView.refresh();
 	}
 

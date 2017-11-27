@@ -4,7 +4,7 @@ public interface IModel {
 
 	void setNode(String id, int x, int y, int radius, ENode nodeType, String name, boolean marking);
 	
-//	void setNode(String id, int x, int y, int radius, ENode nodeType, String name);
+	void setNode(String id, int x, int y, int radius, ENode nodeType, String name);
 	
 	void deleteNode(int x, int y);
 
