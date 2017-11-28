@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -6,12 +7,57 @@ public class SwitchTransition {
 	private ArcsModel arcsModel;
 	private String source;
 	private String target;
+	private String startNodeClass;
+	private String endNodeClass;
 
 	public SwitchTransition(IModel model, ArcsModel arcsModel) {
 		super();
 		this.model = model;
 		this.arcsModel = arcsModel;
 	}
+
+	
+	
+	
+	/**
+	 * @return the startNodeClass
+	 */
+	public String getStartNodeClass() {
+		return startNodeClass;
+	}
+
+
+
+
+	/**
+	 * @param startNodeClass the startNodeClass to set
+	 */
+	public void setStartNodeClass(String startNodeClass) {
+		this.startNodeClass = startNodeClass;
+	}
+
+
+
+
+	/**
+	 * @return the endNodeClass
+	 */
+	public String getEndNodeClass() {
+		return endNodeClass;
+	}
+
+
+
+
+	/**
+	 * @param endNodeClass the endNodeClass to set
+	 */
+	public void setEndNodeClass(String endNodeClass) {
+		this.endNodeClass = endNodeClass;
+	}
+
+
+
 
 	public boolean transitionActive(String id) {
 		List<Boolean> marking = new ArrayList<Boolean>();
@@ -21,7 +67,7 @@ public class SwitchTransition {
 
 				for (Node n : model.getAllPlaces()) {
 					if (n.getId().equals(a.getSource())) {
-						marking.add(n.getMarkOrActive());
+						marking.add(n.getMarking());
 
 					}
 
@@ -39,19 +85,18 @@ public class SwitchTransition {
 	}
 
 	public void switchTransition(Node transition) {
-		System.out.println("Method switchTransition");
-		System.out.println(transition.getId());
-		System.out.println(transitionActive(transition.getId()));
+//		System.out.println("Method switchTransition");
+//		System.out.println(transition.getId());
+//		System.out.println(transitionActive(transition.getId()));
 		if (transitionActive(transition.getId())) {
-			System.out.println("I'm here");
 
 			for (Arc a : arcsModel.getArcs()) {
 				if (a.getTarget().equals(transition.getId())) {
 
 					for (Node n : model.getAllNodes()) {
 						if (n.getId().equals(a.getSource())) {
-							n.setMarkOrActive(false);
-							System.out.println("n.setMarkOrActive(false): " + n.getId());
+							n.setMarking(false);
+//							System.out.println("n.setMarking(false): " + n.getId());
 
 						}
 					}
@@ -64,8 +109,8 @@ public class SwitchTransition {
 
 					for (Node n : model.getAllNodes()) {
 						if (n.getId().equals(a.getTarget())) {
-							n.setMarkOrActive(true);
-							System.out.println("n.setMarkOrActive(true): " + n.getId());
+							n.setMarking(true);
+//							System.out.println("n.setMarking(true): " + n.getId());
 
 						}
 					}
@@ -109,9 +154,10 @@ public class SwitchTransition {
 		return true;
 	}
 
-	public String hasStartingEndingPlaces() {
+	public String isWorkflowNet() {
 		if (areAllNetworkElementsOnThePath()) {
 
+			//hasStartingEndingPlaces
 			List<String> arcsSource = new ArrayList<String>();
 			List<String> arcsTarget = new ArrayList<String>();
 			List<String> nodes = new ArrayList<String>();
@@ -154,36 +200,50 @@ public class SwitchTransition {
 
 			if (nodesStart.isEmpty() && nodesEnd.isEmpty()) {
 				// keine anfangsstelle und keine endstelle
-				return "No starting and no ending places";
+				setStartNodeClass(null);
+				setEndNodeClass(null);
+				return "Here we go...";
 			}
 			
 			else if (nodesEnd.size() >= 2 && nodesStart.size() >= 2) {
 				// zu viele anfangsstellen und endsstelle
+				setStartNodeClass(null);
+				setEndNodeClass(null);
 				return "Too many starting places and too many ending place";
 			}
 
 			else if (nodesStart.size() >= 2 && nodesEnd.isEmpty()) {
 				// zu viele anfangsstellen und keine endstelle
+				setStartNodeClass(null);
+				setEndNodeClass(null);
 				return "Too many starting places and no ending place";
 			}
 
 			else if (nodesEnd.size() >= 2 && nodesStart.isEmpty()) {
 				// keine anfangsstelle und zu viele endstellen 
+				setStartNodeClass(null);
+				setEndNodeClass(null);
 				return "No starting place and too many ending places";
 			}
 			
 			else if (nodesStart.isEmpty()) {
 				// keine anfangsstelle
+				setStartNodeClass(null);
+				setEndNodeClass(null);
 				return "No starting place";
 			}
 
 			else if (nodesEnd.isEmpty()) {
 				// keine endstelle
+				setStartNodeClass(null);
+				setEndNodeClass(null);
 				return "No ending place";
 			}
 
 			else if (nodesStart.size() >= 2) {
 				// zu viele anfangsstellen
+				setStartNodeClass(null);
+				setEndNodeClass(null);
 				return "Too many starting places";
 			}
 
@@ -191,19 +251,23 @@ public class SwitchTransition {
 
 			else if (nodesEnd.size() >= 2) {
 				// zu viele anfangsstellen
+				setStartNodeClass(null);
+				setEndNodeClass(null);
 				return "Too many ending places";
 			}
 
 			else if (nodesStart.size() == 1 && nodesEnd.size() == 1) {
 				// genau eine anfangsstelle und genau eine endstelle
+				setStartNodeClass(nodesStart.get(0));
+				setEndNodeClass(nodesEnd.get(0));
 				return "It's a Workflow Net!";
 
 			}
 
-			nodesStart.clear();
-			nodesEnd.clear();
-
 		}
-		return null;
+		setStartNodeClass(null);
+		setEndNodeClass(null);
+		return "Not all network elements on a path from start place to end place";
 	}
+	
 }

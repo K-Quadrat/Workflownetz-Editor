@@ -92,10 +92,10 @@ public class PNMLParserImpl extends PNMLParser {
 		for (Node n : model.getAllNodes()) {
 			if (n.getId().equals(id)) {
 				if(marking.equals("0")) {
-					n.setMarkOrActive(false);
+					n.setMarking(false);
 				}
 				if(marking.equals("1")) {
-					n.setMarkOrActive(true);
+					n.setMarking(true);
 				}
 			}
 		}

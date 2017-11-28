@@ -57,7 +57,8 @@ public class MyJPanel extends JPanel implements IView {
 
 	public MyJPanel(IModel model, PopupMenuController popupMenuController, ViewController viewController,
 			ToolBarController toolBarController, SelectedNode selectedNode, ArcsModel arcsModel,
-			ArcsController arcsController, GlobalSizeModel globalSizeModel, StatusBar statusBar, SwitchTransition switchTransition) {
+			ArcsController arcsController, GlobalSizeModel globalSizeModel, StatusBar statusBar,
+			SwitchTransition switchTransition) {
 		this.model = model;
 		this.popupMenuController = popupMenuController;
 		this.viewController = viewController;
@@ -99,7 +100,7 @@ public class MyJPanel extends JPanel implements IView {
 
 		ActionListener menuListener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
-				if (event.getActionCommand().equals("Connect")) {
+				if (event.getActionCommand().equals("Switch transition")) {
 
 					for (Node n : model.getAllTransitions()) {
 						if (n.equals(selectedNode.getSelectedNodeRightClick())) {
@@ -137,7 +138,7 @@ public class MyJPanel extends JPanel implements IView {
 		};
 
 		JMenuItem item;
-		rightClickMenu.add(item = new JMenuItem("Connect"));
+		rightClickMenu.add(item = new JMenuItem("Switch transition"));
 		item.setHorizontalTextPosition(JMenuItem.RIGHT);
 		item.addActionListener(menuListener);
 
@@ -238,7 +239,7 @@ public class MyJPanel extends JPanel implements IView {
 					firstClickNodeId = null;
 					secondClickNodeId = null;
 					nodeType = null;
-					
+
 				} else if (n == null || nodeType == n.getNodeType()) {
 					firstClick = true;
 				}
@@ -305,22 +306,28 @@ public class MyJPanel extends JPanel implements IView {
 			} else {
 				g2d.setColor(Color.BLACK);
 			}
-		
+
 			if (n.getNodeType() == ENode.PLACE) {
 				g2d.drawOval(n.getX(), n.getY(), n.getRadius(), n.getRadius());
 			}
 			if (n.getNodeType() == ENode.TRANSITION) {
-				if(switchTransition.transitionActive(n.getId())) {
+				if (switchTransition.transitionActive(n.getId())) {
 					g2d.setColor(Color.GREEN);
 					g2d.fillRect(n.getX(), n.getY(), n.getRadius(), n.getRadius());
-					
-				}else {
+
+				} else {
 					g2d.drawRect(n.getX(), n.getY(), n.getRadius(), n.getRadius());
 				}
-					
-				
-				
 
+			}
+			if (n.getId().equals(switchTransition.getStartNodeClass())) {
+				g2d.setColor(Color.GRAY);
+				g2d.fillOval(n.getX(), n.getY(), n.getRadius(), n.getRadius());
+			}
+			
+			if (n.getId().equals(switchTransition.getEndNodeClass())) {
+				g2d.setColor(Color.DARK_GRAY);
+				g2d.fillOval(n.getX(), n.getY(), n.getRadius(), n.getRadius());
 			}
 
 		}
@@ -346,6 +353,19 @@ public class MyJPanel extends JPanel implements IView {
 			g2d.fillPolygon(a.getPfeil());
 		}
 	}
+	
+	public void drawMarking(Graphics2D g2d) {
+
+		for (Node n : model.getAllPlaces()) {
+			if(n.getMarking()) {
+				g2d.setColor(Color.BLACK);
+				g2d.fillOval(n.getX() + n.getRadius()/2 - n.getRadius()/15, n.getY()+ n.getRadius()/2 - n.getRadius()/15, n.getRadius()/6, n.getRadius()/6);
+				
+			}
+			
+		}
+	}
+	
 
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -364,25 +384,28 @@ public class MyJPanel extends JPanel implements IView {
 		// g2d.setColor(Color.WHITE);
 		// g2d.fillRect(0, 0, 8000, 4000);
 
-		drawNodes(g2d);
-		drawName(g2d);
-
+	
 		arcsController.setPosition();
 
-		drawArc(g2d);
+		
 		statusBar.setMessage("Hello");
-		
-		
-		
-//		if (switchTransition.areAllNetworkElementsOnThePath()) {
-//			statusBar.setMessage("All network elements on a path from start place to end place");
-//		}
-		if (!switchTransition.areAllNetworkElementsOnThePath()) {
-			statusBar.setMessage("Not all network elements on a path from start place to end place");
-		}
-		
-		statusBar.setMessage(switchTransition.hasStartingEndingPlaces());
-		
+
+		// if (switchTransition.areAllNetworkElementsOnThePath()) {
+		// statusBar.setMessage("All network elements on a path from start place to end
+		// place");
+		// }
+		// if (!switchTransition.areAllNetworkElementsOnThePath()) {
+		// statusBar.setMessage("Not all network elements on a path from start place to
+		// end place");
+		// }
+
+		statusBar.setMessage(switchTransition.isWorkflowNet());
+
+		drawNodes(g2d);
+		drawName(g2d);
+		drawArc(g2d);
+//		switchTransition.setMarking();
+		drawMarking(g2d);
 		
 		// arcWithHeadController.arcConverter();
 		// drawArc(g2d);

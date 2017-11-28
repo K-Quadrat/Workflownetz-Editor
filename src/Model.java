@@ -9,8 +9,8 @@ public class Model implements IModel {
 	private boolean containsPoint = false;
 
 	@Override
-	public void setNode(String id, int x, int y, int radius, ENode nodeType, String name, boolean markOrActive) {
-		nodes.add(new Node(id, x, y, radius, nodeType, name, markOrActive));
+	public void setNode(String id, int x, int y, int radius, ENode nodeType, String name, boolean marking) {
+		nodes.add(new Node(id, x, y, radius, nodeType, name, marking));
 	}
 
 	@Override

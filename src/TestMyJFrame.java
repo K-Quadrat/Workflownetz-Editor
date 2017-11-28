@@ -28,9 +28,10 @@ public class TestMyJFrame {
 					ArcsController arcsController = new ArcsController(model, arcsModel, globalSizeModel);
 					MyJPanel myJPanel = new MyJPanel(model, popupMenuController, viewController, toolBarController, selectedNode, arcsModel, arcsController, globalSizeModel, statusBar, switchTransition);
 					IView iView = myJPanel;
+					SetStartMark setStartMark = new SetStartMark(switchTransition, iView, model);
 					
 					GlobalSizeController globalSizeController = new GlobalSizeController(model, iView, globalSizeModel, arcsModel);
-					new MyJFrame(globalSizeController, myJPanel, toolBarController, model, iView, arcsModel, globalSizeModel, id, statusBar);
+					new MyJFrame(globalSizeController, myJPanel, toolBarController, model, iView, arcsModel, globalSizeModel, id, statusBar, setStartMark);
 					
 										
 					

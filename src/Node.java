@@ -6,9 +6,9 @@ public class Node {
 	private int radius;
 	private ENode nodeType;
 	private String name;
-	private boolean markOrActive;
+	private boolean marking;
 	
-	public Node(String id, int x, int y, int radius, ENode nodeType, String name, boolean markOrActive) {
+	public Node(String id, int x, int y, int radius, ENode nodeType, String name, boolean marking) {
 		
 		this.id = id;
 		this.x = x;
@@ -16,7 +16,7 @@ public class Node {
 		this.radius = radius;
 		this.nodeType = nodeType;
 		this.name = name;
-		this.markOrActive = markOrActive;
+		this.marking = marking;
 	}
 	
 	public Node(String id, int x, int y, int radius, ENode nodeType, String name) {
@@ -76,15 +76,15 @@ public class Node {
 	/**
 	 * @return the markedOrActivated
 	 */
-	public boolean getMarkOrActive() {
-		return markOrActive;
+	public boolean getMarking() {
+		return marking;
 	}
 
 	/**
 	 * @param markedOrActivated the markedOrActivated to set
 	 */
-	public void setMarkOrActive(boolean markOrActive) {
-		this.markOrActive = markOrActive;
+	public void setMarking(boolean marking) {
+		this.marking = marking;
 	}
 
 	public int getRadius() {

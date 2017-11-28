@@ -37,10 +37,11 @@ public class MyJFrame extends JFrame {
 	private GlobalSizeModel globalSizeModel;
 	private ID id;
 	private StatusBar statusBar;
+	private SetStartMark setStartMark;
 
 	public MyJFrame(GlobalSizeController globalSizeController, MyJPanel myJPanel, ToolBarController toolBarController,
 			IModel model, IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel, ID id,
-			StatusBar statusBar) {
+			StatusBar statusBar, SetStartMark setStartMark) {
 		this.globalSizeController = globalSizeController;
 		this.myJPanel = myJPanel;
 		this.toolBarController = toolBarController;
@@ -49,6 +50,7 @@ public class MyJFrame extends JFrame {
 		this.globalSizeModel = globalSizeModel;
 		this.id = id;
 		this.statusBar = statusBar;
+		this.setStartMark = setStartMark;
 		// EventQueue.invokeLater(new Runnable() {
 		// @Override
 		// public void run() {
@@ -112,7 +114,10 @@ public class MyJFrame extends JFrame {
 
 		JButton buttonArc = new JButton("Arc");
 		toolBar.add(buttonArc);
-
+		
+		JButton buttonSetStartMarker = new JButton("Set start marker");
+		toolBar.add(buttonSetStartMarker);
+		
 		JButton buttonBigger = new JButton("Bigger +");
 		toolBar.add(buttonBigger);
 
@@ -209,6 +214,18 @@ public class MyJFrame extends JFrame {
 				}
 			}
 		});
+		
+		buttonSetStartMarker.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (e.getSource() == buttonSetStartMarker) {
+					setStartMark.setStartMarking();
+				}
+			}
+		});
+		
+		
 
 		buttonBigger.addActionListener(new ActionListener() {
 
