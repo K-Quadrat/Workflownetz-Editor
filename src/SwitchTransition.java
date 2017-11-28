@@ -25,7 +25,8 @@ public class SwitchTransition {
 	}
 
 	/**
-	 * @param deadlock the deadlock to set
+	 * @param deadlock
+	 *            the deadlock to set
 	 */
 	public void setDeadlock(boolean deadlock) {
 		this.deadlock = deadlock;
@@ -102,14 +103,26 @@ public class SwitchTransition {
 				}
 			}
 		}
-		// System.out.println(marking);
-		// if contains false return true
 		if (marking.contains(false) || marking.isEmpty()) {
 			return false;
 		} else {
 			setDeadlock(true);
 			return true;
 		}
+
+	}
+
+	public boolean reachedTheEndMark() {
+		for (Node n : model.getAllPlaces()) {
+			if (n.getId().equals(endNodeClass)) {
+				if (n.getMarking()) {
+					return true;
+				}
+			}
+
+		}
+
+		return false;
 
 	}
 

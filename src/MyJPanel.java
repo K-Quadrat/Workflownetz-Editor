@@ -408,6 +408,10 @@ public class MyJPanel extends JPanel implements IView {
 		if (switchTransition.isDeadlock()) {
 			statusBar.setMessage("Deadlock", Color.RED);
 		} 
+		else if (switchTransition.reachedTheEndMark()) {
+			statusBar.setMessage("Reached the end mark", Color.BLACK);
+		}
+		
 		else if(switchTransition.isWorkflowNet().equals("It's a Workflow Net!")){
 			statusBar.setMessage(switchTransition.isWorkflowNet(), Color.GREEN);
 		}
