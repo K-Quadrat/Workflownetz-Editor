@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.JLabel;
@@ -8,10 +9,11 @@ public class StatusBar extends JLabel {
     public StatusBar() {
         super();
         super.setPreferredSize(new Dimension(100, 20));
-        setMessage("Ready");
+//        setMessage("Ready");
     }
      
-    public void setMessage(String message) {
-        setText(" "+message);        
+    public void setMessage(String message, Color color) {
+        setText(" "+message);   
+        setForeground(color);
     }        
 }

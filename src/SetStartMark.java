@@ -36,6 +36,7 @@ public class SetStartMark {
 				}
 				
 			}
+			switchTransition.setDeadlock(false);
 			iView.refresh();
 		}
 		

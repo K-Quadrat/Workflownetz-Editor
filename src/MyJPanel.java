@@ -311,11 +311,18 @@ public class MyJPanel extends JPanel implements IView {
 				g2d.drawOval(n.getX(), n.getY(), n.getRadius(), n.getRadius());
 			}
 			if (n.getNodeType() == ENode.TRANSITION) {
-				if (switchTransition.transitionActive(n.getId())) {
+				if (switchTransition.transitionActive(n.getId()) && !switchTransition.deadlock(n.getId())) {
 					g2d.setColor(Color.GREEN);
 					g2d.fillRect(n.getX(), n.getY(), n.getRadius(), n.getRadius());
 
-				} else {
+				}
+				if (switchTransition.transitionActive(n.getId()) && switchTransition.deadlock(n.getId())) {
+					g2d.setColor(Color.RED);
+					g2d.fillRect(n.getX(), n.getY(), n.getRadius(), n.getRadius());
+
+				}
+
+				else {
 					g2d.drawRect(n.getX(), n.getY(), n.getRadius(), n.getRadius());
 				}
 
@@ -324,7 +331,7 @@ public class MyJPanel extends JPanel implements IView {
 				g2d.setColor(Color.GRAY);
 				g2d.fillOval(n.getX(), n.getY(), n.getRadius(), n.getRadius());
 			}
-			
+
 			if (n.getId().equals(switchTransition.getEndNodeClass())) {
 				g2d.setColor(Color.DARK_GRAY);
 				g2d.fillOval(n.getX(), n.getY(), n.getRadius(), n.getRadius());
@@ -353,19 +360,19 @@ public class MyJPanel extends JPanel implements IView {
 			g2d.fillPolygon(a.getPfeil());
 		}
 	}
-	
+
 	public void drawMarking(Graphics2D g2d) {
 
 		for (Node n : model.getAllPlaces()) {
-			if(n.getMarking()) {
+			if (n.getMarking()) {
 				g2d.setColor(Color.BLACK);
-				g2d.fillOval(n.getX() + n.getRadius()/2 - n.getRadius()/15, n.getY()+ n.getRadius()/2 - n.getRadius()/15, n.getRadius()/6, n.getRadius()/6);
-				
+				g2d.fillOval(n.getX() + n.getRadius() / 2 - n.getRadius() / 15,
+						n.getY() + n.getRadius() / 2 - n.getRadius() / 15, n.getRadius() / 6, n.getRadius() / 6);
+
 			}
-			
+
 		}
 	}
-	
 
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -384,11 +391,7 @@ public class MyJPanel extends JPanel implements IView {
 		// g2d.setColor(Color.WHITE);
 		// g2d.fillRect(0, 0, 8000, 4000);
 
-	
 		arcsController.setPosition();
-
-		
-		statusBar.setMessage("Hello");
 
 		// if (switchTransition.areAllNetworkElementsOnThePath()) {
 		// statusBar.setMessage("All network elements on a path from start place to end
@@ -399,14 +402,23 @@ public class MyJPanel extends JPanel implements IView {
 		// end place");
 		// }
 
-		statusBar.setMessage(switchTransition.isWorkflowNet());
+	
+
+		
+		if (switchTransition.isDeadlock()) {
+			statusBar.setMessage("Deadlock", Color.RED);
+		} 
+		else if(switchTransition.isWorkflowNet().equals("It's a Workflow Net!")){
+			statusBar.setMessage(switchTransition.isWorkflowNet(), Color.GREEN);
+		}
+		else {
+			statusBar.setMessage(switchTransition.isWorkflowNet(), Color.BLACK);
+		}
 
 		drawNodes(g2d);
 		drawName(g2d);
 		drawArc(g2d);
-//		switchTransition.setMarking();
 		drawMarking(g2d);
-		
 		// arcWithHeadController.arcConverter();
 		// drawArc(g2d);
 
