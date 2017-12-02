@@ -9,7 +9,8 @@ public class SwitchTransition {
 	private String target;
 	private String startNodeClass;
 	private String endNodeClass;
-	private boolean deadlock;
+	private boolean contact;
+	private boolean transitionActive;
 
 	public SwitchTransition(IModel model, ArcsModel arcsModel) {
 		super();
@@ -18,18 +19,33 @@ public class SwitchTransition {
 	}
 
 	/**
-	 * @return the deadlock
+	 * @return the transitionActive
 	 */
-	public boolean isDeadlock() {
-		return deadlock;
+	public boolean isTransitionActive() {
+		return transitionActive;
 	}
 
 	/**
-	 * @param deadlock
-	 *            the deadlock to set
+	 * @param transitionActive
+	 *            the transitionActive to set
 	 */
-	public void setDeadlock(boolean deadlock) {
-		this.deadlock = deadlock;
+	public void setTransitionActive(boolean transitionActive) {
+		this.transitionActive = transitionActive;
+	}
+
+	/**
+	 * @return the contact
+	 */
+	public boolean isContact() {
+		return contact;
+	}
+
+	/**
+	 * @param contact
+	 *            the contact to set
+	 */
+	public void setContact(boolean contact) {
+		this.contact = contact;
 	}
 
 	/**
@@ -80,14 +96,17 @@ public class SwitchTransition {
 		// System.out.println(marking);
 		// if contains false return true
 		if (marking.contains(false) || marking.isEmpty()) {
+			setTransitionActive(false);
 			return false;
+
 		} else {
+			setTransitionActive(true);
 			return true;
 		}
 
 	}
 
-	public boolean deadlock(String id) {
+	public boolean contact(String id) {
 
 		List<Boolean> marking = new ArrayList<Boolean>();
 
@@ -106,13 +125,21 @@ public class SwitchTransition {
 		if (marking.contains(false) || marking.isEmpty()) {
 			return false;
 		} else {
-			setDeadlock(true);
+			setContact(true);
 			return true;
 		}
 
 	}
 
-	public boolean reachedTheEndMark() {
+	public boolean deadlock() {
+		if (!reachedTheEndMarking() && !transitionActive) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean reachedTheEndMarking() {
 		for (Node n : model.getAllPlaces()) {
 			if (n.getId().equals(endNodeClass)) {
 				if (n.getMarking()) {
@@ -130,7 +157,7 @@ public class SwitchTransition {
 		// System.out.println("Method switchTransition");
 		// System.out.println(transition.getId());
 		// System.out.println(transitionActive(transition.getId()));
-		if (transitionActive(transition.getId()) && !deadlock(transition.getId())) {
+		if (transitionActive(transition.getId()) && !contact(transition.getId())) {
 
 			for (Arc a : arcsModel.getArcs()) {
 				if (a.getTarget().equals(transition.getId())) {

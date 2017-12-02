@@ -11,6 +11,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.beans.DefaultPersistenceDelegate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -311,12 +312,12 @@ public class MyJPanel extends JPanel implements IView {
 				g2d.drawOval(n.getX(), n.getY(), n.getRadius(), n.getRadius());
 			}
 			if (n.getNodeType() == ENode.TRANSITION) {
-				if (switchTransition.transitionActive(n.getId()) && !switchTransition.deadlock(n.getId())) {
+				if (switchTransition.transitionActive(n.getId()) && !switchTransition.contact(n.getId())) {
 					g2d.setColor(Color.GREEN);
 					g2d.fillRect(n.getX(), n.getY(), n.getRadius(), n.getRadius());
 
 				}
-				if (switchTransition.transitionActive(n.getId()) && switchTransition.deadlock(n.getId())) {
+				if (switchTransition.transitionActive(n.getId()) && switchTransition.contact(n.getId())) {
 					g2d.setColor(Color.RED);
 					g2d.fillRect(n.getX(), n.getY(), n.getRadius(), n.getRadius());
 
@@ -404,12 +405,15 @@ public class MyJPanel extends JPanel implements IView {
 
 	
 
-		
-		if (switchTransition.isDeadlock()) {
-			statusBar.setMessage("Deadlock", Color.RED);
+		if (switchTransition.isContact()) {
+			statusBar.setMessage("Contact", Color.RED);
 		} 
-		else if (switchTransition.reachedTheEndMark()) {
-			statusBar.setMessage("Reached the end mark", Color.BLACK);
+		else if(switchTransition.deadlock()) {
+			statusBar.setMessage("Deadlock", Color.RED);
+		}
+		else if (switchTransition.reachedTheEndMarking()) {
+			statusBar.setMessage("Reached end marking", Color.BLACK);
+			
 		}
 		
 		else if(switchTransition.isWorkflowNet().equals("It's a Workflow Net!")){

@@ -42,5 +42,9 @@ public class ArcsModel {
 		}
 
 	}
+	
+	public void clearArcsList() {
+		arcs.clear();
+	}
 
 }

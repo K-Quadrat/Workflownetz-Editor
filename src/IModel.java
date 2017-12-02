@@ -20,4 +20,6 @@ public interface IModel {
 
 	List<Node> getAllTransitions();
 	
+	void clearNodesList();
+	
 }

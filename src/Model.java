@@ -8,6 +8,7 @@ public class Model implements IModel {
 	private int index;
 	private boolean containsPoint = false;
 
+	
 	@Override
 	public void setNode(String id, int x, int y, int radius, ENode nodeType, String name, boolean marking) {
 		nodes.add(new Node(id, x, y, radius, nodeType, name, marking));
@@ -92,5 +93,11 @@ public class Model implements IModel {
 		}
 
 	}
+
+	@Override
+	public void clearNodesList() {
+		nodes.clear();
+	}
+
 
 }

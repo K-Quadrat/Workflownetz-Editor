@@ -40,8 +40,8 @@ public class MyJFrame extends JFrame {
 	private SetStartMark setStartMark;
 
 	public MyJFrame(GlobalSizeController globalSizeController, MyJPanel myJPanel, ToolBarController toolBarController,
-			IModel model, IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel, ID id,
-			StatusBar statusBar, SetStartMark setStartMark) {
+			IModel model, IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel, ID id, StatusBar statusBar,
+			SetStartMark setStartMark) {
 		this.globalSizeController = globalSizeController;
 		this.myJPanel = myJPanel;
 		this.toolBarController = toolBarController;
@@ -114,10 +114,10 @@ public class MyJFrame extends JFrame {
 
 		JButton buttonArc = new JButton("Arc");
 		toolBar.add(buttonArc);
-		
+
 		JButton buttonSetStartMarker = new JButton("Set start marker");
 		toolBar.add(buttonSetStartMarker);
-		
+
 		JButton buttonBigger = new JButton("Bigger +");
 		toolBar.add(buttonBigger);
 
@@ -166,7 +166,7 @@ public class MyJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonSelect) {
 					toolBarController.setToolBarSwitch(0);
-//					System.out.println("Select " + toolBarController.getToolBarSwitch());
+					// System.out.println("Select " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
@@ -177,7 +177,7 @@ public class MyJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonMarquee) {
 					toolBarController.setToolBarSwitch(1);
-//					System.out.println("Marquee " + toolBarController.getToolBarSwitch());
+					// System.out.println("Marquee " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
@@ -188,7 +188,7 @@ public class MyJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonPlace) {
 					toolBarController.setToolBarSwitch(2);
-//					System.out.println("Place " + toolBarController.getToolBarSwitch());
+					// System.out.println("Place " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
@@ -199,7 +199,7 @@ public class MyJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonTransition) {
 					toolBarController.setToolBarSwitch(3);
-//					System.out.println("Transition " + toolBarController.getToolBarSwitch());
+					// System.out.println("Transition " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
@@ -210,11 +210,11 @@ public class MyJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonArc) {
 					toolBarController.setToolBarSwitch(4);
-//					System.out.println("Arc " + toolBarController.getToolBarSwitch());
+					// System.out.println("Arc " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});
-		
+
 		buttonSetStartMarker.addActionListener(new ActionListener() {
 
 			@Override
@@ -224,8 +224,6 @@ public class MyJFrame extends JFrame {
 				}
 			}
 		});
-		
-		
 
 		buttonBigger.addActionListener(new ActionListener() {
 
@@ -254,15 +252,19 @@ public class MyJFrame extends JFrame {
 
 	private void OpenFile(IModel model) {
 		// Create a file chooser
-		System.out.println(currentPath);
 		// TODO set to currentPath
 		JFileChooser chooser = new JFileChooser("/home/jens/FernUniHagen/ProPra/Aufgabenstellung/Beispiele");
 		// JFileChooser chooser = new JFileChooser(currentPath);
 
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNML File", "pnml");
 		chooser.setFileFilter(filter);
+
 		int returnVal = chooser.showOpenDialog(MyJFrame.this);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
+
+			model.clearNodesList();
+			arcsModel.clearArcsList();
+
 			System.out.println("You chose to open this file: " + chooser.getSelectedFile());
 			currentPath = chooser.getCurrentDirectory();
 
@@ -274,25 +276,12 @@ public class MyJFrame extends JFrame {
 			} else {
 				System.err.println("Die Datei " + pnmlDatei.getAbsolutePath() + " wurde nicht gefunden!");
 			}
+			id.setBothIdForParser();
+			id.setArcIdForParser();
+
 		} else {
 			System.out.println("Bitte eine Datei als Parameter angeben!");
 		}
-		id.setBothIdForParser();
-		id.setArcIdForParser();
-
-		// try (BufferedReader br = new BufferedReader(new
-		// FileReader(chooser.getSelectedFile()))) {
-		//
-		// String sCurrentLine;
-		//
-		// while ((sCurrentLine = br.readLine()) != null) {
-		// System.out.println(sCurrentLine);
-		// }
-		//
-		// } catch (Exception e2) {
-		// // TODO: handle exception
-		// }
-
 	}
 
 	private void SaveFile() {
