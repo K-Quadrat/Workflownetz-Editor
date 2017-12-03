@@ -106,7 +106,7 @@ public class Multiselect {
 		for (Node n : model.getAllNodes()) {
 			for (int i = 0; i < getMultiselectedNodesIds().size(); i++) {
 				if (n.getId().equals(getMultiselectedNodesIds().get(i))) {
-					if (model.getSmallestPoint().x <= globalSizeModel.getNodesSize()) {
+					if (model.getSmallestPoint().x <= globalSizeModel.getNodesSize()/2) {
 						if (n.getX() < (n.getX() + distanceX / 20)) {
 							n.setX(n.getX() + distanceX / 20);
 						}
@@ -115,7 +115,7 @@ public class Multiselect {
 						n.setX(n.getX() + distanceX / 20);
 					}
 
-					if (model.getSmallestPoint().y <= globalSizeModel.getNodesSize()) {
+					if (model.getSmallestPoint().y <= globalSizeModel.getNodesSize()/2) {
 						if (n.getY() < (n.getY() + distanceY / 20)) {
 							n.setY(n.getY() + distanceY / 20);
 						}

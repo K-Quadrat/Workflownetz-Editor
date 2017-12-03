@@ -16,14 +16,13 @@ public class TestMyJFrame {
 					StatusBar statusBar = new StatusBar();
 					IModel model = new Model();
 					ArcsModel arcsModel = new ArcsModel();
-					
-
 					SwitchTransition switchTransition = new SwitchTransition(model, arcsModel);
 					ID id = new ID(model, arcsModel);
 					ToolBarController toolBarController = new ToolBarController();
-					SelectedNode selectedNode = new SelectedNode();
-					PopupMenuController popupMenuController = new PopupMenuController(model, selectedNode, arcsModel);
+					
 					GlobalSizeModel globalSizeModel = new GlobalSizeModel();
+					SelectedNode selectedNode = new SelectedNode(model, globalSizeModel);
+					PopupMenuController popupMenuController = new PopupMenuController(model, selectedNode, arcsModel);
 					Multiselect multiselect = new Multiselect(model, globalSizeModel);
 					ViewController viewController = new ViewController(model, id, globalSizeModel, arcsModel);
 					

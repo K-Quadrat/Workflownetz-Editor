@@ -291,8 +291,7 @@ public class MyJPanel extends JPanel implements IView {
 		public void mouseDragged(MouseEvent e) {
 			if (selectedNode.getSelectedNode() != null && toolBarController.getToolBarSwitch() != 1) {
 				// Change coordinates of the node
-				selectedNode.getSelectedNode().setX(e.getX());
-				selectedNode.getSelectedNode().setY(e.getY());
+				selectedNode.setNewCoordinatesForSelectedNode(new Point(e.getX(), e.getY()));
 			}
 
 			if (toolBarController.getToolBarSwitch() == 1) {

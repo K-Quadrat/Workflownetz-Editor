@@ -146,7 +146,7 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == menuItemSave) {
-					SaveFile();
+					SaveFile(model);
 				}
 			}
 		});
@@ -285,15 +285,26 @@ public class MyJFrame extends JFrame {
 		}
 	}
 
-	private void SaveFile() {
+	private void SaveFile(IModel model) {
 		// Create a file chooser
-		JFileChooser chooser = new JFileChooser();
+		// TODO set to currentPath
+		JFileChooser chooser = new JFileChooser("/home/jens/FernUniHagen/ProPra/Aufgabenstellung/SaveTest");
+		// JFileChooser chooser = new JFileChooser(currentPath);
 
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNML File", "pnml");
 		chooser.setFileFilter(filter);
 		int returnVal = chooser.showSaveDialog(MyJFrame.this);
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			System.out.println("You chose to open this file: " + chooser.getSelectedFile());
+			System.out.println("You chose to save this file: " + chooser.getSelectedFile());
+			currentPath = chooser.getCurrentDirectory();
+			File pnmlDatei = new File(chooser.getSelectedFile() + ".pnml", "");
+			PNMLWriterImpl pnmlWriterImpl = new PNMLWriterImpl(pnmlDatei, model, arcsModel);
+			pnmlWriterImpl.writeAllToFile();
+
+		}
+
+		else {
+			System.out.println("Bitte eine Datei zum Speichern angeben!");
 		}
 
 	}
