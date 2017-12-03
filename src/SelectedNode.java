@@ -1,6 +1,8 @@
+import java.util.ArrayList;
+import java.util.List;
 
 public class SelectedNode {
-	
+
 	private Node selectedNode = null;
 	private Node selectedNodeRightClick = null;
 
@@ -12,7 +14,8 @@ public class SelectedNode {
 	}
 
 	/**
-	 * @param selectedNodeRightClick the selectedNodeRightClick to set
+	 * @param selectedNodeRightClick
+	 *            the selectedNodeRightClick to set
 	 */
 	public void setSelectedNodeRightClick(Node selectedNodeRightClick) {
 		this.selectedNodeRightClick = selectedNodeRightClick;
@@ -26,13 +29,11 @@ public class SelectedNode {
 	}
 
 	/**
-	 * @param selectedNode the selectedNode to set
+	 * @param selectedNode
+	 *            the selectedNode to set
 	 */
 	public void setSelectedNode(Node selectedNode) {
 		this.selectedNode = selectedNode;
 	}
-	
-	
-	
-	
+
 }

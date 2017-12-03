@@ -64,6 +64,7 @@ public class MyJFrame extends JFrame {
 
 		JFrame frame = new JFrame("Workflownetz Editor");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setPreferredSize(new Dimension(800, 600));
 
 		// Create contentPane with Border Layout
 		JPanel contentPaneForMenu = new JPanel(new BorderLayout());
@@ -100,28 +101,28 @@ public class MyJFrame extends JFrame {
 		JToolBar toolBar = new JToolBar();
 		contentPane.add(toolBar, BorderLayout.NORTH);
 
-		JButton buttonSelect = new JButton("Select");
+		JButton buttonSelect = new JButton("Select component");
 		toolBar.add(buttonSelect);
 
-		JButton buttonMarquee = new JButton("Marquee");
-		toolBar.add(buttonMarquee);
+		JButton buttonMultiselect = new JButton("Multiselect components");
+		toolBar.add(buttonMultiselect);
 
-		JButton buttonPlace = new JButton("Place");
+		JButton buttonPlace = new JButton("Add a place");
 		toolBar.add(buttonPlace);
 
-		JButton buttonTransition = new JButton("Transition");
+		JButton buttonTransition = new JButton("Add a transition");
 		toolBar.add(buttonTransition);
 
-		JButton buttonArc = new JButton("Arc");
+		JButton buttonArc = new JButton("Add a Arc");
 		toolBar.add(buttonArc);
 
 		JButton buttonSetStartMarker = new JButton("Set start marker");
 		toolBar.add(buttonSetStartMarker);
 
-		JButton buttonBigger = new JButton("Bigger +");
+		JButton buttonBigger = new JButton("Zoom out");
 		toolBar.add(buttonBigger);
 
-		JButton buttonSmaller = new JButton("Smaller -");
+		JButton buttonSmaller = new JButton("Zoom in");
 		toolBar.add(buttonSmaller);
 
 		frame.add(contentPaneForMenu);
@@ -171,13 +172,13 @@ public class MyJFrame extends JFrame {
 			}
 		});
 
-		buttonMarquee.addActionListener(new ActionListener() {
+		buttonMultiselect.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				if (e.getSource() == buttonMarquee) {
+				if (e.getSource() == buttonMultiselect) {
 					toolBarController.setToolBarSwitch(1);
-					// System.out.println("Marquee " + toolBarController.getToolBarSwitch());
+					// System.out.println("Multiselect " + toolBarController.getToolBarSwitch());
 				}
 			}
 		});

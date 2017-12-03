@@ -16,17 +16,20 @@ public class TestMyJFrame {
 					StatusBar statusBar = new StatusBar();
 					IModel model = new Model();
 					ArcsModel arcsModel = new ArcsModel();
+					
+
 					SwitchTransition switchTransition = new SwitchTransition(model, arcsModel);
 					ID id = new ID(model, arcsModel);
 					ToolBarController toolBarController = new ToolBarController();
 					SelectedNode selectedNode = new SelectedNode();
 					PopupMenuController popupMenuController = new PopupMenuController(model, selectedNode, arcsModel);
 					GlobalSizeModel globalSizeModel = new GlobalSizeModel();
+					Multiselect multiselect = new Multiselect(model, globalSizeModel);
 					ViewController viewController = new ViewController(model, id, globalSizeModel, arcsModel);
 					
 
 					ArcsController arcsController = new ArcsController(model, arcsModel, globalSizeModel);
-					MyJPanel myJPanel = new MyJPanel(model, popupMenuController, viewController, toolBarController, selectedNode, arcsModel, arcsController, globalSizeModel, statusBar, switchTransition);
+					MyJPanel myJPanel = new MyJPanel(model, popupMenuController, viewController, toolBarController, selectedNode, arcsModel, arcsController, globalSizeModel, statusBar, switchTransition, multiselect);
 					IView iView = myJPanel;
 					SetStartMark setStartMark = new SetStartMark(switchTransition, iView, model);
 					

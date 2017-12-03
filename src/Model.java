@@ -1,4 +1,7 @@
+import java.awt.Point;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 public class Model implements IModel {
@@ -8,7 +11,6 @@ public class Model implements IModel {
 	private int index;
 	private boolean containsPoint = false;
 
-	
 	@Override
 	public void setNode(String id, int x, int y, int radius, ENode nodeType, String name, boolean marking) {
 		nodes.add(new Node(id, x, y, radius, nodeType, name, marking));
@@ -99,5 +101,39 @@ public class Model implements IModel {
 		nodes.clear();
 	}
 
+	@Override
+	public Point getLargestPoint() {
+
+		if (!getAllNodes().isEmpty()) {
+			List<Integer> xCoordinates = new ArrayList<Integer>();
+			List<Integer> yCoordinates = new ArrayList<Integer>();
+			for (Node n : getAllNodes()) {
+				xCoordinates.add(n.getX());
+				yCoordinates.add(n.getY());
+			}
+			return new Point(Collections.max(xCoordinates), Collections.max(yCoordinates));
+
+		} else {
+			return new Point(800, 600);
+		}
+
+	}
+
+	@Override
+	public Point getSmallestPoint() {
+
+		if (!getAllNodes().isEmpty()) {
+			List<Integer> xCoordinates = new ArrayList<Integer>();
+			List<Integer> yCoordinates = new ArrayList<Integer>();
+			for (Node n : getAllNodes()) {
+				xCoordinates.add(n.getX());
+				yCoordinates.add(n.getY());
+			}
+			return new Point(Collections.min(xCoordinates), Collections.min(yCoordinates));
+
+		} else {
+			return null;
+		}
+	}
 
 }

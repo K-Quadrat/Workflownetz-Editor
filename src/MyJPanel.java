@@ -55,11 +55,12 @@ public class MyJPanel extends JPanel implements IView {
 	private GlobalSizeModel globalSizeModel;
 	private StatusBar statusBar;
 	private SwitchTransition switchTransition;
+	private Multiselect multiselect;
 
 	public MyJPanel(IModel model, PopupMenuController popupMenuController, ViewController viewController,
 			ToolBarController toolBarController, SelectedNode selectedNode, ArcsModel arcsModel,
 			ArcsController arcsController, GlobalSizeModel globalSizeModel, StatusBar statusBar,
-			SwitchTransition switchTransition) {
+			SwitchTransition switchTransition, Multiselect multiselect) {
 		this.model = model;
 		this.popupMenuController = popupMenuController;
 		this.viewController = viewController;
@@ -70,6 +71,7 @@ public class MyJPanel extends JPanel implements IView {
 		this.globalSizeModel = globalSizeModel;
 		this.statusBar = statusBar;
 		this.switchTransition = switchTransition;
+		this.multiselect = multiselect;
 
 		// Generate few places
 		// model.setNode("S1", 200, 300, 50, ENode.PLACE, "P1", false);
@@ -173,29 +175,43 @@ public class MyJPanel extends JPanel implements IView {
 		public void mouseReleased(MouseEvent e) {
 			// No node selected anymore!
 			selectedNode.setSelectedNode(null);
-			// getContentPane().setCursor(CURSOR_DEF);
 			repaint();
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
-			// Right Click
-			if (e.isPopupTrigger()) {
-				// Find the node that was clicked
-				Node n = model.getNode(e.getX(), e.getY());
-				if (n != null) {
-					selectedNode.setSelectedNodeRightClick(n);
-				}
-				rightClickMenu.show(e.getComponent(), clickX = e.getX(), clickY = e.getY());
-			} else {
-				// Find the node that was clicked
-				Node n = model.getNode(e.getX(), e.getY());
-				if (n != null) {
-					selectedNode.setSelectedNode(n);
-					repaint();
-					// getContentPane().setCursor(CURSOR_MOVE);
+			// if multiselect is activated
+			if (toolBarController.getToolBarSwitch() == 1) {
+				// Is shift down
+				if (e.isShiftDown()) {
+					// Set from point for multiselect
+					multiselect.setMultiselectFrom(new Point(e.getX(), e.getY()));
+					System.out.println(multiselect.getMultiselectFrom());
+
+				} else {
+					multiselect.setCoordinatesFrom(new Point(e.getX(), e.getY()));
+
 				}
 
+			} else {
+				// Right Click
+				if (e.isPopupTrigger()) {
+					// Find the node that was clicked
+					Node n = model.getNode(e.getX(), e.getY());
+					if (n != null) {
+						selectedNode.setSelectedNodeRightClick(n);
+					}
+					rightClickMenu.show(e.getComponent(), clickX = e.getX(), clickY = e.getY());
+				} else {
+					// Find the node that was clicked
+					Node n = model.getNode(e.getX(), e.getY());
+					if (n != null) {
+						selectedNode.setSelectedNode(n);
+						repaint();
+						// getContentPane().setCursor(CURSOR_MOVE);
+					}
+
+				}
 			}
 
 		}
@@ -216,6 +232,14 @@ public class MyJPanel extends JPanel implements IView {
 		public void mouseClicked(MouseEvent e) {
 
 			switch (toolBarController.getToolBarSwitch()) {
+			case 0:
+				multiselect.clearMultiselect();
+				repaint();
+				break;
+			case 1:
+				multiselect.clearMultiselect();
+				repaint();
+				break;
 			case 2:
 				viewController.addPlace(e.getX(), e.getY());
 				break;
@@ -265,12 +289,28 @@ public class MyJPanel extends JPanel implements IView {
 
 		@Override
 		public void mouseDragged(MouseEvent e) {
-			if (selectedNode.getSelectedNode() != null) {
+			if (selectedNode.getSelectedNode() != null && toolBarController.getToolBarSwitch() != 1) {
 				// Change coordinates of the node
 				selectedNode.getSelectedNode().setX(e.getX());
 				selectedNode.getSelectedNode().setY(e.getY());
-				repaint();
 			}
+
+			if (toolBarController.getToolBarSwitch() == 1) {
+				// Right Click
+				if (e.isShiftDown()) {
+					// Set to point for multiselect
+					multiselect.setMultiselectTo(new Point(e.getX(), e.getY()));
+					System.out.println(multiselect.getMultiselectTo());
+					multiselect.clearMultiselect();
+					multiselect.addNodeMultiselectedNodesIds();
+
+				} else {
+					multiselect.setCoordinatesTo(new Point(e.getX(), e.getY()));
+					multiselect.setNewCoordinates();
+
+				}
+			}
+			repaint();
 		}
 	};
 
@@ -292,20 +332,29 @@ public class MyJPanel extends JPanel implements IView {
 	// return null;
 	// }
 
-	@Override
-	public Dimension getPreferredSize() {
-		return new Dimension(800, 600);
-	}
+//	@Override
+//	public Dimension getPreferredSize() {
+//		return new Dimension(800, 600);
+//	}
 
+	
 	// draw all nodes
 	private void drawNodes(Graphics2D g2d) {
 		for (Node n : model.getAllNodes()) {
 			// der momentan ausgewählte node erhält zur besseren übersicht einen roten rand
 			// die anderen nodes bekommen einen schwarzen rahmen
-			if (n.equals(selectedNode.getSelectedNode())) {
+			if (n.equals(selectedNode.getSelectedNode()) && toolBarController.getToolBarSwitch() != 1) {
 				g2d.setColor(Color.RED);
 			} else {
 				g2d.setColor(Color.BLACK);
+			}
+
+			if (toolBarController.getToolBarSwitch() == 1) {
+				for (int i = 0; i < multiselect.getMultiselectedNodesIds().size(); i++) {
+					if (n.getId().equals(multiselect.getMultiselectedNodesIds().get(i))) {
+						g2d.setColor(Color.RED);
+					}
+				}
 			}
 
 			if (n.getNodeType() == ENode.PLACE) {
@@ -403,23 +452,18 @@ public class MyJPanel extends JPanel implements IView {
 		// end place");
 		// }
 
-	
-
 		if (switchTransition.isContact()) {
 			statusBar.setMessage("Contact", Color.RED);
-		} 
-		else if(switchTransition.deadlock()) {
+		} else if (switchTransition.deadlock()) {
 			statusBar.setMessage("Deadlock", Color.RED);
-		}
-		else if (switchTransition.reachedTheEndMarking()) {
+		} else if (switchTransition.reachedTheEndMarking()) {
 			statusBar.setMessage("Reached end marking", Color.BLACK);
-			
+
 		}
-		
-		else if(switchTransition.isWorkflowNet().equals("It's a Workflow Net!")){
+
+		else if (switchTransition.isWorkflowNet().equals("It's a Workflow Net!")) {
 			statusBar.setMessage(switchTransition.isWorkflowNet(), Color.GREEN);
-		}
-		else {
+		} else {
 			statusBar.setMessage(switchTransition.isWorkflowNet(), Color.BLACK);
 		}
 
@@ -427,6 +471,8 @@ public class MyJPanel extends JPanel implements IView {
 		drawName(g2d);
 		drawArc(g2d);
 		drawMarking(g2d);
+		setPreferredSize(new Dimension(model.getLargestPoint().x+100, model.getLargestPoint().y+100));
+
 		// arcWithHeadController.arcConverter();
 		// drawArc(g2d);
 
