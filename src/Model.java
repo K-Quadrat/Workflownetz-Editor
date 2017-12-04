@@ -111,10 +111,14 @@ public class Model implements IModel {
 				xCoordinates.add(n.getX());
 				yCoordinates.add(n.getY());
 			}
-			return new Point(Collections.max(xCoordinates), Collections.max(yCoordinates));
+			if (Collections.max(xCoordinates) < 1024 || Collections.max(yCoordinates) < 768) {
+				return new Point(1024, 768);
+			} else {
+				return new Point(Collections.max(xCoordinates), Collections.max(yCoordinates));
+			}
 
 		} else {
-			return new Point(800, 600);
+			return new Point(1024, 768);
 		}
 
 	}

@@ -14,9 +14,10 @@ public class TestMyJFrame {
 
 					UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 					StatusBar statusBar = new StatusBar();
+					AnimationMode animationMode = new AnimationMode();
 					IModel model = new Model();
 					ArcsModel arcsModel = new ArcsModel();
-					SwitchTransition switchTransition = new SwitchTransition(model, arcsModel);
+					SwitchTransition switchTransition = new SwitchTransition(model, arcsModel, statusBar, animationMode);
 					ID id = new ID(model, arcsModel);
 					ToolBarController toolBarController = new ToolBarController();
 					
@@ -28,12 +29,12 @@ public class TestMyJFrame {
 					
 
 					ArcsController arcsController = new ArcsController(model, arcsModel, globalSizeModel);
-					MyJPanel myJPanel = new MyJPanel(model, popupMenuController, viewController, toolBarController, selectedNode, arcsModel, arcsController, globalSizeModel, statusBar, switchTransition, multiselect);
+					MyJPanel myJPanel = new MyJPanel(model, popupMenuController, viewController, toolBarController, selectedNode, arcsModel, arcsController, globalSizeModel, statusBar, switchTransition, multiselect, animationMode);
 					IView iView = myJPanel;
-					SetStartMark setStartMark = new SetStartMark(switchTransition, iView, model);
+					SetStartMark setStartMark = new SetStartMark(switchTransition, iView, model, animationMode);
 					
 					GlobalSizeController globalSizeController = new GlobalSizeController(model, iView, globalSizeModel, arcsModel);
-					new MyJFrame(globalSizeController, myJPanel, toolBarController, model, iView, arcsModel, globalSizeModel, id, statusBar, setStartMark);
+					new MyJFrame(globalSizeController, myJPanel, toolBarController, model, iView, arcsModel, globalSizeModel, id, statusBar, setStartMark, animationMode);
 					
 										
 					

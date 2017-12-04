@@ -56,11 +56,12 @@ public class MyJPanel extends JPanel implements IView {
 	private StatusBar statusBar;
 	private SwitchTransition switchTransition;
 	private Multiselect multiselect;
+	private AnimationMode animationMode;
 
 	public MyJPanel(IModel model, PopupMenuController popupMenuController, ViewController viewController,
 			ToolBarController toolBarController, SelectedNode selectedNode, ArcsModel arcsModel,
 			ArcsController arcsController, GlobalSizeModel globalSizeModel, StatusBar statusBar,
-			SwitchTransition switchTransition, Multiselect multiselect) {
+			SwitchTransition switchTransition, Multiselect multiselect, AnimationMode animationMode) {
 		this.model = model;
 		this.popupMenuController = popupMenuController;
 		this.viewController = viewController;
@@ -72,7 +73,8 @@ public class MyJPanel extends JPanel implements IView {
 		this.statusBar = statusBar;
 		this.switchTransition = switchTransition;
 		this.multiselect = multiselect;
-
+		this.animationMode = animationMode;
+		
 		// Generate few places
 		// model.setNode("S1", 200, 300, 50, ENode.PLACE, "P1", false);
 		// model.setNode("S2", 300, 300, 50, ENode.PLACE, "P2", false);
@@ -115,6 +117,7 @@ public class MyJPanel extends JPanel implements IView {
 					refresh();
 				}
 				if (event.getActionCommand().equals("Delete Node")) {
+					animationMode.setAnimationMode(false);
 					model.deleteNode(clickX, clickY);
 					arcsController.removeNotUsedArcs();
 					repaint();
@@ -331,12 +334,11 @@ public class MyJPanel extends JPanel implements IView {
 	// return null;
 	// }
 
-//	@Override
-//	public Dimension getPreferredSize() {
-//		return new Dimension(800, 600);
-//	}
+	// @Override
+	// public Dimension getPreferredSize() {
+	// return new Dimension(800, 600);
+	// }
 
-	
 	// draw all nodes
 	private void drawNodes(Graphics2D g2d) {
 		for (Node n : model.getAllNodes()) {
@@ -428,73 +430,30 @@ public class MyJPanel extends JPanel implements IView {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-		// Copied from Newsgroups?
-		// int width = getWidth() - 100;
-		// int height = getHeight() - 100;
-		// int x = (getWidth() - width) / 2;
-		// int y = (getHeight() - height) / 2;
-		// g2d.setColor(Color.RED);
-		// g2d.drawRect(x, y, width, height);
-		// g2d.dispose();
-		// weißes quadrat mahlen
-		// g2d.setColor(Color.WHITE);
-		// g2d.fillRect(0, 0, 8000, 4000);
 
 		arcsController.setPosition();
 
-		// if (switchTransition.areAllNetworkElementsOnThePath()) {
-		// statusBar.setMessage("All network elements on a path from start place to end
-		// place");
-		// }
-		// if (!switchTransition.areAllNetworkElementsOnThePath()) {
-		// statusBar.setMessage("Not all network elements on a path from start place to
-		// end place");
-		// }
 
-		if (switchTransition.isContact()) {
-			statusBar.setMessage("Contact", Color.RED);
-		} else if (switchTransition.deadlock()) {
-			statusBar.setMessage("Deadlock", Color.RED);
-		} else if (switchTransition.reachedTheEndMarking()) {
-			statusBar.setMessage("Reached end marking", Color.BLACK);
+		switchTransition.deadlock();
 
-		}
 
-		else if (switchTransition.isWorkflowNet().equals("It's a Workflow Net!")) {
-			statusBar.setMessage(switchTransition.isWorkflowNet(), Color.GREEN);
-		} else {
-			statusBar.setMessage(switchTransition.isWorkflowNet(), Color.BLACK);
-		}
-
+		switchTransition.isWorkflowNet();
+		switchTransition.reachedTheEndMarking();
+		
 		drawNodes(g2d);
 		drawName(g2d);
 		drawArc(g2d);
 		drawMarking(g2d);
-		setPreferredSize(new Dimension(model.getLargestPoint().x+100, model.getLargestPoint().y+100));
-
-		// arcWithHeadController.arcConverter();
-		// drawArc(g2d);
-
-		// listeA.contains( elementAusListeB ); //true oder false
-
-		//
-		// if (a.getSource().equals(n.getName())) {
-		// sourcePoint.setLocation(n.getX(), n.getY());
-		// System.out.println(sourcePoint);
-		// }
-		//
-		// if (a.getTarget().equals(n.getName())) {
-		// targetPoint.setLocation(n.getX(), n.getY());
-		// radius = n.getRadius();
-		// System.out.println(targetPoint);
-		// System.out.println(radius);
-		//
-		// }
-		//
-		// }
-
-		// }
-
+		setPreferredSize(new Dimension(model.getLargestPoint().x + 100, model.getLargestPoint().y + 100));
+		
+//		if (animationMode.isContact()) {
+//			statusBar.setMessage("Contact", Color.RED);
+//		}
+		
+//		switchTransition.contact(id)
+		
+		switchTransition.deadlock();
+		
 	}
 
 	@Override

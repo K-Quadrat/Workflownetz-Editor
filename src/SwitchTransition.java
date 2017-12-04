@@ -9,13 +9,16 @@ public class SwitchTransition {
 	private String target;
 	private String startNodeClass;
 	private String endNodeClass;
-	private boolean contact;
 	private boolean transitionActive;
+	private StatusBar statusBar;
+	private AnimationMode animationMode;
 
-	public SwitchTransition(IModel model, ArcsModel arcsModel) {
+	public SwitchTransition(IModel model, ArcsModel arcsModel, StatusBar statusBar, AnimationMode animationMode) {
 		super();
 		this.model = model;
 		this.arcsModel = arcsModel;
+		this.statusBar = statusBar;
+		this.animationMode = animationMode;
 	}
 
 	/**
@@ -33,20 +36,6 @@ public class SwitchTransition {
 		this.transitionActive = transitionActive;
 	}
 
-	/**
-	 * @return the contact
-	 */
-	public boolean isContact() {
-		return contact;
-	}
-
-	/**
-	 * @param contact
-	 *            the contact to set
-	 */
-	public void setContact(boolean contact) {
-		this.contact = contact;
-	}
 
 	/**
 	 * @return the startNodeClass
@@ -109,6 +98,7 @@ public class SwitchTransition {
 	public boolean contact(String id) {
 
 		List<Boolean> marking = new ArrayList<Boolean>();
+		List<Boolean> contact = new ArrayList<Boolean>();
 
 		for (Arc a : arcsModel.getArcs()) {
 			if (a.getSource().equals(id)) {
@@ -123,26 +113,43 @@ public class SwitchTransition {
 			}
 		}
 		if (marking.contains(false) || marking.isEmpty()) {
-			return false;
-		} else {
-			setContact(true);
+		}
+
+		else {
+			contact.add(true);
+		}
+		
+		if(contact.contains(true)) {
+			statusBar.setMessage("Contact", Color.RED);
 			return true;
+		}
+		else {
+			return false;
 		}
 
 	}
 
 	public boolean deadlock() {
-		if (!reachedTheEndMarking() && !transitionActive) {
+		List<Boolean> active = new ArrayList<Boolean>();
+
+		for (Node n : model.getAllTransitions()) {
+			active.add(transitionActive(n.getId()));
+		}
+		if (active.contains(true) || reachedTheEndMarking()) {
+			return false;
+		} else if (animationMode.isAnimationMode()) {
+			statusBar.setMessage("Deadlock", Color.RED);
 			return true;
 		}
-
 		return false;
+
 	}
 
 	public boolean reachedTheEndMarking() {
 		for (Node n : model.getAllPlaces()) {
 			if (n.getId().equals(endNodeClass)) {
 				if (n.getMarking()) {
+					statusBar.setMessage("Reached end marking", Color.BLACK);
 					return true;
 				}
 			}
@@ -223,7 +230,7 @@ public class SwitchTransition {
 		return true;
 	}
 
-	public String hasStartingEndingPlaces() {
+	public void hasStartingEndingPlaces() {
 
 		// hasStartingEndingPlaces
 		List<String> arcsSource = new ArrayList<String>();
@@ -266,81 +273,103 @@ public class SwitchTransition {
 
 		}
 
-		if (nodesStart.isEmpty() && nodesEnd.isEmpty()) {
+		if (nodesStart.isEmpty() && nodesEnd.isEmpty() && model.getAllNodes().isEmpty()) {
 			// keine anfangsstelle und keine endstelle
 			setStartNodeClass(null);
 			setEndNodeClass(null);
-			return "Here we go...";
+			statusBar.setMessage("Here we go...", Color.BLACK);
+			// return "Here we go...";
 		}
 
 		else if (nodesEnd.size() >= 2 && nodesStart.size() >= 2) {
 			// zu viele anfangsstellen und endsstelle
 			setStartNodeClass(null);
 			setEndNodeClass(null);
-			return "Too many starting places and too many ending place";
+			statusBar.setMessage("Too many starting places and too many ending place", Color.BLACK);
+			// return "Too many starting places and too many ending place";
 		}
 
 		else if (nodesStart.size() >= 2 && nodesEnd.isEmpty()) {
 			// zu viele anfangsstellen und keine endstelle
 			setStartNodeClass(null);
 			setEndNodeClass(null);
-			return "Too many starting places and no ending place";
+			statusBar.setMessage("Too many starting places and no ending place", Color.BLACK);
+			// return "Too many starting places and no ending place";
 		}
 
 		else if (nodesEnd.size() >= 2 && nodesStart.isEmpty()) {
 			// keine anfangsstelle und zu viele endstellen
 			setStartNodeClass(null);
 			setEndNodeClass(null);
-			return "No starting place and too many ending places";
+			statusBar.setMessage("No starting place and too many ending places", Color.BLACK);
+			// return "No starting place and too many ending places";
+		}
+
+		else if (nodesStart.isEmpty() && nodesEnd.isEmpty()) {
+			// keine anfangsstelle und keine endstelle
+			setStartNodeClass(null);
+			setEndNodeClass(null);
+			statusBar.setMessage("No starting place and no ending place", Color.BLACK);
+			// return "No starting place and no ending place";
 		}
 
 		else if (nodesStart.isEmpty()) {
 			// keine anfangsstelle
 			setStartNodeClass(null);
 			setEndNodeClass(null);
-			return "No starting place";
+			statusBar.setMessage("No starting place", Color.BLACK);
+			// return "No starting place";
 		}
 
 		else if (nodesEnd.isEmpty()) {
 			// keine endstelle
 			setStartNodeClass(null);
 			setEndNodeClass(null);
-			return "No ending place";
+			statusBar.setMessage("No ending place", Color.BLACK);
+			// return "No ending place";
 		}
 
 		else if (nodesStart.size() >= 2) {
 			// zu viele anfangsstellen
 			setStartNodeClass(null);
 			setEndNodeClass(null);
-			return "Too many starting places";
+			statusBar.setMessage("Too many starting places", Color.BLACK);
+			// return "Too many starting places";
 		}
 
 		else if (nodesEnd.size() >= 2) {
 			// zu viele anfangsstellen
 			setStartNodeClass(null);
 			setEndNodeClass(null);
-			return "Too many ending places";
+			statusBar.setMessage("Too many ending places", Color.BLACK);
+			// return "Too many ending places";
 		}
 
 		else if (nodesStart.size() == 1 && nodesEnd.size() == 1) {
 			// genau eine anfangsstelle und genau eine endstelle
 			setStartNodeClass(nodesStart.get(0));
 			setEndNodeClass(nodesEnd.get(0));
-			return "It's a Workflow Net!";
+			statusBar.setMessage("It's a Workflow Net!", Color.GREEN);
+			// return "It's a Workflow Net!";
 
+		} else {
+			setStartNodeClass(null);
+			setEndNodeClass(null);
+			statusBar.setMessage("Not all network elements on a path from start place to end place", Color.BLACK);
+			// return "Not all network elements on a path from start place to end place";
 		}
-		setStartNodeClass(null);
-		setEndNodeClass(null);
-		return "Not all network elements on a path from start place to end place";
+
 	}
 
-	public String isWorkflowNet() {
+	public boolean isWorkflowNet() {
 		if (areAllNetworkElementsOnThePath()) {
 
-			return hasStartingEndingPlaces();
+			hasStartingEndingPlaces();
+			return true;
 
 		}
-		return "Not all network elements on a path from start place to end place";
+		statusBar.setMessage("Not all network elements on a path from start place to end place", Color.BLACK);
+		return false;
 	}
 
 }

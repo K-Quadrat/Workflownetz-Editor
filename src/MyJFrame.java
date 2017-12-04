@@ -38,10 +38,11 @@ public class MyJFrame extends JFrame {
 	private ID id;
 	private StatusBar statusBar;
 	private SetStartMark setStartMark;
+	private AnimationMode animationMode;
 
 	public MyJFrame(GlobalSizeController globalSizeController, MyJPanel myJPanel, ToolBarController toolBarController,
 			IModel model, IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel, ID id, StatusBar statusBar,
-			SetStartMark setStartMark) {
+			SetStartMark setStartMark, AnimationMode animationMode) {
 		this.globalSizeController = globalSizeController;
 		this.myJPanel = myJPanel;
 		this.toolBarController = toolBarController;
@@ -51,6 +52,7 @@ public class MyJFrame extends JFrame {
 		this.id = id;
 		this.statusBar = statusBar;
 		this.setStartMark = setStartMark;
+		this.animationMode = animationMode;
 		// EventQueue.invokeLater(new Runnable() {
 		// @Override
 		// public void run() {
@@ -64,7 +66,7 @@ public class MyJFrame extends JFrame {
 
 		JFrame frame = new JFrame("Workflownetz Editor");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setPreferredSize(new Dimension(800, 600));
+		frame.setPreferredSize(new Dimension(1024, 768));
 
 		// Create contentPane with Border Layout
 		JPanel contentPaneForMenu = new JPanel(new BorderLayout());
@@ -136,6 +138,7 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == menuItemOpen) {
+					animationMode.setAnimationMode(false);
 					OpenFile(model);
 				}
 			}
@@ -188,6 +191,7 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonPlace) {
+					animationMode.setAnimationMode(false);
 					toolBarController.setToolBarSwitch(2);
 					// System.out.println("Place " + toolBarController.getToolBarSwitch());
 				}
@@ -199,6 +203,7 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonTransition) {
+					animationMode.setAnimationMode(false);
 					toolBarController.setToolBarSwitch(3);
 					// System.out.println("Transition " + toolBarController.getToolBarSwitch());
 				}
@@ -210,6 +215,7 @@ public class MyJFrame extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonArc) {
+					animationMode.setAnimationMode(false);
 					toolBarController.setToolBarSwitch(4);
 					// System.out.println("Arc " + toolBarController.getToolBarSwitch());
 				}
