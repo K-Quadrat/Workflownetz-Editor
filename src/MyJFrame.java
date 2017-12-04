@@ -64,7 +64,7 @@ public class MyJFrame extends JFrame {
 		// ex.printStackTrace();
 		// }
 
-		JFrame frame = new JFrame("Workflownetz Editor");
+		JFrame frame = new JFrame("Workflownetz Editor Jens Hartschen 6970770");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setPreferredSize(new Dimension(1024, 768));
 
@@ -289,6 +289,7 @@ public class MyJFrame extends JFrame {
 		} else {
 			System.out.println("Bitte eine Datei als Parameter angeben!");
 		}
+		setStartMark.setStartMarking();
 	}
 
 	private void SaveFile(IModel model) {

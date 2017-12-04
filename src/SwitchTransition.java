@@ -202,10 +202,6 @@ public class SwitchTransition {
 		List<String> arcsTarget = new ArrayList<String>();
 		List<String> nodes = new ArrayList<String>();
 
-		// if (!model.getAllNodes().isEmpty() && arcsModel.getArcs().isEmpty()) {
-		// System.out.println("Nodes aber keine arcs / Nicht alle netzelemente auf dem
-		// Pfad");
-		// }
 
 		for (Arc a : arcsModel.getArcs()) {
 			arcsSource.add(a.getSource());

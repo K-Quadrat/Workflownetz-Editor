@@ -57,11 +57,12 @@ public class MyJPanel extends JPanel implements IView {
 	private SwitchTransition switchTransition;
 	private Multiselect multiselect;
 	private AnimationMode animationMode;
+	private SetStartMarkWithOutIView setStartMarkWithOutIView;
 
 	public MyJPanel(IModel model, PopupMenuController popupMenuController, ViewController viewController,
 			ToolBarController toolBarController, SelectedNode selectedNode, ArcsModel arcsModel,
 			ArcsController arcsController, GlobalSizeModel globalSizeModel, StatusBar statusBar,
-			SwitchTransition switchTransition, Multiselect multiselect, AnimationMode animationMode) {
+			SwitchTransition switchTransition, Multiselect multiselect, AnimationMode animationMode, SetStartMarkWithOutIView setStartMarkWithOutIView) {
 		this.model = model;
 		this.popupMenuController = popupMenuController;
 		this.viewController = viewController;
@@ -74,6 +75,7 @@ public class MyJPanel extends JPanel implements IView {
 		this.switchTransition = switchTransition;
 		this.multiselect = multiselect;
 		this.animationMode = animationMode;
+		this.setStartMarkWithOutIView = setStartMarkWithOutIView;
 		
 		// Generate few places
 		// model.setNode("S1", 200, 300, 50, ENode.PLACE, "P1", false);
@@ -120,6 +122,7 @@ public class MyJPanel extends JPanel implements IView {
 					animationMode.setAnimationMode(false);
 					model.deleteNode(clickX, clickY);
 					arcsController.removeNotUsedArcs();
+					setStartMarkWithOutIView.setStartMarking();
 					repaint();
 
 				}
@@ -245,9 +248,13 @@ public class MyJPanel extends JPanel implements IView {
 				break;
 			case 2:
 				viewController.addPlace(e.getX(), e.getY());
+				setStartMarkWithOutIView.setStartMarking();
+				repaint();
 				break;
 			case 3:
 				viewController.addTransition(e.getX(), e.getY());
+				setStartMarkWithOutIView.setStartMarking();
+				repaint();
 				break;
 			case 4:
 				// Find the node that was clicked
@@ -432,11 +439,7 @@ public class MyJPanel extends JPanel implements IView {
 
 
 		arcsController.setPosition();
-
-
 		switchTransition.deadlock();
-
-
 		switchTransition.isWorkflowNet();
 		switchTransition.reachedTheEndMarking();
 		
@@ -445,12 +448,6 @@ public class MyJPanel extends JPanel implements IView {
 		drawArc(g2d);
 		drawMarking(g2d);
 		setPreferredSize(new Dimension(model.getLargestPoint().x + 100, model.getLargestPoint().y + 100));
-		
-//		if (animationMode.isContact()) {
-//			statusBar.setMessage("Contact", Color.RED);
-//		}
-		
-//		switchTransition.contact(id)
 		
 		switchTransition.deadlock();
 		

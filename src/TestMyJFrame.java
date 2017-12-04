@@ -29,7 +29,8 @@ public class TestMyJFrame {
 					
 
 					ArcsController arcsController = new ArcsController(model, arcsModel, globalSizeModel);
-					MyJPanel myJPanel = new MyJPanel(model, popupMenuController, viewController, toolBarController, selectedNode, arcsModel, arcsController, globalSizeModel, statusBar, switchTransition, multiselect, animationMode);
+					SetStartMarkWithOutIView setStartMarkWithOutIView = new SetStartMarkWithOutIView(switchTransition, model, animationMode);
+					MyJPanel myJPanel = new MyJPanel(model, popupMenuController, viewController, toolBarController, selectedNode, arcsModel, arcsController, globalSizeModel, statusBar, switchTransition, multiselect, animationMode, setStartMarkWithOutIView);
 					IView iView = myJPanel;
 					SetStartMark setStartMark = new SetStartMark(switchTransition, iView, model, animationMode);
 					

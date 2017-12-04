@@ -1,22 +1,20 @@
 
-public class SetStartMark {
+public class SetStartMarkWithOutIView {
+
 	private SwitchTransition switchTransition;
-	private IView iView;
 	private IModel model;
 	private AnimationMode animationMode;
 
-	public SetStartMark(SwitchTransition switchTransition, IView iView, IModel model, AnimationMode animationMode) {
+	public SetStartMarkWithOutIView(SwitchTransition switchTransition, IModel model, AnimationMode animationMode) {
 		super();
 		this.switchTransition = switchTransition;
-		this.iView = iView;
 		this.model = model;
 		this.animationMode = animationMode;
 	}
 
-	public SetStartMark(SwitchTransition switchTransition, IView iView) {
+	public SetStartMarkWithOutIView(SwitchTransition switchTransition, IView iView) {
 		super();
 		this.switchTransition = switchTransition;
-		this.iView = iView;
 	}
 
 	public void setStartMarking() {
@@ -32,7 +30,6 @@ public class SetStartMark {
 				}
 
 			}
-			iView.refresh();
 		}
 		
 		else if (!switchTransition.isWorkflowNet()) {
@@ -47,7 +44,6 @@ public class SetStartMark {
 				}
 
 			}
-			iView.refresh();
 		}
 
 	}
