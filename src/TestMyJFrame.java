@@ -17,6 +17,7 @@ public class TestMyJFrame {
 					AnimationMode animationMode = new AnimationMode();
 					IModel model = new Model();
 					ArcsModel arcsModel = new ArcsModel();
+					AllNodesOnGraph allNodesOnGraph = new AllNodesOnGraph(arcsModel, model);
 					SwitchTransition switchTransition = new SwitchTransition(model, arcsModel, statusBar, animationMode);
 					ID id = new ID(model, arcsModel);
 					ToolBarController toolBarController = new ToolBarController();
@@ -32,6 +33,7 @@ public class TestMyJFrame {
 					SetStartMarkWithOutIView setStartMarkWithOutIView = new SetStartMarkWithOutIView(switchTransition, model, animationMode);
 					MyJPanel myJPanel = new MyJPanel(model, popupMenuController, viewController, toolBarController, selectedNode, arcsModel, arcsController, globalSizeModel, statusBar, switchTransition, multiselect, animationMode, setStartMarkWithOutIView);
 					IView iView = myJPanel;
+					myJPanel.setIViewObject(iView);
 					SetStartMark setStartMark = new SetStartMark(switchTransition, iView, model, animationMode);
 					
 					GlobalSizeController globalSizeController = new GlobalSizeController(model, iView, globalSizeModel, arcsModel);

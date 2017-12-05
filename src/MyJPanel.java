@@ -58,6 +58,7 @@ public class MyJPanel extends JPanel implements IView {
 	private Multiselect multiselect;
 	private AnimationMode animationMode;
 	private SetStartMarkWithOutIView setStartMarkWithOutIView;
+	private IView iView;
 
 	public MyJPanel(IModel model, PopupMenuController popupMenuController, ViewController viewController,
 			ToolBarController toolBarController, SelectedNode selectedNode, ArcsModel arcsModel,
@@ -137,7 +138,7 @@ public class MyJPanel extends JPanel implements IView {
 
 					for (Node n : model.getAllNodes()) {
 						if (n.equals(selectedNode.getSelectedNodeRightClick())) {
-							ViewSetName viewSetName = new ViewSetName(n);
+							ViewSetName viewSetName = new ViewSetName(n, iView);
 							selectedNode.setSelectedNodeRightClick(null);
 						}
 
@@ -453,6 +454,11 @@ public class MyJPanel extends JPanel implements IView {
 		
 	}
 
+	public void setIViewObject (IView iView) {
+		this.iView = iView;
+		
+	}
+	
 	@Override
 	public void refresh() {
 		repaint();
