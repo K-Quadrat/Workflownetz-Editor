@@ -171,6 +171,12 @@ public class MyJFrame extends JFrame {
 				if (e.getSource() == buttonSelect) {
 					toolBarController.setToolBarSwitch(0);
 					// System.out.println("Select " + toolBarController.getToolBarSwitch());
+					//TODO
+					System.out.println("I'm here");
+					scrollPane.revalidate();
+					scrollPane.repaint();
+					myJPanel.revalidate();
+					myJPanel.refresh();
 				}
 			}
 		});
@@ -252,10 +258,9 @@ public class MyJFrame extends JFrame {
 			}
 		});
 
+		myJPanel.setScrollPaneReference(scrollPane);
+		
 	}
-	// });
-
-	// }
 
 	private void OpenFile(IModel model) {
 		// Create a file chooser

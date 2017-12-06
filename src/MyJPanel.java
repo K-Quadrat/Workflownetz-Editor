@@ -58,12 +58,14 @@ public class MyJPanel extends JPanel implements IView {
 	private Multiselect multiselect;
 	private AnimationMode animationMode;
 	private SetStartMarkWithOutIView setStartMarkWithOutIView;
+	private JScrollPane scrollPane;
 	private IView iView;
 
 	public MyJPanel(IModel model, PopupMenuController popupMenuController, ViewController viewController,
 			ToolBarController toolBarController, SelectedNode selectedNode, ArcsModel arcsModel,
 			ArcsController arcsController, GlobalSizeModel globalSizeModel, StatusBar statusBar,
-			SwitchTransition switchTransition, Multiselect multiselect, AnimationMode animationMode, SetStartMarkWithOutIView setStartMarkWithOutIView) {
+			SwitchTransition switchTransition, Multiselect multiselect, AnimationMode animationMode,
+			SetStartMarkWithOutIView setStartMarkWithOutIView) {
 		this.model = model;
 		this.popupMenuController = popupMenuController;
 		this.viewController = viewController;
@@ -77,7 +79,7 @@ public class MyJPanel extends JPanel implements IView {
 		this.multiselect = multiselect;
 		this.animationMode = animationMode;
 		this.setStartMarkWithOutIView = setStartMarkWithOutIView;
-		
+
 		// Generate few places
 		// model.setNode("S1", 200, 300, 50, ENode.PLACE, "P1", false);
 		// model.setNode("S2", 300, 300, 50, ENode.PLACE, "P2", false);
@@ -438,30 +440,39 @@ public class MyJPanel extends JPanel implements IView {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-
 		arcsController.setPosition();
 		switchTransition.deadlock();
 		switchTransition.isWorkflowNet();
 		switchTransition.reachedTheEndMarking();
-		
+
 		drawNodes(g2d);
 		drawName(g2d);
 		drawArc(g2d);
 		drawMarking(g2d);
 		setPreferredSize(new Dimension(model.getLargestPoint().x + 100, model.getLargestPoint().y + 100));
-		
+
 		switchTransition.deadlock();
-		
+		revalidate();
+		refreshScrollPane();
 	}
 
-	public void setIViewObject (IView iView) {
+	public void setIViewReference(IView iView) {
 		this.iView = iView;
-		
+
 	}
-	
+
+	public void setScrollPaneReference(JScrollPane scrollPane) {
+		this.scrollPane = scrollPane;
+	}
+
 	@Override
 	public void refresh() {
 		repaint();
+	}
+
+	public void refreshScrollPane() {
+		scrollPane.revalidate();
+		scrollPane.repaint();
 	}
 
 }
