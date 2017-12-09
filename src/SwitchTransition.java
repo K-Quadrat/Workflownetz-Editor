@@ -351,7 +351,7 @@ public class SwitchTransition {
 		} else {
 			setStartNodeClass(null);
 			setEndNodeClass(null);
-			statusBar.setMessage("Not all network elements on a path from start place to end place", Color.BLACK);
+			statusBar.setMessage("Not all network elements on a path from start place to end place", Color.RED);
 			// return "Not all network elements on a path from start place to end place";
 		}
 
@@ -364,7 +364,7 @@ public class SwitchTransition {
 			return true;
 
 		}
-		statusBar.setMessage("Not all network elements on a path from start place to end place", Color.BLACK);
+		statusBar.setMessage("Not all network elements on a path from start place to end place", Color.RED);
 		return false;
 	}
 

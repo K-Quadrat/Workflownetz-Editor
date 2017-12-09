@@ -60,12 +60,13 @@ public class MyJPanel extends JPanel implements IView {
 	private SetStartMarkWithOutIView setStartMarkWithOutIView;
 	private JScrollPane scrollPane;
 	private IView iView;
+	private Warshall warshall;
 
 	public MyJPanel(IModel model, PopupMenuController popupMenuController, ViewController viewController,
 			ToolBarController toolBarController, SelectedNode selectedNode, ArcsModel arcsModel,
 			ArcsController arcsController, GlobalSizeModel globalSizeModel, StatusBar statusBar,
 			SwitchTransition switchTransition, Multiselect multiselect, AnimationMode animationMode,
-			SetStartMarkWithOutIView setStartMarkWithOutIView) {
+			SetStartMarkWithOutIView setStartMarkWithOutIView, Warshall warshall) {
 		this.model = model;
 		this.popupMenuController = popupMenuController;
 		this.viewController = viewController;
@@ -79,6 +80,7 @@ public class MyJPanel extends JPanel implements IView {
 		this.multiselect = multiselect;
 		this.animationMode = animationMode;
 		this.setStartMarkWithOutIView = setStartMarkWithOutIView;
+		this.warshall = warshall;
 
 		// Generate few places
 		// model.setNode("S1", 200, 300, 50, ENode.PLACE, "P1", false);
@@ -182,9 +184,23 @@ public class MyJPanel extends JPanel implements IView {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
-			// No node selected anymore!
-			selectedNode.setSelectedNode(null);
+			// Right Click
+			if (e.isPopupTrigger()) {
+				// Find the node that was clicked
+				Node n = model.getNode(e.getX(), e.getY());
+				if (n != null) {
+					selectedNode.setSelectedNodeRightClick(n);
+				}
+				rightClickMenu.show(e.getComponent(), clickX = e.getX(), clickY = e.getY());
+			}
+			else {
+				// No node selected anymore!
+				selectedNode.setSelectedNode(null);
+				
+			}
 			repaint();
+			
+			
 		}
 
 		@Override
@@ -224,6 +240,7 @@ public class MyJPanel extends JPanel implements IView {
 			}
 
 		}
+		
 
 		@Override
 		public void mouseExited(MouseEvent e) {
@@ -451,9 +468,9 @@ public class MyJPanel extends JPanel implements IView {
 		drawMarking(g2d);
 		setPreferredSize(new Dimension(model.getLargestPoint().x + 100, model.getLargestPoint().y + 100));
 
+		warshall.check();
 		switchTransition.deadlock();
 		revalidate();
-		refreshScrollPane();
 	}
 
 	public void setIViewReference(IView iView) {
@@ -470,9 +487,9 @@ public class MyJPanel extends JPanel implements IView {
 		repaint();
 	}
 
-	public void refreshScrollPane() {
-		scrollPane.revalidate();
-		scrollPane.repaint();
-	}
+//	public void refreshScrollPane() {
+//		scrollPane.revalidate();
+//		scrollPane.repaint();
+//	}
 
 }

@@ -4,23 +4,26 @@ public class SetStartMark {
 	private IView iView;
 	private IModel model;
 	private AnimationMode animationMode;
+	private Warshall warshall; 
 
-	public SetStartMark(SwitchTransition switchTransition, IView iView, IModel model, AnimationMode animationMode) {
+	public SetStartMark(SwitchTransition switchTransition, IView iView, IModel model, AnimationMode animationMode, Warshall warshall) {
 		super();
 		this.switchTransition = switchTransition;
 		this.iView = iView;
 		this.model = model;
 		this.animationMode = animationMode;
+		this.warshall = warshall;
 	}
 
-	public SetStartMark(SwitchTransition switchTransition, IView iView) {
+	public SetStartMark(SwitchTransition switchTransition, IView iView, Warshall warshall) {
 		super();
 		this.switchTransition = switchTransition;
 		this.iView = iView;
 	}
 
 	public void setStartMarking() {
-		if (switchTransition.isWorkflowNet()) {
+		warshall.check();
+		if (switchTransition.isWorkflowNet() && warshall.check()) {
 
 			for (Node n : model.getAllPlaces()) {
 				if (n.getId().equals(switchTransition.getStartNodeClass())) {
@@ -35,7 +38,7 @@ public class SetStartMark {
 			iView.refresh();
 		}
 		
-		else if (!switchTransition.isWorkflowNet()) {
+		else if (!switchTransition.isWorkflowNet() || !warshall.check()) {
 
 			for (Node n : model.getAllPlaces()) {
 				if (n.getId().equals(switchTransition.getStartNodeClass())) {

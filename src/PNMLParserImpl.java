@@ -7,14 +7,16 @@ public class PNMLParserImpl extends PNMLParser {
 	private IView iView;
 	private ArcsModel arcsModel;
 	private GlobalSizeModel globalSizeModel;
+	private ID globalId;
 
 	// Constructor
-	public PNMLParserImpl(File pnml, IModel model, IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel) {
+	public PNMLParserImpl(File pnml, IModel model, IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel, ID globalId) {
 		super(pnml);
 		this.model = model;
 		this.iView = iView;
 		this.arcsModel = arcsModel;
 		this.globalSizeModel = globalSizeModel;
+		this.globalId = globalId;
 	}
 
 	/*
@@ -24,7 +26,31 @@ public class PNMLParserImpl extends PNMLParser {
 	 */
 	@Override
 	public void newTransition(String id) {
-		model.setNode(id, 0, 0, globalSizeModel.getNodesSize(), ENode.TRANSITION, "");
+//		
+//		
+//		
+//		if(!id.substring(0, 1).matches("T") || !id.substring(1).matches("[0-9]")) {
+//			
+//			System.out.println("#####################################");
+//			System.out.println("#####################################");
+//			System.out.println("#####################################");
+//			System.out.println("#####################################");
+//			System.out.println("#####################################");
+//			System.out.println(id.substring(0, 1).matches("T"));
+//			System.out.println(id.substring(1).matches("[0-9]"));
+//			
+////			globalId.setBothIdForParser();
+////			globalId.getNextTransitionIdString();
+////			model.setNode(globalId.getNextTransitionIdString(), 0, 0, globalSizeModel.getNodesSize(), ENode.TRANSITION, "");
+//
+//		}
+//		else {
+			model.setNode(id, 0, 0, globalSizeModel.getNodesSize(), ENode.TRANSITION, "");
+//		}
+
+		
+
+		
 		iView.refresh();
 	}
 

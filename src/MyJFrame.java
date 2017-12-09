@@ -39,10 +39,11 @@ public class MyJFrame extends JFrame {
 	private StatusBar statusBar;
 	private SetStartMark setStartMark;
 	private AnimationMode animationMode;
+	private Warshall warshall;
 
 	public MyJFrame(GlobalSizeController globalSizeController, MyJPanel myJPanel, ToolBarController toolBarController,
 			IModel model, IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel, ID id, StatusBar statusBar,
-			SetStartMark setStartMark, AnimationMode animationMode) {
+			SetStartMark setStartMark, AnimationMode animationMode, Warshall warshall) {
 		this.globalSizeController = globalSizeController;
 		this.myJPanel = myJPanel;
 		this.toolBarController = toolBarController;
@@ -53,6 +54,7 @@ public class MyJFrame extends JFrame {
 		this.statusBar = statusBar;
 		this.setStartMark = setStartMark;
 		this.animationMode = animationMode;
+		this.warshall = warshall;
 		// EventQueue.invokeLater(new Runnable() {
 		// @Override
 		// public void run() {
@@ -171,12 +173,7 @@ public class MyJFrame extends JFrame {
 				if (e.getSource() == buttonSelect) {
 					toolBarController.setToolBarSwitch(0);
 					// System.out.println("Select " + toolBarController.getToolBarSwitch());
-					//TODO
-					System.out.println("I'm here");
-					scrollPane.revalidate();
-					scrollPane.repaint();
-					myJPanel.revalidate();
-					myJPanel.refresh();
+
 				}
 			}
 		});
@@ -259,10 +256,79 @@ public class MyJFrame extends JFrame {
 		});
 
 		myJPanel.setScrollPaneReference(scrollPane);
-		
+
+	}
+
+	private boolean databaseConditionCheckNodesId(IModel model) {
+		boolean error = false;
+		if (!model.getAllNodes().isEmpty()) {
+
+			for (Node n : model.getAllNodes()) {
+				// for (int i = 0; i < model.getAllNodes().size(); i++) {
+
+				if (!n.getId().substring(0, 1).matches("[ST]")) {
+					error = true;
+//					System.out.println("Error1");
+
+				}
+				if (!n.getId().substring(1).matches("[0-9][0-9]?[0-9]?[0-9]?")) {
+					error = true;
+//					System.out.println("Error2");
+				}
+				// }
+			}
+		}
+
+		if (error) {
+			for (Node n : model.getAllNodes()) {
+				if (n.getNodeType() == ENode.PLACE) {
+					n.setId(id.getNextPlaceIdString());
+
+				}
+				if (n.getNodeType() == ENode.TRANSITION) {
+					n.setId(id.getNextTransitionIdString());
+
+				}
+			}
+		}
+
+		return error;
+
+	}
+
+	private boolean databaseConditionCheckArcsId(ArcsModel arcsModel) {
+		boolean error = false;
+		if (!arcsModel.getArcs().isEmpty()) {
+
+			for (Arc a : arcsModel.getArcs()) {
+
+				if (!a.getId().substring(0, 1).matches("[K]")) {
+					error = true;
+//					System.out.println("Error1");
+
+				}
+				if (!a.getId().substring(1).matches("[0-9][0-9]?[0-9]?[0-9]?")) {
+					error = true;
+//					System.out.println("Error2");
+				}
+			}
+		}
+
+		if (error) {
+//			for (Arc a : arcsModel.getArcs()) {
+//				a.setId(id.getNextArcIdString());
+//
+//			}
+			arcsModel.clearArcsList();
+		}
+
+		return error;
+
 	}
 
 	private void OpenFile(IModel model) {
+		boolean parserError = false;
+
 		// Create a file chooser
 		// TODO set to currentPath
 		JFileChooser chooser = new JFileChooser("/home/jens/FernUniHagen/ProPra/Aufgabenstellung/Beispiele");
@@ -282,14 +348,40 @@ public class MyJFrame extends JFrame {
 
 			File pnmlDatei = new File(chooser.getSelectedFile(), "");
 			if (pnmlDatei.exists()) {
-				PNMLParserImpl pnmlParserImpl = new PNMLParserImpl(pnmlDatei, model, iView, arcsModel, globalSizeModel);
+				PNMLParserImpl pnmlParserImpl = new PNMLParserImpl(pnmlDatei, model, iView, arcsModel, globalSizeModel,
+						id);
 				pnmlParserImpl.initParser();
 				pnmlParserImpl.parse();
 			} else {
 				System.err.println("Die Datei " + pnmlDatei.getAbsolutePath() + " wurde nicht gefunden!");
 			}
-			id.setBothIdForParser();
-			id.setArcIdForParser();
+
+			System.out.println("+++++++++++++++++++");
+			System.out.println("+++++++++++++++++++");
+			System.out.println("+++++++++++++++++++");
+
+			// If databaseConditionCheckNodesId got no error, return false and execute if
+			// statement
+			if (!databaseConditionCheckNodesId(model)) {
+				id.setBothIdForParser();
+			}
+			else {
+				parserError = true;
+			}
+
+			// If databaseConditionCheckArcsId got no error, return false and execute if
+			// statement
+			if (!databaseConditionCheckArcsId(arcsModel)) {
+				id.setArcIdForParser();
+			}
+			else {
+				parserError = true;
+			}
+
+			
+			if(parserError) {
+				ViewParserError viewParserError = new ViewParserError(); 
+			}
 
 		} else {
 			System.out.println("Bitte eine Datei als Parameter angeben!");

@@ -22,6 +22,44 @@ public class ID {
 		this.arcsModel = arcsModel;
 	}
 
+	
+	
+	/**
+	 * @return the placeIdCounter
+	 */
+	public int getPlaceIdCounter() {
+		return placeIdCounter;
+	}
+
+
+
+	/**
+	 * @param placeIdCounter the placeIdCounter to set
+	 */
+	public void setPlaceIdCounter(int placeIdCounter) {
+		this.placeIdCounter = placeIdCounter;
+	}
+
+
+
+	/**
+	 * @return the transitionIdCounter
+	 */
+	public int getTransitionIdCounter() {
+		return transitionIdCounter;
+	}
+
+
+
+	/**
+	 * @param transitionIdCounter the transitionIdCounter to set
+	 */
+	public void setTransitionIdCounter(int transitionIdCounter) {
+		this.transitionIdCounter = transitionIdCounter;
+	}
+
+
+
 	/**
 	 * @return the placeIdString
 	 */
