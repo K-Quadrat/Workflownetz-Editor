@@ -1,5 +1,7 @@
 import java.awt.EventQueue;
 
+import de.hartschen.wne.ViewSetName;
+
 public class TestViewSetName {
 
 	public static void main(String[] args) {

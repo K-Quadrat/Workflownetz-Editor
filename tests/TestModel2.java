@@ -1,3 +1,4 @@
+import de.hartschen.wne.Model;
 
 public class TestModel2 {
 

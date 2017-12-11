@@ -1,6 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import de.hartschen.wne.ENode;
+import de.hartschen.wne.Node;
+
 public class testArrayList {
 
 	public static void main(String[] args) {

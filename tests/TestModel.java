@@ -4,6 +4,12 @@ import java.util.List;
 
 import com.sun.xml.internal.bind.v2.runtime.reflect.opt.TransducedAccessor_field_Float;
 
+import de.hartschen.wne.Arc;
+import de.hartschen.wne.ArcsModel;
+import de.hartschen.wne.ENode;
+import de.hartschen.wne.Model;
+import de.hartschen.wne.Node;
+
 public class TestModel {
 	private static Point sourcePoint;
 	private Point targetPoint;
