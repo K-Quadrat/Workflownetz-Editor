@@ -16,12 +16,6 @@ public class SetStartMark {
 		this.warshall = warshall;
 	}
 
-	public SetStartMark(SwitchTransition switchTransition, IView iView, Warshall warshall) {
-		super();
-		this.switchTransition = switchTransition;
-		this.iView = iView;
-	}
-
 	public void setStartMarking() {
 		warshall.check();
 		if (switchTransition.isWorkflowNet() && warshall.check()) {

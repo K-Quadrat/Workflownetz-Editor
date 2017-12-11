@@ -1,11 +1,9 @@
 package de.hartschen.wne;
 
 import java.awt.Color;
-import java.util.Arrays;
 
 public class Warshall {
 	private ArcsModel arcsModel;
-	private IModel model;
 	private ID id;
 	private SwitchTransition switchTransition;
 	private StatusBar statusBar;
@@ -18,10 +16,9 @@ public class Warshall {
 	private int V;
 	private boolean[][] tc;
 
-	public Warshall(ArcsModel arcsModel, IModel model, ID id, SwitchTransition switchTransition, StatusBar statusBar) {
+	public Warshall(ArcsModel arcsModel, ID id, SwitchTransition switchTransition, StatusBar statusBar) {
 		super();
 		this.arcsModel = arcsModel;
-		this.model = model;
 		this.id = id;
 		this.switchTransition = switchTransition;
 		this.statusBar = statusBar;
@@ -85,8 +82,6 @@ public class Warshall {
 		// }
 
 		getTC(matrix);
-		displayTC();
-
 	}
 
 	/** Function to make the transitive closure **/
@@ -143,7 +138,6 @@ public class Warshall {
 			for (int i = 0; i < matrixSize; i++) {
 				if (!tc[startPlaceMatrixIndex][i]) {
 					// if false
-					System.out.println(i);
 					if (!nodeStillExist(i)) {
 						return false;
 					}
@@ -154,7 +148,6 @@ public class Warshall {
 			for (int i = 0; i < matrixSize; i++) {
 				if (!tc[i][endPlaceMatrixIndex]) {
 					// if false
-					System.out.println(i);
 					if (!nodeStillExist(i)) {
 						return false;
 					}

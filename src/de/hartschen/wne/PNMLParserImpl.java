@@ -9,17 +9,14 @@ public class PNMLParserImpl extends PNMLParser {
 	private IView iView;
 	private ArcsModel arcsModel;
 	private GlobalSizeModel globalSizeModel;
-	private ID globalId;
 
 	// Constructor
-	public PNMLParserImpl(File pnml, IModel model, IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel,
-			ID globalId) {
+	public PNMLParserImpl(File pnml, IModel model, IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel) {
 		super(pnml);
 		this.model = model;
 		this.iView = iView;
 		this.arcsModel = arcsModel;
 		this.globalSizeModel = globalSizeModel;
-		this.globalId = globalId;
 	}
 
 	/*

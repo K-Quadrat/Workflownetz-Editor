@@ -279,8 +279,8 @@ public class WNEMainFrame extends JFrame {
 
 		// Create a file chooser
 		// TODO set to currentPath
-		JFileChooser chooser = new JFileChooser("/home/jens/FernUniHagen/ProPra/Aufgabenstellung/Beispiele");
-		// JFileChooser chooser = new JFileChooser(currentPath);
+//		JFileChooser chooser = new JFileChooser("/home/jens/FernUniHagen/ProPra/Aufgabenstellung/Beispiele");
+		 JFileChooser chooser = new JFileChooser(currentPath);
 
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNML File", "pnml");
 		chooser.setFileFilter(filter);
@@ -297,7 +297,7 @@ public class WNEMainFrame extends JFrame {
 			File pnmlDatei = new File(chooser.getSelectedFile(), "");
 			if (pnmlDatei.exists()) {
 				PNMLParserImpl pnmlParserImpl = new PNMLParserImpl(pnmlDatei, model, iView, arcsModel, globalSizeModel,
-						id);
+						z);
 				pnmlParserImpl.initParser();
 				pnmlParserImpl.parse();
 			} else {
@@ -317,8 +317,8 @@ public class WNEMainFrame extends JFrame {
 	private void SaveFile(IModel model) {
 		// Create a file chooser
 		// TODO set to currentPath
-		JFileChooser chooser = new JFileChooser("/home/jens/FernUniHagen/ProPra/Aufgabenstellung/SaveTest");
-		// JFileChooser chooser = new JFileChooser(currentPath);
+//		JFileChooser chooser = new JFileChooser("/home/jens/FernUniHagen/ProPra/Aufgabenstellung/SaveTest");
+		 JFileChooser chooser = new JFileChooser(currentPath);
 
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNML File", "pnml");
 		chooser.setFileFilter(filter);

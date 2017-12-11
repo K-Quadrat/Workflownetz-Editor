@@ -46,7 +46,6 @@ public class WNEPanel extends JPanel implements IView {
 	private IModel model;
 	private JPopupMenu rightClickMenu;
 	private JPopupMenu rightClickMenuMultiselect;;
-	private PopupMenuController popupMenuController;
 	private ViewController viewController;
 	private ToolBarController toolBarController;
 	private SelectedNode selectedNode;
@@ -65,13 +64,12 @@ public class WNEPanel extends JPanel implements IView {
 	private IView iView;
 	private Warshall warshall;
 
-	public WNEPanel(IModel model, PopupMenuController popupMenuController, ViewController viewController,
+	public WNEPanel(IModel model, ViewController viewController,
 			ToolBarController toolBarController, SelectedNode selectedNode, ArcsModel arcsModel,
 			ArcsController arcsController, GlobalSizeModel globalSizeModel, StatusBar statusBar,
 			SwitchTransition switchTransition, Multiselect multiselect, AnimationMode animationMode,
 			SetStartMark setStartMark, Warshall warshall) {
 		this.model = model;
-		this.popupMenuController = popupMenuController;
 		this.viewController = viewController;
 		this.toolBarController = toolBarController;
 		this.selectedNode = selectedNode;

@@ -5,11 +5,6 @@ import java.awt.Point;
 public class ViewController extends WNEPanel {
 
 	private IModel model;
-	private IView view;
-	private String placeId;
-	private int placeIdCounter;
-	private String transitionId;
-	private int transitionIdCounter;
 	private ID id;
 	private GlobalSizeModel globalSizeModel;
 	private ArcsModel arcsModel;

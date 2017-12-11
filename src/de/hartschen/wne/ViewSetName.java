@@ -1,23 +1,14 @@
 package de.hartschen.wne;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.concurrent.TimeUnit;
 
 import javax.swing.*;
 
 public class ViewSetName extends JPanel {
 
-	private Node node;
-	private IView iView;
-
 	public ViewSetName(Node node, IView iView) {
 		super();
-		this.node = node;
-		this.iView = iView;
 
 		JFrame frame = new JFrame();
 		frame.setLayout(new BorderLayout());
