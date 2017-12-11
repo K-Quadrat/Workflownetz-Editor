@@ -11,11 +11,13 @@ public class Multiselect {
 	private Point coordinatesFrom;
 	private Point coordinatesTo;
 	private GlobalSizeModel globalSizeModel;
+	private ArcsController arcsController;
 
-	public Multiselect(IModel model, GlobalSizeModel globalSizeModel) {
+	public Multiselect(IModel model, GlobalSizeModel globalSizeModel, ArcsController arcsController) {
 		super();
 		this.model = model;
 		this.globalSizeModel = globalSizeModel;
+		this.arcsController = arcsController;
 	}
 
 	public void addNodeMultiselectedNodesIds() {
@@ -28,6 +30,19 @@ public class Multiselect {
 
 		}
 		System.out.println(multiselectedNodesIds);
+	}
+
+	public void deleteMultiselectedNodes() {
+		for (int i = 0; i < getMultiselectedNodesIds().size(); i++) {
+			for (int j = 0; j < model.getAllNodes().size(); j++) {
+				Node n = model.getAllNodes().get(j);
+
+				if (n.getId().equals(getMultiselectedNodesIds().get(i))) {
+					model.deleteNodeById(n.getId());
+					j--;
+				}
+			}
+		}
 	}
 
 	public void clearMultiselect() {
@@ -106,7 +121,7 @@ public class Multiselect {
 		for (Node n : model.getAllNodes()) {
 			for (int i = 0; i < getMultiselectedNodesIds().size(); i++) {
 				if (n.getId().equals(getMultiselectedNodesIds().get(i))) {
-					if (model.getSmallestPoint().x <= globalSizeModel.getNodesSize()/2) {
+					if (model.getSmallestPoint().x <= globalSizeModel.getNodesSize() / 2) {
 						if (n.getX() < (n.getX() + distanceX / 20)) {
 							n.setX(n.getX() + distanceX / 20);
 						}
@@ -115,7 +130,7 @@ public class Multiselect {
 						n.setX(n.getX() + distanceX / 20);
 					}
 
-					if (model.getSmallestPoint().y <= globalSizeModel.getNodesSize()/2) {
+					if (model.getSmallestPoint().y <= globalSizeModel.getNodesSize() / 2) {
 						if (n.getY() < (n.getY() + distanceY / 20)) {
 							n.setY(n.getY() + distanceY / 20);
 						}

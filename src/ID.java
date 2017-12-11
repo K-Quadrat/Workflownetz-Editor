@@ -125,13 +125,15 @@ public class ID {
 			if (n.getNodeType() == ENode.PLACE) {
 				// Remove all "S", parse String to int and add all numbers to ArrayList
 				// placesIds
-				placesIds.add(Integer.parseInt(n.getId().replaceAll("S", "")));
+//				placesIds.add(Integer.parseInt(n.getId().replaceAll("S", "")));
+				placesIds.add(Integer.parseInt(n.getId().replaceAll("[A-Z,a-z]", "")));
 			}
 
 			if (n.getNodeType() == ENode.TRANSITION) {
 				// Remove all "T", parse String to int and add all numbers to ArrayList
 				// transitionsIds
-				transitionsIds.add(Integer.parseInt(n.getId().replaceAll("T", "")));
+//				transitionsIds.add(Integer.parseInt(n.getId().replaceAll("T", "")));
+				transitionsIds.add(Integer.parseInt(n.getId().replaceAll("[A-Z,a-z]", "")));
 			}
 
 		}
@@ -148,7 +150,8 @@ public class ID {
 		for (Arc a : arcsModel.getArcs()) {
 			// Remove all "K", parse String to int and add all numbers to ArrayList
 			// placesIds
-			arcsIds.add(Integer.parseInt(a.getId().replaceAll("K", "")));
+//			arcsIds.add(Integer.parseInt(a.getId().replaceAll("K", "")));
+			arcsIds.add(Integer.parseInt(a.getId().replaceAll("[A-Z,a-z]", "")));
 
 		}
 		arcIdCounter = Collections.max(arcsIds);

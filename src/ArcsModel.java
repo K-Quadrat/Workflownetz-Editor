@@ -25,8 +25,7 @@ public class ArcsModel {
 		}
 		arcs.remove(index);
 	}
-	
-	
+
 	public void deleteArc(int x, int y) {
 		for (Arc a : arcs) {
 			if (a.containsPoint(x, y)) {
@@ -42,7 +41,7 @@ public class ArcsModel {
 		}
 
 	}
-	
+
 	public void clearArcsList() {
 		arcs.clear();
 	}

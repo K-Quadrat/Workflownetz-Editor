@@ -63,19 +63,20 @@ public class Warshall {
 			int sourceMatrixIndex = 0;
 			int targetMatrixIndex = 0;
 			if (a.getSource().contains("S")) {
-				sourceMatrixIndex = (Integer.parseInt(a.getSource().replaceAll("S", "")));
+				sourceMatrixIndex = (Integer.parseInt(a.getSource().replaceAll("[A-Z,a-z]", "")));
+
 				sourceMatrixIndex--;
 
-				targetMatrixIndex = (Integer.parseInt(a.getTarget().replaceAll("T", "")));
+				targetMatrixIndex = (Integer.parseInt(a.getTarget().replaceAll("[A-Z,a-z]", "")));
 				targetMatrixIndex = targetMatrixIndex + lastPlaceId;
 				targetMatrixIndex--;
 
 			} else if (a.getSource().contains("T")) {
-				sourceMatrixIndex = (Integer.parseInt(a.getSource().replaceAll("T", "")));
+				sourceMatrixIndex = (Integer.parseInt(a.getSource().replaceAll("[A-Z,a-z]", "")));
 				sourceMatrixIndex = sourceMatrixIndex + lastPlaceId;
 				sourceMatrixIndex--;
 
-				targetMatrixIndex = (Integer.parseInt(a.getTarget().replaceAll("S", "")));
+				targetMatrixIndex = (Integer.parseInt(a.getTarget().replaceAll("[A-Z,a-z]", "")));
 				targetMatrixIndex--;
 
 			}
@@ -139,10 +140,10 @@ public class Warshall {
 		// set startPlaceMatrixIndex and endPlaceMatrixIndex
 		if (switchTransition.getStartNodeClass() != null && !switchTransition.getStartNodeClass().isEmpty()
 				&& switchTransition.getEndNodeClass() != null && !switchTransition.getEndNodeClass().isEmpty()) {
-			int startPlaceMatrixIndex = (Integer.parseInt(switchTransition.getStartNodeClass().replaceAll("S", "")));
+			int startPlaceMatrixIndex = (Integer.parseInt(switchTransition.getStartNodeClass().replaceAll("[A-Z,a-z]", "")));
 			startPlaceMatrixIndex--;
 
-			int endPlaceMatrixIndex = (Integer.parseInt(switchTransition.getEndNodeClass().replaceAll("S", "")));
+			int endPlaceMatrixIndex = (Integer.parseInt(switchTransition.getEndNodeClass().replaceAll("[A-Z,a-z]", "")));
 			endPlaceMatrixIndex--;
 
 			System.out.println("startPlaceMatrixIndex: " + startPlaceMatrixIndex);

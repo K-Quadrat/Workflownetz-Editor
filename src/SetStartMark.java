@@ -4,12 +4,11 @@ public class SetStartMark {
 	private IView iView;
 	private IModel model;
 	private AnimationMode animationMode;
-	private Warshall warshall; 
+	private Warshall warshall;
 
-	public SetStartMark(SwitchTransition switchTransition, IView iView, IModel model, AnimationMode animationMode, Warshall warshall) {
+	public SetStartMark(SwitchTransition switchTransition, IModel model, AnimationMode animationMode, Warshall warshall) {
 		super();
 		this.switchTransition = switchTransition;
-		this.iView = iView;
 		this.model = model;
 		this.animationMode = animationMode;
 		this.warshall = warshall;
@@ -55,4 +54,9 @@ public class SetStartMark {
 
 	}
 
+	public void setIViewReference(IView iView) {
+		this.iView = iView;
+
+	}
+	
 }

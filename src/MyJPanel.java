@@ -43,6 +43,7 @@ public class MyJPanel extends JPanel implements IView {
 	private ENode nodeType;
 	private IModel model;
 	private JPopupMenu rightClickMenu;
+	private JPopupMenu rightClickMenuMultiselect;;
 	private PopupMenuController popupMenuController;
 	private ViewController viewController;
 	private ToolBarController toolBarController;
@@ -57,7 +58,7 @@ public class MyJPanel extends JPanel implements IView {
 	private SwitchTransition switchTransition;
 	private Multiselect multiselect;
 	private AnimationMode animationMode;
-	private SetStartMarkWithOutIView setStartMarkWithOutIView;
+	private SetStartMark setStartMark;
 	private JScrollPane scrollPane;
 	private IView iView;
 	private Warshall warshall;
@@ -66,7 +67,7 @@ public class MyJPanel extends JPanel implements IView {
 			ToolBarController toolBarController, SelectedNode selectedNode, ArcsModel arcsModel,
 			ArcsController arcsController, GlobalSizeModel globalSizeModel, StatusBar statusBar,
 			SwitchTransition switchTransition, Multiselect multiselect, AnimationMode animationMode,
-			SetStartMarkWithOutIView setStartMarkWithOutIView, Warshall warshall) {
+			SetStartMark setStartMark, Warshall warshall) {
 		this.model = model;
 		this.popupMenuController = popupMenuController;
 		this.viewController = viewController;
@@ -79,7 +80,7 @@ public class MyJPanel extends JPanel implements IView {
 		this.switchTransition = switchTransition;
 		this.multiselect = multiselect;
 		this.animationMode = animationMode;
-		this.setStartMarkWithOutIView = setStartMarkWithOutIView;
+		this.setStartMark = setStartMark;
 		this.warshall = warshall;
 
 		// Generate few places
@@ -110,6 +111,9 @@ public class MyJPanel extends JPanel implements IView {
 		// Create JPopupMenu
 		rightClickMenu = new JPopupMenu();
 
+		// Create JPopupMenu for multiselect
+		rightClickMenuMultiselect = new JPopupMenu();
+
 		ActionListener menuListener = new ActionListener() {
 			public void actionPerformed(ActionEvent event) {
 				if (event.getActionCommand().equals("Switch transition")) {
@@ -127,13 +131,14 @@ public class MyJPanel extends JPanel implements IView {
 					animationMode.setAnimationMode(false);
 					model.deleteNode(clickX, clickY);
 					arcsController.removeNotUsedArcs();
-					setStartMarkWithOutIView.setStartMarking();
+					setStartMark.setStartMarking();
 					repaint();
 
 				}
 
 				if (event.getActionCommand().equals("Delete Arc")) {
 					arcsModel.deleteArc(clickX, clickY);
+					setStartMark.setStartMarking();
 					repaint();
 
 				}
@@ -148,6 +153,16 @@ public class MyJPanel extends JPanel implements IView {
 
 					}
 				}
+
+				if (event.getActionCommand().equals("Delete all selected items")) {
+					animationMode.setAnimationMode(false);
+					multiselect.deleteMultiselectedNodes();
+					arcsController.removeNotUsedArcs();
+					setStartMark.setStartMarking();
+					repaint();
+
+				}
+
 			}
 		};
 
@@ -170,6 +185,10 @@ public class MyJPanel extends JPanel implements IView {
 		item.setHorizontalTextPosition(JMenuItem.RIGHT);
 		item.addActionListener(menuListener);
 
+		rightClickMenuMultiselect.add(item = new JMenuItem("Delete all selected items"));
+		item.setHorizontalTextPosition(JMenuItem.RIGHT);
+		item.addActionListener(menuListener);
+
 	}
 
 	public MyJPanel() {
@@ -184,31 +203,40 @@ public class MyJPanel extends JPanel implements IView {
 
 		@Override
 		public void mouseReleased(MouseEvent e) {
+			// if multiselect is activated
+			if (toolBarController.getToolBarSwitch() == 1) {
+				if (e.isPopupTrigger()) {
+					rightClickMenuMultiselect.show(e.getComponent(), clickX = e.getX(), clickY = e.getY());
+				}
+			}
+
 			// Right Click
-			if (e.isPopupTrigger()) {
+			else if (e.isPopupTrigger()) {
 				// Find the node that was clicked
 				Node n = model.getNode(e.getX(), e.getY());
 				if (n != null) {
 					selectedNode.setSelectedNodeRightClick(n);
 				}
 				rightClickMenu.show(e.getComponent(), clickX = e.getX(), clickY = e.getY());
-			}
-			else {
+			} else {
 				// No node selected anymore!
 				selectedNode.setSelectedNode(null);
-				
+
 			}
 			repaint();
-			
-			
+
 		}
 
 		@Override
 		public void mousePressed(MouseEvent e) {
 			// if multiselect is activated
 			if (toolBarController.getToolBarSwitch() == 1) {
+				if (e.isPopupTrigger()) {
+					rightClickMenuMultiselect.show(e.getComponent(), clickX = e.getX(), clickY = e.getY());
+				}
+
 				// Is shift down
-				if (e.isShiftDown()) {
+				else if (e.isShiftDown()) {
 					// Set from point for multiselect
 					multiselect.setMultiselectFrom(new Point(e.getX(), e.getY()));
 					System.out.println(multiselect.getMultiselectFrom());
@@ -240,7 +268,6 @@ public class MyJPanel extends JPanel implements IView {
 			}
 
 		}
-		
 
 		@Override
 		public void mouseExited(MouseEvent e) {
@@ -268,12 +295,12 @@ public class MyJPanel extends JPanel implements IView {
 				break;
 			case 2:
 				viewController.addPlace(e.getX(), e.getY());
-				setStartMarkWithOutIView.setStartMarking();
+				setStartMark.setStartMarking();
 				repaint();
 				break;
 			case 3:
 				viewController.addTransition(e.getX(), e.getY());
-				setStartMarkWithOutIView.setStartMarking();
+				setStartMark.setStartMarking();
 				repaint();
 				break;
 			case 4:
@@ -298,7 +325,8 @@ public class MyJPanel extends JPanel implements IView {
 				} else if (n == null || nodeType == n.getNodeType()) {
 					firstClick = true;
 				}
-
+				setStartMark.setStartMarking();
+				repaint();
 				break;
 
 			default:
@@ -487,9 +515,9 @@ public class MyJPanel extends JPanel implements IView {
 		repaint();
 	}
 
-//	public void refreshScrollPane() {
-//		scrollPane.revalidate();
-//		scrollPane.repaint();
-//	}
+	// public void refreshScrollPane() {
+	// scrollPane.revalidate();
+	// scrollPane.repaint();
+	// }
 
 }

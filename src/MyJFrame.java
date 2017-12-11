@@ -40,10 +40,12 @@ public class MyJFrame extends JFrame {
 	private SetStartMark setStartMark;
 	private AnimationMode animationMode;
 	private Warshall warshall;
+	private Multiselect multiselect;
+	private ArcsController arcsController;
 
 	public MyJFrame(GlobalSizeController globalSizeController, MyJPanel myJPanel, ToolBarController toolBarController,
 			IModel model, IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel, ID id, StatusBar statusBar,
-			SetStartMark setStartMark, AnimationMode animationMode, Warshall warshall) {
+			SetStartMark setStartMark, AnimationMode animationMode, Warshall warshall, Multiselect multiselect, ArcsController arcsController) {
 		this.globalSizeController = globalSizeController;
 		this.myJPanel = myJPanel;
 		this.toolBarController = toolBarController;
@@ -55,6 +57,8 @@ public class MyJFrame extends JFrame {
 		this.setStartMark = setStartMark;
 		this.animationMode = animationMode;
 		this.warshall = warshall;
+		this.multiselect = multiselect;
+		this.arcsController = arcsController;
 		// EventQueue.invokeLater(new Runnable() {
 		// @Override
 		// public void run() {
@@ -172,6 +176,10 @@ public class MyJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonSelect) {
 					toolBarController.setToolBarSwitch(0);
+					//TODO
+//					model.deleteNodeById("S2");
+					arcsController.removeNotUsedArcs();
+					iView.refresh();
 					// System.out.println("Select " + toolBarController.getToolBarSwitch());
 
 				}
@@ -184,6 +192,10 @@ public class MyJFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (e.getSource() == buttonMultiselect) {
 					toolBarController.setToolBarSwitch(1);
+					multiselect.deleteMultiselectedNodes();
+					arcsController.removeNotUsedArcs();
+					setStartMark.setStartMarking();
+					iView.refresh();
 					// System.out.println("Multiselect " + toolBarController.getToolBarSwitch());
 				}
 			}
@@ -296,35 +308,6 @@ public class MyJFrame extends JFrame {
 
 	}
 
-	private boolean databaseConditionCheckArcsId(ArcsModel arcsModel) {
-		boolean error = false;
-		if (!arcsModel.getArcs().isEmpty()) {
-
-			for (Arc a : arcsModel.getArcs()) {
-
-				if (!a.getId().substring(0, 1).matches("[K]")) {
-					error = true;
-//					System.out.println("Error1");
-
-				}
-				if (!a.getId().substring(1).matches("[0-9][0-9]?[0-9]?[0-9]?")) {
-					error = true;
-//					System.out.println("Error2");
-				}
-			}
-		}
-
-		if (error) {
-//			for (Arc a : arcsModel.getArcs()) {
-//				a.setId(id.getNextArcIdString());
-//
-//			}
-			arcsModel.clearArcsList();
-		}
-
-		return error;
-
-	}
 
 	private void OpenFile(IModel model) {
 		boolean parserError = false;
@@ -356,32 +339,9 @@ public class MyJFrame extends JFrame {
 				System.err.println("Die Datei " + pnmlDatei.getAbsolutePath() + " wurde nicht gefunden!");
 			}
 
-			System.out.println("+++++++++++++++++++");
-			System.out.println("+++++++++++++++++++");
-			System.out.println("+++++++++++++++++++");
-
-			// If databaseConditionCheckNodesId got no error, return false and execute if
-			// statement
-			if (!databaseConditionCheckNodesId(model)) {
-				id.setBothIdForParser();
-			}
-			else {
-				parserError = true;
-			}
-
-			// If databaseConditionCheckArcsId got no error, return false and execute if
-			// statement
-			if (!databaseConditionCheckArcsId(arcsModel)) {
-				id.setArcIdForParser();
-			}
-			else {
-				parserError = true;
-			}
-
+			id.setBothIdForParser();
+			id.setArcIdForParser();
 			
-			if(parserError) {
-				ViewParserError viewParserError = new ViewParserError(); 
-			}
 
 		} else {
 			System.out.println("Bitte eine Datei als Parameter angeben!");

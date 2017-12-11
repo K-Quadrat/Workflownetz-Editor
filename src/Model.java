@@ -140,4 +140,21 @@ public class Model implements IModel {
 		}
 	}
 
+	@Override
+	public void deleteNodeById(String id) {
+		boolean hit = false;
+		for (Node n : getAllNodes()) {
+			if (n.getId().equals(id)) {
+				index = nodes.indexOf(n);
+				hit = true;
+			}
+		}
+		if (hit) {
+			nodes.remove(index);	
+		}
+		
+	}
+	
+	
+
 }

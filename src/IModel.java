@@ -8,6 +8,8 @@ public interface IModel {
 	void setNode(String id, int x, int y, int radius, ENode nodeType, String name);
 
 	void deleteNode(int x, int y);
+	
+	void deleteNodeById(String id);
 
 	Node getNode(int x, int y);
 
