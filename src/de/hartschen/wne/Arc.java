@@ -30,15 +30,10 @@ public class Arc {
 	 * 
 	 * @param id
 	 * @param source
-	 *            node id
 	 * @param target
-	 *            node id
-	 * @param Quell
-	 *            Koordinaten
-	 * @param Ziel
-	 *            Koordinaten
-	 * @param Golbale
-	 *            Größe des Pfeils
+	 * @param k1
+	 * @param k2
+	 * @param length
 	 */
 	public Arc(String id, String source, String target, Point k1, Point k2, double length) {
 
@@ -144,8 +139,7 @@ public class Arc {
 	/**
 	 * Die Methode setzt die Quellkooardinaten.
 	 * 
-	 * @param Point
-	 *            from
+	 * @param from
 	 */
 	public void setFrom(Point from) {
 		this.from = from;
@@ -163,8 +157,7 @@ public class Arc {
 	/**
 	 * Die Methode setzt die Zielkooardinaten.
 	 * 
-	 * @param Point
-	 *            to
+	 * @param to
 	 * 
 	 */
 	public void setTo(Point to) {
@@ -183,18 +176,18 @@ public class Arc {
 	/**
 	 * Die Methode setzt die Pfeilspitze.
 	 * 
-	 * @param Polygon
-	 *            arrow
+	 * @param arrow
 	 */
 	public void setArrow(Polygon arrow) {
 		this.arrow = arrow;
 	}
 
-	
-	/** Die Methode ändert die Koordinaten und Größe des Pfeils.
-	 * @param Quellkooardinaten
-	 * @param Zielkooardinaten
-	 * @param Globale Größe der Pfeilspitze
+	/**
+	 * Die Methode ändert die Koordinaten und Größe des Pfeils.
+	 * 
+	 * @param k1
+	 * @param k2
+	 * @param length
 	 */
 	public void modifyArc(Point k1, Point k2, double length) {
 

@@ -108,8 +108,7 @@ public class Warshall {
 	 * Die Methode berechnet die Transitive Hülle mit dem Floyd und Warshall
 	 * Algorithmus.
 	 * 
-	 * @param 2D
-	 *            Matrix
+	 * @param graph
 	 */
 	public void getTC(int[][] graph) {
 		this.V = graph.length;

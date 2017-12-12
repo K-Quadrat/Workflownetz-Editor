@@ -21,9 +21,7 @@ public class AnimationMode {
 	/**
 	 * Die Methode setzt den AnimationMode auf true oder false.
 	 * 
-	 * @param true
-	 *            oder false
-	 * 
+	 * @param animationMode
 	 * 
 	 */
 	public void setAnimationMode(boolean animationMode) {

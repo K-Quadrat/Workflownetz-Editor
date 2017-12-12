@@ -46,8 +46,7 @@ public class ID {
 	/**
 	 * Die Methode setzt die höchste Place Id als Ganzzahl.
 	 * 
-	 * @param Integer
-	 *            placeIdCounter
+	 * @param placeIdCounter
 	 */
 	public void setPlaceIdCounter(int placeIdCounter) {
 		this.placeIdCounter = placeIdCounter;
@@ -56,7 +55,7 @@ public class ID {
 	/**
 	 * Die Methode liefert die höchste Transition Id als Ganzzahl zurück.
 	 * 
-	 * @return Integer transitionIdCounter
+	 * @return transitionIdCounter
 	 */
 	public int getTransitionIdCounter() {
 		return transitionIdCounter;
@@ -65,8 +64,7 @@ public class ID {
 	/**
 	 * Die Methode setzt die höchste Transition Id als Ganzzahl.
 	 * 
-	 * @param Integer
-	 *            transitionIdCounter
+	 * @param transitionIdCounter
 	 */
 	public void setTransitionIdCounter(int transitionIdCounter) {
 		this.transitionIdCounter = transitionIdCounter;

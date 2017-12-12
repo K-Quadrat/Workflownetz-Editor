@@ -58,10 +58,8 @@ public class ViewController extends WNEPanel {
 	 * Die Methode bekommt zwei node ids übergeben und erstellt ein Pfeil zwischen
 	 * den beiden nodes.
 	 * 
-	 * @param Quellnode
-	 *            Id
-	 * @param Zielnode
-	 *            Id
+	 * @param firstClickNodeId
+	 * @param secondClickNodeId
 	 */
 	public void addArc(String firstClickNodeId, String secondClickNodeId) {
 		arcsModel.setArc(id.getNextArcIdString(), firstClickNodeId, secondClickNodeId, new Point(0, 0), new Point(0, 0),

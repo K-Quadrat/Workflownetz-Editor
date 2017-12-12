@@ -23,8 +23,7 @@ public class ToolBarController {
 	 * Die Methode setzt im toolBarSwitch, die Id des buttons, welcher durch
 	 * angeklicken aktiviert wurde.
 	 * 
-	 * @param button
-	 *            id
+	 * @param toolBarSwitch
 	 */
 	public void setToolBarSwitch(int toolBarSwitch) {
 		this.toolBarSwitch = toolBarSwitch;

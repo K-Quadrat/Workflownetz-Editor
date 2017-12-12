@@ -92,8 +92,7 @@ public class Multiselect {
 	/**
 	 * Die Methode setzt die Koordinaten für multiselectFrom.
 	 * 
-	 * @param Point
-	 *            multiselectFrom
+	 * @param multiselectFrom
 	 */
 	public void setMultiselectFrom(Point multiselectFrom) {
 		this.multiselectFrom = multiselectFrom;
@@ -111,8 +110,7 @@ public class Multiselect {
 	/**
 	 * Die Methode liefert die Koordinaten für multiselectTo zurück.
 	 * 
-	 * @param Point
-	 *            multiselectTo
+	 * @param multiselectTo
 	 */
 	public void setMultiselectTo(Point multiselectTo) {
 		this.multiselectTo = multiselectTo;
@@ -130,8 +128,7 @@ public class Multiselect {
 	/**
 	 * Die Methode setzt die Koordinaten für coordinatesFrom.
 	 * 
-	 * @param Point
-	 *            coordinatesFrom
+	 * @param coordinatesFrom
 	 */
 	public void setCoordinatesFrom(Point coordinatesFrom) {
 		this.coordinatesFrom = coordinatesFrom;
@@ -149,8 +146,7 @@ public class Multiselect {
 	/**
 	 * Die Methode setzt die Koordinaten für getCoordinatesTo.
 	 * 
-	 * @param Point
-	 *            coordinatesTo
+	 * @param coordinatesTo
 	 */
 	public void setCoordinatesTo(Point coordinatesTo) {
 		this.coordinatesTo = coordinatesTo;

@@ -23,8 +23,8 @@ public class StatusBar extends JLabel {
 	/**
 	 * Die Methode macht die übergebene Nachricht in der StatusBar sichbar.
 	 * 
-	 * @param Nachricht
-	 * @param Farbe
+	 * @param message
+	 * @param color
 	 */
 	public void setMessage(String message, Color color) {
 		setText(" " + message);

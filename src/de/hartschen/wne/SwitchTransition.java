@@ -48,8 +48,7 @@ public class SwitchTransition {
 	/**
 	 * Die Methode setzt eine transition auf aktiv oder inaktiv
 	 * 
-	 * @param true
-	 *            oder false
+	 * @param transitionActive
 	 */
 	public void setTransitionActive(boolean transitionActive) {
 		this.transitionActive = transitionActive;
@@ -67,8 +66,7 @@ public class SwitchTransition {
 	/**
 	 * Die Methode setzt die start node.
 	 * 
-	 * @param Id
-	 *            der start node
+	 * @param startNodeClass
 	 */
 	public void setStartNodeClass(String startNodeClass) {
 		this.startNodeClass = startNodeClass;
@@ -86,8 +84,7 @@ public class SwitchTransition {
 	/**
 	 * Die Methode setzt die end node.
 	 * 
-	 * @param Id
-	 *            der end node
+	 * @param endNodeClass
 	 */
 	public void setEndNodeClass(String endNodeClass) {
 		this.endNodeClass = endNodeClass;
@@ -98,8 +95,7 @@ public class SwitchTransition {
 	 * ist. Wenn die transition aktiv ist, wird true zurückgeliefert und wenn sie
 	 * nicht aktiv ist false.
 	 * 
-	 * @param transition
-	 *            id
+	 * @param id
 	 * @return true oder false
 	 */
 	public boolean transitionActive(String id) {
@@ -133,8 +129,7 @@ public class SwitchTransition {
 	 * ist, ansonsten false. Im Fehlerfall wird eine entsprechende Nachricht an die
 	 * StatusBar übergeben.
 	 * 
-	 * @param node
-	 *            id
+	 * @param id
 	 * @return true oder false
 	 */
 	public boolean contact(String id) {
@@ -175,7 +170,7 @@ public class SwitchTransition {
 	 * ansonsten false. Im Fehlerfall wird eine entsprechende Nachricht an die
 	 * StatusBar übergeben.
 	 * 
-	 * @return
+	 * @return true oder false
 	 */
 	public boolean deadlock() {
 		List<Boolean> active = new ArrayList<Boolean>();
@@ -198,7 +193,7 @@ public class SwitchTransition {
 	 * ansonsten false. Bei erreichen der Endmarkierung, wird eine entsprechende
 	 * Nachricht an die StatusBar übergeben.
 	 * 
-	 * @return
+	 * @return true oder false
 	 */
 	public boolean reachedTheEndMarking() {
 		for (Node n : model.getAllPlaces()) {
@@ -416,7 +411,7 @@ public class SwitchTransition {
 	 * sich um ein Workflownetz handelt, wird true zurückgeliefert, ansonsten false.
 	 * Es wird eine entsprechende Nachricht an die StatusBar übergeben.
 	 * 
-	 * @return
+	 * @return true oder false
 	 */
 	public boolean isWorkflowNet() {
 		if (areAllNetworkElementsOnThePath()) {

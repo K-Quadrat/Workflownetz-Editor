@@ -70,8 +70,7 @@ public class Node {
 	/**
 	 * Die Methode setzt die node Id.
 	 * 
-	 * @param node
-	 *            id
+	 * @param id
 	 */
 	public void setId(String id) {
 		this.id = id;
@@ -125,8 +124,7 @@ public class Node {
 	/**
 	 * Die Methode setzt den Status der Makierung.
 	 * 
-	 * @param true
-	 *            oder false
+	 * @param marking
 	 */
 	public void setMarking(boolean marking) {
 		this.marking = marking;

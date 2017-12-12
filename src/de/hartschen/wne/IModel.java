@@ -49,8 +49,7 @@ public interface IModel {
 	/**
 	 * Die Methode löscht ein node Objekt aus der Datenhaltung.
 	 * 
-	 * @param node
-	 *            id
+	 * @param id
 	 */
 	void deleteNodeById(String id);
 
