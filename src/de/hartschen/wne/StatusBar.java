@@ -5,13 +5,27 @@ import java.awt.Dimension;
 
 import javax.swing.JLabel;
 
+/**
+ * Die Klasse implementiert die StatusBar im WNEMainFrame.
+ * 
+ * @author Jens Hartschen
+ *
+ */
 public class StatusBar extends JLabel {
 
-	/** Creates a new instance of StatusBar */
+	/**
+	 * Konstruktor der StatusBar Klasse.
+	 */
 	public StatusBar() {
 		super.setPreferredSize(new Dimension(100, 20));
 	}
 
+	/**
+	 * Die Methode macht die übergebene Nachricht in der StatusBar sichbar.
+	 * 
+	 * @param Nachricht
+	 * @param Farbe
+	 */
 	public void setMessage(String message, Color color) {
 		setText(" " + message);
 		setForeground(color);

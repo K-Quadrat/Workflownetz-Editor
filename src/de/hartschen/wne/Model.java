@@ -5,6 +5,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Die Klasse implementiert das IModel Schnittstellen Interface. Dokumentation
+ * in der IModel Schnittstellen Interface Klasse.
+ * 
+ * @author Jens Hartschen
+ *
+ */
 public class Model implements IModel {
 
 	private List<Node> nodes = new ArrayList<Node>();
@@ -150,11 +157,9 @@ public class Model implements IModel {
 			}
 		}
 		if (hit) {
-			nodes.remove(index);	
+			nodes.remove(index);
 		}
-		
+
 	}
-	
-	
 
 }

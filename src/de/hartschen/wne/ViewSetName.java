@@ -5,6 +5,12 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.*;
 
+/**
+ * Die Klasse erzeugt ein neues JPanel, um den Namen einer node zu ändern.
+ * 
+ * @author Jens Hartschen
+ *
+ */
 public class ViewSetName extends JPanel {
 
 	public ViewSetName(Node node, IView iView) {

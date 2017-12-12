@@ -17,7 +17,13 @@ import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
-
+/**
+ * Die Klasse WNEMainFrame stellt ein JFrame Container, dem alle weiteren
+ * Elemente hinzugefüht werden.
+ * 
+ * @author Jens Hartschen
+ *
+ */
 public class WNEMainFrame extends JFrame {
 
 	private GlobalSizeController globalSizeController;
@@ -36,9 +42,28 @@ public class WNEMainFrame extends JFrame {
 	private Multiselect multiselect;
 	private ArcsController arcsController;
 
-	public WNEMainFrame(GlobalSizeController globalSizeController, WNEPanel myJPanel, ToolBarController toolBarController,
-			IModel model, IView iView, ArcsModel arcsModel, GlobalSizeModel globalSizeModel, ID id, StatusBar statusBar,
-			SetStartMark setStartMark, AnimationMode animationMode, Warshall warshall, Multiselect multiselect, ArcsController arcsController) {
+	/**
+	 * Konstruktor der WNEMainFrame Klasse.
+	 * 
+	 * @param globalSizeController
+	 * @param myJPanel
+	 * @param toolBarController
+	 * @param model
+	 * @param iView
+	 * @param arcsModel
+	 * @param globalSizeModel
+	 * @param id
+	 * @param statusBar
+	 * @param setStartMark
+	 * @param animationMode
+	 * @param warshall
+	 * @param multiselect
+	 * @param arcsController
+	 */
+	public WNEMainFrame(GlobalSizeController globalSizeController, WNEPanel myJPanel,
+			ToolBarController toolBarController, IModel model, IView iView, ArcsModel arcsModel,
+			GlobalSizeModel globalSizeModel, ID id, StatusBar statusBar, SetStartMark setStartMark,
+			AnimationMode animationMode, Warshall warshall, Multiselect multiselect, ArcsController arcsController) {
 		this.globalSizeController = globalSizeController;
 		this.myJPanel = myJPanel;
 		this.toolBarController = toolBarController;
@@ -240,47 +265,19 @@ public class WNEMainFrame extends JFrame {
 
 	}
 
-	private boolean databaseConditionCheckNodesId(IModel model) {
-		boolean error = false;
-		if (!model.getAllNodes().isEmpty()) {
-
-			for (Node n : model.getAllNodes()) {
-
-				if (!n.getId().substring(0, 1).matches("[ST]")) {
-					error = true;
-
-				}
-				if (!n.getId().substring(1).matches("[0-9][0-9]?[0-9]?[0-9]?")) {
-					error = true;
-				}
-			}
-		}
-
-		if (error) {
-			for (Node n : model.getAllNodes()) {
-				if (n.getNodeType() == ENode.PLACE) {
-					n.setId(id.getNextPlaceIdString());
-
-				}
-				if (n.getNodeType() == ENode.TRANSITION) {
-					n.setId(id.getNextTransitionIdString());
-
-				}
-			}
-		}
-
-		return error;
-
-	}
-
-
+	/**
+	 * Die Methode öffnet einen Datei öffen Dialog und instantisiert die PNMLParserImpl.
+	 * Der PNMLParserImpl wird die geöffnete Datei zum einlesen übergeben.
+	 * 
+	 * @param model
+	 */
 	private void OpenFile(IModel model) {
 		boolean parserError = false;
 
 		// Create a file chooser
 		// TODO set to currentPath
-//		JFileChooser chooser = new JFileChooser("/home/jens/FernUniHagen/ProPra/Aufgabenstellung/Beispiele");
-		 JFileChooser chooser = new JFileChooser(currentPath);
+		JFileChooser chooser = new JFileChooser("/home/jens/FernUniHagen/ProPra/Aufgabenstellung/Beispiele");
+		// JFileChooser chooser = new JFileChooser(currentPath);
 
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNML File", "pnml");
 		chooser.setFileFilter(filter);
@@ -296,8 +293,7 @@ public class WNEMainFrame extends JFrame {
 
 			File pnmlDatei = new File(chooser.getSelectedFile(), "");
 			if (pnmlDatei.exists()) {
-				PNMLParserImpl pnmlParserImpl = new PNMLParserImpl(pnmlDatei, model, iView, arcsModel, globalSizeModel,
-						z);
+				PNMLParserImpl pnmlParserImpl = new PNMLParserImpl(pnmlDatei, model, iView, arcsModel, globalSizeModel);
 				pnmlParserImpl.initParser();
 				pnmlParserImpl.parse();
 			} else {
@@ -306,7 +302,6 @@ public class WNEMainFrame extends JFrame {
 
 			id.setBothIdForParser();
 			id.setArcIdForParser();
-			
 
 		} else {
 			System.out.println("Bitte eine Datei als Parameter angeben!");
@@ -314,11 +309,17 @@ public class WNEMainFrame extends JFrame {
 		setStartMark.setStartMarking();
 	}
 
+	/**
+	 * Die Methode öffnet einen Datei speichern Dialog und instantisiert die PNMLWriterImpl.
+	 * Der PNMLWriterImpl wird der Pfad zum Speichern übergeben.
+	 * @param model
+	 */
 	private void SaveFile(IModel model) {
 		// Create a file chooser
 		// TODO set to currentPath
-//		JFileChooser chooser = new JFileChooser("/home/jens/FernUniHagen/ProPra/Aufgabenstellung/SaveTest");
-		 JFileChooser chooser = new JFileChooser(currentPath);
+		// JFileChooser chooser = new
+		// JFileChooser("/home/jens/FernUniHagen/ProPra/Aufgabenstellung/SaveTest");
+		JFileChooser chooser = new JFileChooser(currentPath);
 
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNML File", "pnml");
 		chooser.setFileFilter(filter);

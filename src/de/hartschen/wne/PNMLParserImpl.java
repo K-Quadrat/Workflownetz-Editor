@@ -4,6 +4,12 @@ import java.awt.Color;
 import java.awt.Point;
 import java.io.File;
 
+/**
+ * Implementierung der PNMLParser Klasse. Dokumentation in der PNMLParser Klasse.
+ * 
+ * @author Jens Hartschen
+ *
+ */
 public class PNMLParserImpl extends PNMLParser {
 	private IModel model;
 	private IView iView;

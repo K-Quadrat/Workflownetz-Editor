@@ -4,6 +4,12 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasse um einzelne nodes auszuwählen.
+ * 
+ * @author Jens Hartschen
+ *
+ */
 public class SelectedNode {
 
 	private Node selectedNode = null;
@@ -11,18 +17,21 @@ public class SelectedNode {
 	private IModel model;
 	private GlobalSizeModel globalSizeModel;
 
+	/**
+	 * Konstuktor der Klasse SelectedNode.
+	 * 
+	 * @param model
+	 * @param globalSizeModel
+	 */
 	public SelectedNode(IModel model, GlobalSizeModel globalSizeModel) {
 		super();
 		this.model = model;
 		this.globalSizeModel = globalSizeModel;
 	}
 
-	public SelectedNode(IModel model) {
-		super();
-		this.model = model;
-	}
-
 	/**
+	 * Diese Methode liefert beim Rechtsklick eine ausgewählte node zurück.
+	 * 
 	 * @return the selectedNodeRightClick
 	 */
 	public Node getSelectedNodeRightClick() {
@@ -30,14 +39,17 @@ public class SelectedNode {
 	}
 
 	/**
+	 * Diese Methode setzt beim Rechtsklick eine node als ausgewählt.
+	 * 
 	 * @param selectedNodeRightClick
-	 *            the selectedNodeRightClick to set
 	 */
 	public void setSelectedNodeRightClick(Node selectedNodeRightClick) {
 		this.selectedNodeRightClick = selectedNodeRightClick;
 	}
 
 	/**
+	 * Diese Methode liefert eine ausgewählte node zurück.
+	 * 
 	 * @return the selectedNode
 	 */
 	public Node getSelectedNode() {
@@ -45,13 +57,20 @@ public class SelectedNode {
 	}
 
 	/**
+	 * Diese Methode setzt eine node als ausgewählte.
+	 * 
 	 * @param selectedNode
-	 *            the selectedNode to set
 	 */
 	public void setSelectedNode(Node selectedNode) {
 		this.selectedNode = selectedNode;
 	}
 
+	/**
+	 * Die Methode setzt beim verschiebden der node, die neuen Koordinaten in der
+	 * Datenhaltung.
+	 * 
+	 * @param coordinates
+	 */
 	public void setNewCoordinatesForSelectedNode(Point coordinates) {
 
 		if (model.getSmallestPoint().x <= globalSizeModel.getNodesSize() / 2) {

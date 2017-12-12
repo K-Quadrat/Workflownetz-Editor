@@ -31,6 +31,12 @@ import javax.swing.border.LineBorder;
 import sun.java2d.loops.DrawLine;
 import sun.java2d.loops.DrawRect;
 
+/**
+ * Die Klasse WNEPanel definiert ein JPane zum Zeichnen.
+ * 
+ * @author Jens Hartschen
+ *
+ */
 public class WNEPanel extends JPanel implements IView {
 
 	private int click1X;
@@ -64,11 +70,27 @@ public class WNEPanel extends JPanel implements IView {
 	private IView iView;
 	private Warshall warshall;
 
-	public WNEPanel(IModel model, ViewController viewController,
-			ToolBarController toolBarController, SelectedNode selectedNode, ArcsModel arcsModel,
-			ArcsController arcsController, GlobalSizeModel globalSizeModel, StatusBar statusBar,
-			SwitchTransition switchTransition, Multiselect multiselect, AnimationMode animationMode,
-			SetStartMark setStartMark, Warshall warshall) {
+	/**
+	 * Konstruktor der WNEPanel Klasse.
+	 * 
+	 * @param model
+	 * @param viewController
+	 * @param toolBarController
+	 * @param selectedNode
+	 * @param arcsModel
+	 * @param arcsController
+	 * @param globalSizeModel
+	 * @param statusBar
+	 * @param switchTransition
+	 * @param multiselect
+	 * @param animationMode
+	 * @param setStartMark
+	 * @param warshall
+	 */
+	public WNEPanel(IModel model, ViewController viewController, ToolBarController toolBarController,
+			SelectedNode selectedNode, ArcsModel arcsModel, ArcsController arcsController,
+			GlobalSizeModel globalSizeModel, StatusBar statusBar, SwitchTransition switchTransition,
+			Multiselect multiselect, AnimationMode animationMode, SetStartMark setStartMark, Warshall warshall) {
 		this.model = model;
 		this.viewController = viewController;
 		this.toolBarController = toolBarController;
@@ -114,14 +136,14 @@ public class WNEPanel extends JPanel implements IView {
 					model.deleteNode(clickX, clickY);
 					arcsController.removeNotUsedArcs();
 					setStartMark.setStartMarking();
-					repaint();
+					refresh();
 
 				}
 
 				if (event.getActionCommand().equals("Delete Arc")) {
 					arcsModel.deleteArc(clickX, clickY);
 					setStartMark.setStartMarking();
-					repaint();
+					refresh();
 
 				}
 
@@ -141,7 +163,7 @@ public class WNEPanel extends JPanel implements IView {
 					multiselect.deleteMultiselectedNodes();
 					arcsController.removeNotUsedArcs();
 					setStartMark.setStartMarking();
-					repaint();
+					refresh();
 
 				}
 
@@ -173,6 +195,9 @@ public class WNEPanel extends JPanel implements IView {
 
 	}
 
+	/**
+	 * Standard Konstruktor der WNEPanel Klasse.
+	 */
 	public WNEPanel() {
 	}
 
@@ -205,7 +230,7 @@ public class WNEPanel extends JPanel implements IView {
 				selectedNode.setSelectedNode(null);
 
 			}
-			repaint();
+			refresh();
 
 		}
 
@@ -221,7 +246,7 @@ public class WNEPanel extends JPanel implements IView {
 				else if (e.isShiftDown()) {
 					// Set from point for multiselect
 					multiselect.setMultiselectFrom(new Point(e.getX(), e.getY()));
-					System.out.println(multiselect.getMultiselectFrom());
+					// System.out.println(multiselect.getMultiselectFrom());
 
 				} else {
 					multiselect.setCoordinatesFrom(new Point(e.getX(), e.getY()));
@@ -242,7 +267,7 @@ public class WNEPanel extends JPanel implements IView {
 					Node n = model.getNode(e.getX(), e.getY());
 					if (n != null) {
 						selectedNode.setSelectedNode(n);
-						repaint();
+						refresh();
 					}
 
 				}
@@ -268,21 +293,21 @@ public class WNEPanel extends JPanel implements IView {
 			switch (toolBarController.getToolBarSwitch()) {
 			case 0:
 				multiselect.clearMultiselect();
-				repaint();
+				refresh();
 				break;
 			case 1:
 				multiselect.clearMultiselect();
-				repaint();
+				refresh();
 				break;
 			case 2:
 				viewController.addPlace(e.getX(), e.getY());
 				setStartMark.setStartMarking();
-				repaint();
+				refresh();
 				break;
 			case 3:
 				viewController.addTransition(e.getX(), e.getY());
 				setStartMark.setStartMarking();
-				repaint();
+				refresh();
 				break;
 			case 4:
 				// Find the node that was clicked
@@ -307,7 +332,7 @@ public class WNEPanel extends JPanel implements IView {
 					firstClick = true;
 				}
 				setStartMark.setStartMarking();
-				repaint();
+				refresh();
 				break;
 
 			default:
@@ -348,11 +373,15 @@ public class WNEPanel extends JPanel implements IView {
 
 				}
 			}
-			repaint();
+			refresh();
 		}
 	};
 
-	// draw all nodes
+	/**
+	 * Die Methode stellt alle nodes auf dem panel da.
+	 * 
+	 * @param g2d
+	 */
 	private void drawNodes(Graphics2D g2d) {
 		for (Node n : model.getAllNodes()) {
 			// der momentan ausgewählte node erhält zur besseren übersicht einen roten rand
@@ -404,6 +433,11 @@ public class WNEPanel extends JPanel implements IView {
 		}
 	}
 
+	/**
+	 * Die Methode stellt alle namen der nodes auf dem panel da.
+	 * 
+	 * @param g2d
+	 */
 	private void drawName(Graphics2D g2d) {
 		for (Node n : model.getAllNodes()) {
 			g2d.setColor(Color.BLACK);
@@ -416,15 +450,25 @@ public class WNEPanel extends JPanel implements IView {
 		}
 	}
 
+	/**
+	 * Die Methode stellt alle Pfeile auf dem panel da.
+	 * 
+	 * @param g2d
+	 */
 	public void drawArc(Graphics2D g2d) {
 
 		for (Arc a : arcsModel.getArcs()) {
 
-			g2d.drawLine(a.getVon().x, a.getVon().y, a.getNach().x, a.getNach().y);
-			g2d.fillPolygon(a.getPfeil());
+			g2d.drawLine(a.getFrom().x, a.getFrom().y, a.getTo().x, a.getTo().y);
+			g2d.fillPolygon(a.getArrow());
 		}
 	}
 
+	/**
+	 * Die Methode stellt die Markierung auf den places da.
+	 * 
+	 * @param g2d
+	 */
 	public void drawMarking(Graphics2D g2d) {
 
 		for (Node n : model.getAllPlaces()) {
@@ -459,17 +503,28 @@ public class WNEPanel extends JPanel implements IView {
 		revalidate();
 	}
 
+	/**
+	 * Die Methode setzt eine Referenz des iView Objekts.
+	 * 
+	 * @param iView
+	 */
 	public void setIViewReference(IView iView) {
 		this.iView = iView;
 
 	}
 
+	/**
+	 * Die Methode setzt eine Referenz des ScrollPane.
+	 * 
+	 * @param scrollPane
+	 */
 	public void setScrollPaneReference(JScrollPane scrollPane) {
 		this.scrollPane = scrollPane;
 	}
 
 	@Override
 	public void refresh() {
+		revalidate();
 		repaint();
 	}
 

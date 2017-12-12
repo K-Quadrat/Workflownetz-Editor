@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Klasse zur Verwaltung der Ids für die Transitions, Places und Arcs
+ * 
+ * @author Jens Hartschen
+ *
+ */
 public class ID {
 	int placeIdCounter;
 	int transitionIdCounter;
@@ -17,51 +23,59 @@ public class ID {
 	private IModel model;
 	private ArcsModel arcsModel;
 
+	/**
+	 * Konstruktor der ID Klasse.
+	 * 
+	 * @param model
+	 * @param arcsModel
+	 */
 	public ID(IModel model, ArcsModel arcsModel) {
 		this.model = model;
 		this.arcsModel = arcsModel;
 	}
 
-	
-	
 	/**
-	 * @return the placeIdCounter
+	 * Die Methode liefert die höchste Place Id als Ganzzahl zurück.
+	 * 
+	 * @return Integer placeIdCounter
 	 */
 	public int getPlaceIdCounter() {
 		return placeIdCounter;
 	}
 
-
-
 	/**
-	 * @param placeIdCounter the placeIdCounter to set
+	 * Die Methode setzt die höchste Place Id als Ganzzahl.
+	 * 
+	 * @param Integer
+	 *            placeIdCounter
 	 */
 	public void setPlaceIdCounter(int placeIdCounter) {
 		this.placeIdCounter = placeIdCounter;
 	}
 
-
-
 	/**
-	 * @return the transitionIdCounter
+	 * Die Methode liefert die höchste Transition Id als Ganzzahl zurück.
+	 * 
+	 * @return Integer transitionIdCounter
 	 */
 	public int getTransitionIdCounter() {
 		return transitionIdCounter;
 	}
 
-
-
 	/**
-	 * @param transitionIdCounter the transitionIdCounter to set
+	 * Die Methode setzt die höchste Transition Id als Ganzzahl.
+	 * 
+	 * @param Integer
+	 *            transitionIdCounter
 	 */
 	public void setTransitionIdCounter(int transitionIdCounter) {
 		this.transitionIdCounter = transitionIdCounter;
 	}
 
-
-
 	/**
-	 * @return the placeIdString
+	 * Die Methode liefert die nächste Place Id als String zurück.
+	 * 
+	 * @return Sting placeIdString
 	 */
 	public String getNextPlaceIdString() {
 		placeIdCounter++;
@@ -69,20 +83,26 @@ public class ID {
 		return placeIdString;
 	}
 
+	/**
+	 * Die Methode liefert die aktuelle Place Id als String zurück.
+	 * 
+	 * @return String placeIdString
+	 */
 	public String getPlaceIdString() {
 		return placeIdString;
 	}
 
 	/**
-	 * @param placeIdString
-	 *            the placeIdString to set
+	 * Die Methode setzt die nächste Place Id als String.
 	 */
 	public void setPlaceIdString() {
 		placeIdString = "S" + Integer.toString(placeIdCounter);
 	}
 
 	/**
-	 * @return the transitionIdString
+	 * Die Methode liefert die nächste Transition Id als String zurück.
+	 * 
+	 * @return String transitionIdString
 	 */
 	public String getNextTransitionIdString() {
 		transitionIdCounter++;
@@ -90,24 +110,38 @@ public class ID {
 		return transitionIdString;
 	}
 
+	/**
+	 * Die Methode liefert die aktuelle Transition Id als String zurück.
+	 * 
+	 * @return String transitionIdString
+	 */
 	public String getTransitionIdString() {
 		return transitionIdString;
 	}
 
 	/**
-	 * @param transitionIdString
-	 *            the transitionIdString to set
+	 * Die Methode setzt die nächste Transition Id als String.
 	 */
 	public void setTransitionIdString() {
 		transitionIdString = "T" + Integer.toString(transitionIdCounter);
 	}
 
+	/**
+	 * Die Methode liefert die nächste Arc Id als String zurück.
+	 * 
+	 * @return String arcIdString
+	 */
 	public String getNextArcIdString() {
 		arcIdCounter++;
 		setArcIdString();
 		return arcIdString;
 	}
 
+	/**
+	 * Die Methode liefert die aktuelle Arc Id als String zurück.
+	 * 
+	 * @return String arcIdString
+	 */
 	public String getArcIdString() {
 		return arcIdString;
 	}
@@ -117,8 +151,8 @@ public class ID {
 	}
 
 	/**
-	 * @param placesIds
-	 *            the placesIds to set
+	 * Die Methode prüft die Datenhaltung auf Transitions und Places und setzt die
+	 * Counter auf die neuen Werte.
 	 */
 	public void setBothIdForParser() {
 		for (Node n : model.getAllNodes()) {
@@ -140,6 +174,10 @@ public class ID {
 
 	}
 
+	/**
+	 * Die Methode prüft die Datenhaltung auf Arcs und setzt den Counter auf den
+	 * neuen Wert.
+	 */
 	public void setArcIdForParser() {
 		for (Arc a : arcsModel.getArcs()) {
 			arcsIds.add(Integer.parseInt(a.getId().replaceAll("[A-Z,a-z]", "")));

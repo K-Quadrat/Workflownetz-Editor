@@ -4,6 +4,13 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Die Klasse beinhaltet alle Methoden, die nötig sind um die transitions zu
+ * schalten.
+ * 
+ * @author Jens Hartschen
+ *
+ */
 public class SwitchTransition {
 	private IModel model;
 	private ArcsModel arcsModel;
@@ -13,6 +20,14 @@ public class SwitchTransition {
 	private StatusBar statusBar;
 	private AnimationMode animationMode;
 
+	/**
+	 * Konstruktor der SwitchTransition Klasse.
+	 * 
+	 * @param model
+	 * @param arcsModel
+	 * @param statusBar
+	 * @param animationMode
+	 */
 	public SwitchTransition(IModel model, ArcsModel arcsModel, StatusBar statusBar, AnimationMode animationMode) {
 		super();
 		this.model = model;
@@ -22,50 +37,71 @@ public class SwitchTransition {
 	}
 
 	/**
-	 * @return the transitionActive
+	 * Die Methode prüft ob eine transition aktiv ist.
+	 * 
+	 * @return true oder false
 	 */
 	public boolean isTransitionActive() {
 		return transitionActive;
 	}
 
 	/**
-	 * @param transitionActive
-	 *            the transitionActive to set
+	 * Die Methode setzt eine transition auf aktiv oder inaktiv
+	 * 
+	 * @param true
+	 *            oder false
 	 */
 	public void setTransitionActive(boolean transitionActive) {
 		this.transitionActive = transitionActive;
 	}
 
 	/**
-	 * @return the startNodeClass
+	 * Die Methode liefert die Id der start node zurück.
+	 * 
+	 * @return start node Id
 	 */
 	public String getStartNodeClass() {
 		return startNodeClass;
 	}
 
 	/**
-	 * @param startNodeClass
-	 *            the startNodeClass to set
+	 * Die Methode setzt die start node.
+	 * 
+	 * @param Id
+	 *            der start node
 	 */
 	public void setStartNodeClass(String startNodeClass) {
 		this.startNodeClass = startNodeClass;
 	}
 
 	/**
-	 * @return the endNodeClass
+	 * Die Methode liefert die Id der end node zurück.
+	 * 
+	 * @return end node Id
 	 */
 	public String getEndNodeClass() {
 		return endNodeClass;
 	}
 
 	/**
-	 * @param endNodeClass
-	 *            the endNodeClass to set
+	 * Die Methode setzt die end node.
+	 * 
+	 * @param Id
+	 *            der end node
 	 */
 	public void setEndNodeClass(String endNodeClass) {
 		this.endNodeClass = endNodeClass;
 	}
 
+	/**
+	 * Die Methode bekommt eine transition Id übergeben und prüft ob diese aktive
+	 * ist. Wenn die transition aktiv ist, wird true zurückgeliefert und wenn sie
+	 * nicht aktiv ist false.
+	 * 
+	 * @param transition
+	 *            id
+	 * @return true oder false
+	 */
 	public boolean transitionActive(String id) {
 		List<Boolean> marking = new ArrayList<Boolean>();
 
@@ -81,8 +117,6 @@ public class SwitchTransition {
 				}
 			}
 		}
-		// System.out.println(marking);
-		// if contains false return true
 		if (marking.contains(false) || marking.isEmpty()) {
 			setTransitionActive(false);
 			return false;
@@ -94,6 +128,15 @@ public class SwitchTransition {
 
 	}
 
+	/**
+	 * Die Methode liefert true zurück, wenn es zu einer Kontaktsituation gekommen
+	 * ist, ansonsten false. Im Fehlerfall wird eine entsprechende Nachricht an die
+	 * StatusBar übergeben.
+	 * 
+	 * @param node
+	 *            id
+	 * @return true oder false
+	 */
 	public boolean contact(String id) {
 
 		List<Boolean> marking = new ArrayList<Boolean>();
@@ -127,6 +170,13 @@ public class SwitchTransition {
 
 	}
 
+	/**
+	 * Die Methode liefert true zurück, wenn es zu einem deadlock gekommen ist,
+	 * ansonsten false. Im Fehlerfall wird eine entsprechende Nachricht an die
+	 * StatusBar übergeben.
+	 * 
+	 * @return
+	 */
 	public boolean deadlock() {
 		List<Boolean> active = new ArrayList<Boolean>();
 
@@ -143,6 +193,13 @@ public class SwitchTransition {
 
 	}
 
+	/**
+	 * Die Methode liefert true zurück, wenn die Endmarkierung erreicht wurde,
+	 * ansonsten false. Bei erreichen der Endmarkierung, wird eine entsprechende
+	 * Nachricht an die StatusBar übergeben.
+	 * 
+	 * @return
+	 */
 	public boolean reachedTheEndMarking() {
 		for (Node n : model.getAllPlaces()) {
 			if (n.getId().equals(endNodeClass)) {
@@ -158,6 +215,12 @@ public class SwitchTransition {
 
 	}
 
+	/**
+	 * Die Methode schlatet die transition und entfernt, sowie setzt, die
+	 * Markierungen der places entsprechen neu.
+	 * 
+	 * @param transition
+	 */
 	public void switchTransition(Node transition) {
 		if (transitionActive(transition.getId()) && !contact(transition.getId())) {
 
@@ -190,6 +253,12 @@ public class SwitchTransition {
 		}
 	}
 
+	/**
+	 * Die Methode liefert true zurück, wenn alle nodes mit dem Graphen verbunden
+	 * sind. Ansonsten false.
+	 * 
+	 * @return true oder false
+	 */
 	public boolean areAllNetworkElementsOnThePath() {
 		List<String> arcsSource = new ArrayList<String>();
 		List<String> arcsTarget = new ArrayList<String>();
@@ -218,6 +287,11 @@ public class SwitchTransition {
 		return true;
 	}
 
+	/**
+	 * Die Methode prüft wie viele start und end places es gibt und übergibt eine
+	 * entsprechende Nachricht an die StatusBar.
+	 * 
+	 */
 	public void hasStartingEndingPlaces() {
 
 		// hasStartingEndingPlaces
@@ -336,6 +410,14 @@ public class SwitchTransition {
 
 	}
 
+	/**
+	 * Die Methode führt die beiden Methoden, areAllNetworkElementsOnThePath() und
+	 * hasStartingEndingPlaces() aus. Und Prüft somit auf ein Workflownetz. Wenn es
+	 * sich um ein Workflownetz handelt, wird true zurückgeliefert, ansonsten false.
+	 * Es wird eine entsprechende Nachricht an die StatusBar übergeben.
+	 * 
+	 * @return
+	 */
 	public boolean isWorkflowNet() {
 		if (areAllNetworkElementsOnThePath()) {
 

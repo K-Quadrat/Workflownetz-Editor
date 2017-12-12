@@ -2,6 +2,13 @@ package de.hartschen.wne;
 
 import java.io.File;
 
+/**
+ * Implementierung der PNMLWriter Klasse. Dokumentation in der PNMLWriter
+ * Klasse.
+ * 
+ * @author Jens Hartschen
+ *
+ */
 public class PNMLWriterImpl extends PNMLWriter {
 
 	private IModel model;

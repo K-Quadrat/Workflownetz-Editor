@@ -2,6 +2,16 @@ package de.hartschen.wne;
 
 import java.awt.*;
 
+/**
+ * Die Klasse implementiert den Pfeil.
+ * 
+ * @author Jens Hartschen
+ *
+ */
+/**
+ * @author Jens Hartschen
+ *
+ */
 public class Arc {
 	private String id;
 	private String source;
@@ -15,6 +25,21 @@ public class Arc {
 	private double xNew, yNew; // x-,y-Werte nach der Rotation,absolut
 	private double xHead, yHead; // x-,y-Werte der Pfeilspitze
 
+	/**
+	 * Konstruktor um ein Pfeil Objekt zu erstellen.
+	 * 
+	 * @param id
+	 * @param source
+	 *            node id
+	 * @param target
+	 *            node id
+	 * @param Quell
+	 *            Koordinaten
+	 * @param Ziel
+	 *            Koordinaten
+	 * @param Golbale
+	 *            Größe des Pfeils
+	 */
 	public Arc(String id, String source, String target, Point k1, Point k2, double length) {
 
 		this.id = id;
@@ -51,6 +76,8 @@ public class Arc {
 	}
 
 	/**
+	 * Die Methode liefert die id zurück.
+	 * 
 	 * @return the id
 	 */
 	public String getId() {
@@ -58,6 +85,8 @@ public class Arc {
 	}
 
 	/**
+	 * Die Methode setzt die id.
+	 * 
 	 * @param id
 	 *            the id to set
 	 */
@@ -66,6 +95,8 @@ public class Arc {
 	}
 
 	/**
+	 * Die Methode liefert die quell node id zurück.
+	 * 
 	 * @return the source
 	 */
 	public String getSource() {
@@ -73,6 +104,8 @@ public class Arc {
 	}
 
 	/**
+	 * Die Methode setzt die quell node id.
+	 * 
 	 * @param source
 	 *            the source to set
 	 */
@@ -81,6 +114,8 @@ public class Arc {
 	}
 
 	/**
+	 * Die Methode liefert die ziel node id zurück.
+	 * 
 	 * @return the target
 	 */
 	public String getTarget() {
@@ -88,6 +123,8 @@ public class Arc {
 	}
 
 	/**
+	 * Die Methode setzt die ziel node id.
+	 * 
 	 * @param target
 	 *            the target to set
 	 */
@@ -96,50 +133,69 @@ public class Arc {
 	}
 
 	/**
-	 * @return the von
+	 * Die Methode liefert die Quellkoordinaten zurück.
+	 * 
+	 * @return Point from
 	 */
-	public Point getVon() {
+	public Point getFrom() {
 		return from;
 	}
 
 	/**
-	 * @param von
-	 *            the von to set
+	 * Die Methode setzt die Quellkooardinaten.
+	 * 
+	 * @param Point
+	 *            from
 	 */
-	public void setVon(Point von) {
-		this.from = von;
+	public void setFrom(Point from) {
+		this.from = from;
 	}
 
 	/**
-	 * @return the nach
+	 * Die Methode liefert die Zielkoordinaten
+	 * 
+	 * @return Point to
 	 */
-	public Point getNach() {
+	public Point getTo() {
 		return to;
 	}
 
 	/**
-	 * @param nach
-	 *            the nach to set
+	 * Die Methode setzt die Zielkooardinaten.
+	 * 
+	 * @param Point
+	 *            to
+	 * 
 	 */
-	public void setNach(Point nach) {
-		this.to = nach;
+	public void setTo(Point to) {
+		this.to = to;
 	}
 
 	/**
-	 * @return the pfeil
+	 * Die Methode liefert die Pfeilspitze zurück.
+	 * 
+	 * @return Polygon arrow
 	 */
-	public Polygon getPfeil() {
+	public Polygon getArrow() {
 		return arrow;
 	}
 
 	/**
-	 * @param pfeil
-	 *            the pfeil to set
+	 * Die Methode setzt die Pfeilspitze.
+	 * 
+	 * @param Polygon
+	 *            arrow
 	 */
-	public void setPfeil(Polygon pfeil) {
-		this.arrow = pfeil;
+	public void setArrow(Polygon arrow) {
+		this.arrow = arrow;
 	}
 
+	
+	/** Die Methode ändert die Koordinaten und Größe des Pfeils.
+	 * @param Quellkooardinaten
+	 * @param Zielkooardinaten
+	 * @param Globale Größe der Pfeilspitze
+	 */
 	public void modifyArc(Point k1, Point k2, double length) {
 
 		this.from = k1;
@@ -172,7 +228,15 @@ public class Arc {
 
 	}
 
-	// pX, pY mouse click coordinates
+	/**
+	 * Die Mathode zeigt ob auf eine Pfeilspitze geklickt wurde.
+	 * 
+	 * @param pX
+	 *            Maus click Koordinate
+	 * @param pY
+	 *            Maus click Koordinate
+	 * @return Ausgewählte Pfeilspitze
+	 */
 	public boolean containsPoint(int pX, int pY) {
 		return Math.abs(this.to.x - pX) <= 30 && Math.abs(this.to.y - pY) <= 30;
 	}

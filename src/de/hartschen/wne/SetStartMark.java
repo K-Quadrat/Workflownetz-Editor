@@ -1,5 +1,11 @@
 package de.hartschen.wne;
 
+/**
+ * Klasse zum setzten der Markierung auf der start node.
+ * 
+ * @author Jens Hartschen
+ *
+ */
 public class SetStartMark {
 	private SwitchTransition switchTransition;
 	private IView iView;
@@ -7,6 +13,14 @@ public class SetStartMark {
 	private AnimationMode animationMode;
 	private Warshall warshall;
 
+	/**
+	 * Konstruktor der SetStartMark Klasse.
+	 * 
+	 * @param switchTransition
+	 * @param model
+	 * @param animationMode
+	 * @param warshall
+	 */
 	public SetStartMark(SwitchTransition switchTransition, IModel model, AnimationMode animationMode,
 			Warshall warshall) {
 		super();
@@ -16,6 +30,9 @@ public class SetStartMark {
 		this.warshall = warshall;
 	}
 
+	/**
+	 * Die Methode setzt die Markierung für die start node.
+	 */
 	public void setStartMarking() {
 		warshall.check();
 		if (switchTransition.isWorkflowNet() && warshall.check()) {
@@ -50,6 +67,12 @@ public class SetStartMark {
 
 	}
 
+	/**
+	 * Die Methode bekommt eine Referenz des iView Objekts übergeben, um die
+	 * refresh() Methode der WNEPanel Klasse zugänglich zu machen.
+	 * 
+	 * @param iView
+	 */
 	public void setIViewReference(IView iView) {
 		this.iView = iView;
 

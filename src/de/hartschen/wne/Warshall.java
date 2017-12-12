@@ -2,6 +2,17 @@ package de.hartschen.wne;
 
 import java.awt.Color;
 
+/**
+ * Die Klasse beinhaltet alle Methoden für eine Prüfung des Graphens, mittels
+ * des Algorithmus von Floyd und Warshall.
+ * 
+ * @author Jens Hartschen
+ *
+ */
+/**
+ * @author Jens Hartschen
+ *
+ */
 public class Warshall {
 	private ArcsModel arcsModel;
 	private ID id;
@@ -24,6 +35,12 @@ public class Warshall {
 		this.statusBar = statusBar;
 	}
 
+	/**
+	 * Die Methode führt den Graphen check, auf basis des Algorithmus von Floyd und
+	 * Warshall durch.
+	 * 
+	 * @return true oder false
+	 */
 	public boolean check() {
 		createMatrix();
 		getTC(matrix);
@@ -35,6 +52,9 @@ public class Warshall {
 		}
 	}
 
+	/**
+	 * Die Methode erstellt eine 2D Matrix aus den Daten der Datenhaltung.
+	 */
 	public void createMatrix() {
 
 		lastPlaceId = id.getPlaceIdCounter();
@@ -84,7 +104,13 @@ public class Warshall {
 		getTC(matrix);
 	}
 
-	/** Function to make the transitive closure **/
+	/**
+	 * Die Methode berechnet die Transitive Hülle mit dem Floyd und Warshall
+	 * Algorithmus.
+	 * 
+	 * @param 2D
+	 *            Matrix
+	 */
 	public void getTC(int[][] graph) {
 		this.V = graph.length;
 		tc = new boolean[V][V];
@@ -104,7 +130,9 @@ public class Warshall {
 		}
 	}
 
-	/** Funtion to display the trasitive closure **/
+	/**
+	 * Die Mathode gibt die Transitive Hülle in der Kommandozeile aus.
+	 */
 	public void displayTC() {
 		System.out.println("\nTransitive closure :\n");
 		System.out.print(" ");
@@ -123,6 +151,13 @@ public class Warshall {
 		}
 	}
 
+	/**
+	 * Die Methode prüft, ob alle nodes in der Transitive Hülle, von der start node
+	 * aus erreichbar sind und ob alle nodes die end node erreichen können. Wenn
+	 * beides positiv ist, wird true zurückgegeben, ansonsten false.
+	 * 
+	 * @return true oder false
+	 */
 	public boolean connectedWithStartAndEndPlace() {
 		// set startPlaceMatrixIndex and endPlaceMatrixIndex
 		if (switchTransition.getStartNodeClass() != null && !switchTransition.getStartNodeClass().isEmpty()
@@ -159,6 +194,17 @@ public class Warshall {
 
 	}
 
+	/**
+	 * Die Methode prüft ob eine node, dessen Id bei der
+	 * connectedWithStartAndEndPlace() Methode als fehler erkannt wurde, immer noch
+	 * existiert. Wenn die node nicht mehr existiert, handelt es sich nicht um einen
+	 * Fehler und es wird true zurückgegeben. Im Fehlerfall wird false zurückgegeben
+	 * und eine entsprechende Nachricht an die StatusBar übergeben.
+	 * 
+	 * 
+	 * @param matrixIndex
+	 * @return true oder false
+	 */
 	public boolean nodeStillExist(int matrixIndex) {
 		String nodeId = null;
 
@@ -181,8 +227,7 @@ public class Warshall {
 
 			for (Arc at : arcsModel.getArcs()) {
 				if (at.getTarget().equals(nodeId)) {
-					statusBar.setMessage("Not all network elements on a path from start place to end place 2",
-							Color.RED);
+					statusBar.setMessage("Not all network elements on a path from start place to end place", Color.RED);
 					return false;
 
 				}

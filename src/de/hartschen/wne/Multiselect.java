@@ -4,6 +4,12 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Klasse zur Verwaltung der Multiselect Funktionen.
+ * 
+ * @author Jens Hartschen
+ *
+ */
 public class Multiselect {
 	private List<String> multiselectedNodesIds = new ArrayList<String>();
 	private Point multiselectFrom = new Point(0, 0);
@@ -13,12 +19,22 @@ public class Multiselect {
 	private Point coordinatesTo;
 	private GlobalSizeModel globalSizeModel;
 
+	/**
+	 * konstruktor der Multiselect Klasse.
+	 * 
+	 * @param model
+	 * @param globalSizeModel
+	 */
 	public Multiselect(IModel model, GlobalSizeModel globalSizeModel) {
 		super();
 		this.model = model;
 		this.globalSizeModel = globalSizeModel;
 	}
 
+	/**
+	 * Die Methode fügt die Ids, der ausgewählten nodes, in die Liste
+	 * multiselectedNodesIds hinzu.
+	 */
 	public void addNodeMultiselectedNodesIds() {
 
 		for (Node n : model.getAllNodes()) {
@@ -31,6 +47,9 @@ public class Multiselect {
 		System.out.println(multiselectedNodesIds);
 	}
 
+	/**
+	 * Die Methode lösche alle ausgewählten nodes aus der Datenhaltung.
+	 */
 	public void deleteMultiselectedNodes() {
 		for (int i = 0; i < getMultiselectedNodesIds().size(); i++) {
 			for (int j = 0; j < model.getAllNodes().size(); j++) {
@@ -44,75 +63,103 @@ public class Multiselect {
 		}
 	}
 
+	/**
+	 * Die Methode setzt die Liste multiselectedNodesIds zurück.
+	 */
 	public void clearMultiselect() {
 		multiselectedNodesIds.clear();
 	}
 
+	/**
+	 * Die Methode liefert eine Liste mit allen ausgewählten nodes zurück.
+	 * 
+	 * @return Liste multiselectedNodesIds
+	 */
 	public List<String> getMultiselectedNodesIds() {
 		return multiselectedNodesIds;
 
 	}
 
 	/**
-	 * @return the multiselectFrom
+	 * Die Methode liefert die Koordinaten für multiselectFrom zurück.
+	 * 
+	 * @return Point multiselectFrom
 	 */
-	public Point getMultiselectFrom() {
+	public Point getc() {
 		return multiselectFrom;
 	}
 
 	/**
-	 * @param multiselectFrom
-	 *            the multiselectFrom to set
+	 * Die Methode setzt die Koordinaten für multiselectFrom.
+	 * 
+	 * @param Point
+	 *            multiselectFrom
 	 */
 	public void setMultiselectFrom(Point multiselectFrom) {
 		this.multiselectFrom = multiselectFrom;
 	}
 
 	/**
-	 * @return the multiselectTo
+	 * Die Methode liefert die Koordinaten für multiselectTo zurück.
+	 * 
+	 * @return Point multiselectTo
 	 */
 	public Point getMultiselectTo() {
 		return multiselectTo;
 	}
 
 	/**
-	 * @param multiselectTo
-	 *            the multiselectTo to set
+	 * Die Methode liefert die Koordinaten für multiselectTo zurück.
+	 * 
+	 * @param Point
+	 *            multiselectTo
 	 */
 	public void setMultiselectTo(Point multiselectTo) {
 		this.multiselectTo = multiselectTo;
 	}
 
 	/**
-	 * @return the coordinatesFrom
+	 * Die Methode liefert die Koordinaten für coordinatesFrom zurück.
+	 * 
+	 * @return Point coordinatesFrom
 	 */
 	public Point getCoordinatesFrom() {
 		return coordinatesFrom;
 	}
 
 	/**
-	 * @param coordinatesFrom
-	 *            the coordinatesFrom to set
+	 * Die Methode setzt die Koordinaten für coordinatesFrom.
+	 * 
+	 * @param Point
+	 *            coordinatesFrom
 	 */
 	public void setCoordinatesFrom(Point coordinatesFrom) {
 		this.coordinatesFrom = coordinatesFrom;
 	}
 
 	/**
-	 * @return the coordinatesTo
+	 * Die Methode liefert die Koordinaten für getCoordinatesTo zurück.
+	 * 
+	 * @return Point coordinatesTo
 	 */
 	public Point getCoordinatesTo() {
 		return coordinatesTo;
 	}
 
 	/**
-	 * @param coordinatesTo
-	 *            the coordinatesTo to set
+	 * Die Methode setzt die Koordinaten für getCoordinatesTo.
+	 * 
+	 * @param Point
+	 *            coordinatesTo
 	 */
 	public void setCoordinatesTo(Point coordinatesTo) {
 		this.coordinatesTo = coordinatesTo;
 	}
 
+	/**
+	 * Die Methode setzt beim verschiebden der nodes, die neuen Koordinaten in der
+	 * Datenhaltung.
+	 */
 	public void setNewCoordinates() {
 		int distanceX = coordinatesTo.x - coordinatesFrom.x;
 		int distanceY = coordinatesTo.y - coordinatesFrom.y;
