@@ -1,8 +1,6 @@
 package de.hartschen.wne;
 
 import java.awt.Point;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Klasse um einzelne nodes auszuwählen.

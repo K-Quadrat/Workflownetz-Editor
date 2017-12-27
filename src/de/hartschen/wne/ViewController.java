@@ -8,7 +8,7 @@ import java.awt.Point;
  * @author Jens Hartschen
  *
  */
-public class ViewController extends WNEPanel {
+public class ViewController {
 
 	private IModel model;
 	private ID id;
@@ -35,7 +35,6 @@ public class ViewController extends WNEPanel {
 	public void addPlace(int x, int y) {
 		model.setNode(id.getNextPlaceIdString(), x, y, globalSizeModel.getNodesSize(), ENode.PLACE,
 				id.getPlaceIdString(), false);
-		refresh();
 
 	}
 
@@ -51,7 +50,6 @@ public class ViewController extends WNEPanel {
 	public void addTransition(int x, int y) {
 		model.setNode(id.getNextTransitionIdString(), x, y, globalSizeModel.getNodesSize(), ENode.TRANSITION,
 				id.getTransitionIdString(), false);
-		refresh();
 	}
 
 	/**
@@ -64,7 +62,6 @@ public class ViewController extends WNEPanel {
 	public void addArc(String firstClickNodeId, String secondClickNodeId) {
 		arcsModel.setArc(id.getNextArcIdString(), firstClickNodeId, secondClickNodeId, new Point(0, 0), new Point(0, 0),
 				globalSizeModel.getArcsSize());
-		refresh();
 	}
 
 }

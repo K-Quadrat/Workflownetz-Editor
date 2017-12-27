@@ -26,22 +26,16 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class WNEMainFrame extends JFrame {
 
-	private GlobalSizeController globalSizeController;
-	private WNEPanel myJPanel;
-	private ToolBarController toolBarController;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private File currentPath;
-	private IModel model;
 	private IView iView;
 	private ArcsModel arcsModel;
 	private GlobalSizeModel globalSizeModel;
 	private ID id;
-	private StatusBar statusBar;
 	private SetStartMark setStartMark;
-	private AnimationMode animationMode;
-	private Warshall warshall;
-	private Multiselect multiselect;
-	private ArcsController arcsController;
-
 	/**
 	 * Konstruktor der WNEMainFrame Klasse.
 	 * 
@@ -63,21 +57,12 @@ public class WNEMainFrame extends JFrame {
 	public WNEMainFrame(GlobalSizeController globalSizeController, WNEPanel myJPanel,
 			ToolBarController toolBarController, IModel model, IView iView, ArcsModel arcsModel,
 			GlobalSizeModel globalSizeModel, ID id, StatusBar statusBar, SetStartMark setStartMark,
-			AnimationMode animationMode, Warshall warshall, Multiselect multiselect, ArcsController arcsController) {
-		this.globalSizeController = globalSizeController;
-		this.myJPanel = myJPanel;
-		this.toolBarController = toolBarController;
+			AnimationMode animationMode) {
 		this.iView = iView;
 		this.arcsModel = arcsModel;
 		this.globalSizeModel = globalSizeModel;
 		this.id = id;
-		this.statusBar = statusBar;
 		this.setStartMark = setStartMark;
-		this.animationMode = animationMode;
-		this.warshall = warshall;
-		this.multiselect = multiselect;
-		this.arcsController = arcsController;
-
 		JFrame frame = new JFrame("Workflownetz Editor Jens Hartschen 6970770");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setPreferredSize(new Dimension(1024, 768));
@@ -266,19 +251,14 @@ public class WNEMainFrame extends JFrame {
 	}
 
 	/**
-	 * Die Methode öffnet einen Datei öffen Dialog und instantisiert die PNMLParserImpl.
-	 * Der PNMLParserImpl wird die geöffnete Datei zum einlesen übergeben.
+	 * Die Methode öffnet einen Datei öffen Dialog und instantisiert die
+	 * PNMLParserImpl. Der PNMLParserImpl wird die geöffnete Datei zum einlesen
+	 * übergeben.
 	 * 
 	 * @param model
 	 */
 	private void OpenFile(IModel model) {
-		boolean parserError = false;
-
-		// Create a file chooser
-		// TODO set to currentPath
-		JFileChooser chooser = new JFileChooser("/home/jens/FernUniHagen/ProPra/Aufgabenstellung/Beispiele");
-		// JFileChooser chooser = new JFileChooser(currentPath);
-
+		JFileChooser chooser = new JFileChooser(currentPath);
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNML File", "pnml");
 		chooser.setFileFilter(filter);
 
@@ -310,15 +290,12 @@ public class WNEMainFrame extends JFrame {
 	}
 
 	/**
-	 * Die Methode öffnet einen Datei speichern Dialog und instantisiert die PNMLWriterImpl.
-	 * Der PNMLWriterImpl wird der Pfad zum Speichern übergeben.
+	 * Die Methode öffnet einen Datei speichern Dialog und instantisiert die
+	 * PNMLWriterImpl. Der PNMLWriterImpl wird der Pfad zum Speichern übergeben.
+	 * 
 	 * @param model
 	 */
 	private void SaveFile(IModel model) {
-		// Create a file chooser
-		// TODO set to currentPath
-		// JFileChooser chooser = new
-		// JFileChooser("/home/jens/FernUniHagen/ProPra/Aufgabenstellung/SaveTest");
 		JFileChooser chooser = new JFileChooser(currentPath);
 
 		FileNameExtensionFilter filter = new FileNameExtensionFilter("PNML File", "pnml");

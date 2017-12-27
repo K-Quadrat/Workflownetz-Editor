@@ -44,8 +44,7 @@ public class WNERun {
 
 					GlobalSizeController globalSizeController = new GlobalSizeController(model, iView, globalSizeModel);
 					new WNEMainFrame(globalSizeController, wnePanel, toolBarController, model, iView, arcsModel,
-							globalSizeModel, id, statusBar, setStartMark, animationMode, warshall, multiselect,
-							arcsController);
+							globalSizeModel, id, statusBar, setStartMark, animationMode);
 
 				} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 						| UnsupportedLookAndFeelException ex) {

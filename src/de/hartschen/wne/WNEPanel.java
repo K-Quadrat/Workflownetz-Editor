@@ -1,8 +1,6 @@
 package de.hartschen.wne;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -13,23 +11,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.beans.DefaultPersistenceDelegate;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.swing.ImageIcon;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
-
-import sun.java2d.loops.DrawLine;
-import sun.java2d.loops.DrawRect;
 
 /**
  * Die Klasse WNEPanel definiert ein JPane zum Zeichnen.
@@ -39,10 +25,10 @@ import sun.java2d.loops.DrawRect;
  */
 public class WNEPanel extends JPanel implements IView {
 
-	private int click1X;
-	private int click1Y;
-	private int click2X;
-	private int click2Y;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private int clickX;
 	private int clickY;
 	private String firstClickNodeId;
@@ -55,18 +41,11 @@ public class WNEPanel extends JPanel implements IView {
 	private ViewController viewController;
 	private ToolBarController toolBarController;
 	private SelectedNode selectedNode;
-	private Point sourcePoint;
-	private Point targetPoint;
-	private int radius;
 	private ArcsModel arcsModel;
 	private ArcsController arcsController;
-	private GlobalSizeModel globalSizeModel;
-	private StatusBar statusBar;
 	private SwitchTransition switchTransition;
 	private Multiselect multiselect;
-	private AnimationMode animationMode;
 	private SetStartMark setStartMark;
-	private JScrollPane scrollPane;
 	private IView iView;
 	private Warshall warshall;
 
@@ -97,11 +76,8 @@ public class WNEPanel extends JPanel implements IView {
 		this.selectedNode = selectedNode;
 		this.arcsModel = arcsModel;
 		this.arcsController = arcsController;
-		this.globalSizeModel = globalSizeModel;
-		this.statusBar = statusBar;
 		this.switchTransition = switchTransition;
 		this.multiselect = multiselect;
-		this.animationMode = animationMode;
 		this.setStartMark = setStartMark;
 		this.warshall = warshall;
 
@@ -151,7 +127,7 @@ public class WNEPanel extends JPanel implements IView {
 
 					for (Node n : model.getAllNodes()) {
 						if (n.equals(selectedNode.getSelectedNodeRightClick())) {
-							ViewSetName viewSetName = new ViewSetName(n, iView);
+							new ViewSetName(n, iView);
 							selectedNode.setSelectedNodeRightClick(null);
 						}
 
@@ -200,11 +176,6 @@ public class WNEPanel extends JPanel implements IView {
 	 */
 	public WNEPanel() {
 	}
-
-	// standartcursor für bewegungen
-	private Cursor CURSOR_MOVE = new Cursor(Cursor.MOVE_CURSOR);
-	// defaultcursor
-	private Cursor CURSOR_DEF = new Cursor(Cursor.DEFAULT_CURSOR);
 
 	private MouseListener mouseListener = new MouseListener() {
 
@@ -519,7 +490,6 @@ public class WNEPanel extends JPanel implements IView {
 	 * @param scrollPane
 	 */
 	public void setScrollPaneReference(JScrollPane scrollPane) {
-		this.scrollPane = scrollPane;
 	}
 
 	@Override

@@ -1,0 +1,884 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="de.hartschen.wne.GlobalSizeModel" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/GlobalSizeModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="185" width="136" x="848" y="1163"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="de.hartschen.wne.Multiselect" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/Multiselect.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="401" width="219" x="869" y="722"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="de.hartschen.wne.ViewController" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/ViewController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="131" width="289" x="1464" y="722"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="de.hartschen.wne.Arc" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/Arc.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="599" width="230" x="1633" y="2558"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="de.hartschen.wne.Warshall" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/Warshall.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="293" width="276" x="1877" y="1163"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="de.hartschen.wne.GlobalSizeController" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/GlobalSizeController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="113" width="278" x="488" y="722"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="de.hartschen.wne.WNEPanel" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/WNEPanel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="581" width="939" x="1464" y="101"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="de.hartschen.wne.ViewSetName" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/ViewSetName.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="77" width="157" x="302" y="-70"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="9" language="java" name="de.hartschen.wne.IModel" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/IModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="293" width="276" x="1128" y="2225"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="10" language="java" name="de.hartschen.wne.IView" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/IView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="77" width="104" x="1691" y="1163"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="11" language="java" name="de.hartschen.wne.ArcsController" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/ArcsController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="203" width="275" x="1128" y="722"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="de.hartschen.wne.PNMLWriterImpl" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/PNMLWriterImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="95" width="220" x="546" y="1676"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="de.hartschen.wne.SelectedNode" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/SelectedNode.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="167" width="262" x="2294" y="722"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="14" language="java" name="de.hartschen.wne.Model" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/Model.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="347" width="276" x="2680" y="722"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="15" language="java" name="de.hartschen.wne.SetStartMark" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/SetStartMark.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="113" width="335" x="1898" y="722"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="de.hartschen.wne.Node" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/Node.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="473" width="238" x="2318" y="1163"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="de.hartschen.wne.StatusBar" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/StatusBar.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="95" width="174" x="2587" y="2225"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="de.hartschen.wne.PNMLParser" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/PNMLParser.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="455" width="200" x="-82" y="101"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="19" language="java" name="de.hartschen.wne.PNMLWriter" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/PNMLWriter.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="221" width="254" x="491" y="1163"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="20" language="java" name="de.hartschen.wne.AnimationMode" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/AnimationMode.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="131" width="184" x="2801" y="2225"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="de.hartschen.wne.ArcsModel" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/ArcsModel.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="203" width="268" x="1633" y="2225"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="de.hartschen.wne.ID" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/ID.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="509" width="188" x="1424" y="1676"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="de.hartschen.wne.SwitchTransition" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/SwitchTransition.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="383" width="329" x="2174" y="1676"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="de.hartschen.wne.WNEMainFrame" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/WNEMainFrame.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="131" width="768" x="1464" y="-70"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="25" language="java" name="de.hartschen.wne.ENode" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/ENode.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="113" width="132" x="2627" y="1676"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="26" language="java" name="de.hartschen.wne.WNERun" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/WNERun.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="95" width="114" x="904" y="-70"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="27" language="java" name="de.hartschen.wne.PNMLParserImpl" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/PNMLParserImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="185" width="337" x="-82" y="722"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="28" language="java" name="de.hartschen.wne.ToolBarController" project="Workflownetz-Editor" 
+    file="/Workflownetz-Editor/src/de/hartschen/wne/ToolBarController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="131" width="153" x="295" y="722"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="29">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="30" name="viewController"/>      
+      <multiplicity id="31" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="32">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="33" name="id"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="35">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="36" name="toolBarController"/>      
+      <multiplicity id="37" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="38">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="39" name="arcsController"/>      
+      <multiplicity id="40" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="41">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="42" name="statusBar"/>      
+      <multiplicity id="43" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="44">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="45" name="model"/>      
+      <multiplicity id="46" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="47">    
+    <bendpoint x="2183" y="1163"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="48" name="switchTransition"/>      
+      <multiplicity id="49" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="50">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="51" name="globalSizeModel"/>      
+      <multiplicity id="52" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="53">    
+    <bendpoint x="1846" y="1676"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="54" name="arcsModel"/>      
+      <multiplicity id="55" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="56">    
+    <bendpoint x="2263" y="722"/>    
+    <bendpoint x="2263" y="1163"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="57" name="switchTransition"/>      
+      <multiplicity id="58" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="59">    
+    <bendpoint x="1330" y="1163"/>    
+    <bendpoint x="1360" y="1676"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="60" name="arcsModel"/>      
+      <multiplicity id="61" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="62">    
+    <bendpoint x="817" y="722"/>    
+    <bendpoint x="817" y="1163"/>    
+    <bendpoint x="817" y="1676"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="63" name="model"/>      
+      <multiplicity id="64" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="65">    
+    <bendpoint x="2628" y="722"/>    
+    <bendpoint x="2719" y="1163"/>    
+    <bendpoint x="2810" y="1676"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="66" name="animationMode"/>      
+      <multiplicity id="67" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="68">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="69" name="globalSizeModel"/>      
+      <multiplicity id="70" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="71">    
+    <bendpoint x="754" y="101"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="72" name="toolBarController"/>      
+      <multiplicity id="73" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="74">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="75" name="animationMode"/>      
+      <multiplicity id="76" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="77">    
+    <bendpoint x="1454" y="1163"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="78" name="id"/>      
+      <multiplicity id="79" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="80">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="19"/>  
+  </generalization>  
+  <association id="81">    
+    <bendpoint x="1433" y="101"/>    
+    <bendpoint x="1433" y="722"/>    
+    <bendpoint x="1433" y="1163"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="82" name="id"/>      
+      <multiplicity id="83" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="84">    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="85" name="globalSizeModel"/>      
+      <multiplicity id="86" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="87">    
+    <bendpoint x="1783" y="722"/>    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="10"/>  
+  </realization>  
+  <association id="88">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="89" name="arcsModel"/>      
+      <multiplicity id="90" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <bendpoint x="2607" y="722"/>    
+    <bendpoint x="2649" y="1163"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="92" name="nodeType"/>      
+      <multiplicity id="93" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="94">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="95" name="nodes"/>      
+      <multiplicity id="96" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="97">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="98" name="selectedNode"/>      
+      <multiplicity id="99" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="100">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="101" name="selectedNodeRightClick"/>      
+      <multiplicity id="102" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="103">    
+    <bendpoint x="2986" y="101"/>    
+    <bendpoint x="2986" y="722"/>    
+    <bendpoint x="2888" y="1163"/>    
+    <bendpoint x="2789" y="1676"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="104" name="statusBar"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="106">    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="107" name="myJPanel"/>      
+      <multiplicity id="108" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="109">    
+    <bendpoint x="1846" y="1163"/>    
+    <bendpoint x="1804" y="1676"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="110" name="model"/>      
+      <multiplicity id="111" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="112">    
+    <bendpoint x="2204" y="1163"/>    
+    <bendpoint x="2122" y="1676"/>    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="113" name="model"/>      
+      <multiplicity id="114" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="115">    
+    <bendpoint x="2628" y="1163"/>    
+    <bendpoint x="2533" y="1676"/>    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="9"/>  
+  </realization>  
+  <association id="116">    
+    <bendpoint x="838" y="722"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="117" name="globalSizeModel"/>      
+      <multiplicity id="118" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="119">    
+    <bendpoint x="1014" y="1163"/>    
+    <bendpoint x="1014" y="1676"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="120" name="model"/>      
+      <multiplicity id="121" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="122">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="7"/>  
+  </generalization>  
+  <association id="123">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="124" name="model"/>      
+      <multiplicity id="125" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="126">    
+    <end type="SOURCE" refId="16" navigable="false">      
+      <attribute id="127" name="nodeType"/>      
+      <multiplicity id="128" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="129">    
+    <bendpoint x="1867" y="722"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="130" name="warshall"/>      
+      <multiplicity id="131" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="132">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="133" name="iView"/>      
+      <multiplicity id="134" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="135">    
+    <bendpoint x="1825" y="722"/>    
+    <bendpoint x="1825" y="1163"/>    
+    <bendpoint x="1825" y="1676"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="136" name="arcsModel"/>      
+      <multiplicity id="137" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="138">    
+    <bendpoint x="2454" y="101"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="139" name="setStartMark"/>      
+      <multiplicity id="140" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="141">    
+    <bendpoint x="796" y="101"/>    
+    <bendpoint x="796" y="722"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="142" name="globalSizeModel"/>      
+      <multiplicity id="143" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="144">    
+    <bendpoint x="460" y="1163"/>    
+    <bendpoint x="460" y="1676"/>    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="145" name="model"/>      
+      <multiplicity id="146" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="147">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="148" name="arcs"/>      
+      <multiplicity id="149" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="150">    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="151" name="view"/>      
+      <multiplicity id="152" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="153">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="154" name="arcsModel"/>      
+      <multiplicity id="155" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="156">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="157" name="globalSizeModel"/>      
+      <multiplicity id="158" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="159">    
+    <bendpoint x="2143" y="1676"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="160" name="statusBar"/>      
+      <multiplicity id="161" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="162">    
+    <bendpoint x="-113" y="101"/>    
+    <bendpoint x="-113" y="722"/>    
+    <bendpoint x="-113" y="1163"/>    
+    <bendpoint x="-113" y="1676"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="163" name="model"/>      
+      <multiplicity id="164" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="165">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="166" name="globalSizeModel"/>      
+      <multiplicity id="167" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="168">    
+    <bendpoint x="775" y="101"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="169" name="globalSizeController"/>      
+      <multiplicity id="170" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="171">    
+    <bendpoint x="2287" y="1163"/>    
+    <bendpoint x="2575" y="1676"/>    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="172" name="animationMode"/>      
+      <multiplicity id="173" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="174">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="175" name="warshall"/>      
+      <multiplicity id="176" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="177">    
+    <bendpoint x="775" y="1163"/>    
+    <bendpoint x="838" y="1676"/>    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="178" name="arcsModel"/>      
+      <multiplicity id="179" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="180">    
+    <bendpoint x="1351" y="1163"/>    
+    <bendpoint x="1339" y="1676"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="181" name="model"/>      
+      <multiplicity id="182" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="183">    
+    <end type="SOURCE" refId="15" navigable="false">      
+      <attribute id="184" name="iView"/>      
+      <multiplicity id="185" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="186">    
+    <bendpoint x="2586" y="722"/>    
+    <bendpoint x="2586" y="1163"/>    
+    <bendpoint x="2596" y="1676"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="187" name="statusBar"/>      
+      <multiplicity id="188" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="189">    
+    <end type="SOURCE" refId="13" navigable="false">      
+      <attribute id="190" name="selectedNode"/>      
+      <multiplicity id="191" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="192">    
+    <bendpoint x="3007" y="101"/>    
+    <bendpoint x="3007" y="722"/>    
+    <bendpoint x="3007" y="1163"/>    
+    <bendpoint x="3007" y="1676"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="193" name="animationMode"/>      
+      <multiplicity id="194" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="195">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="196" name="model"/>      
+      <multiplicity id="197" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="198">    
+    <bendpoint x="796" y="1163"/>    
+    <bendpoint x="796" y="1676"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="199" name="model"/>      
+      <multiplicity id="200" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="201">    
+    <bendpoint x="2433" y="101"/>    
+    <bendpoint x="1846" y="722"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="202" name="iView"/>      
+      <multiplicity id="203" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="204">    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="205" name="switchTransition"/>      
+      <multiplicity id="206" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="207">    
+    <bendpoint x="1642" y="1163"/>    
+    <bendpoint x="1642" y="1676"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="208" name="arcsModel"/>      
+      <multiplicity id="209" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="210">    
+    <bendpoint x="2649" y="101"/>    
+    <bendpoint x="2649" y="722"/>    
+    <bendpoint x="2607" y="1163"/>    
+    <bendpoint x="2554" y="1676"/>    
+    <end type="SOURCE" refId="24" navigable="false">      
+      <attribute id="211" name="arcsModel"/>      
+      <multiplicity id="212" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="213">    
+    <bendpoint x="1804" y="722"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="214" name="iView"/>      
+      <multiplicity id="215" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="216">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="217" name="multiselect"/>      
+      <multiplicity id="218" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="219">    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="220" name="setStartMark"/>      
+      <multiplicity id="221" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="15" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="222">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="223" name="globalSizeModel"/>      
+      <multiplicity id="224" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="225">    
+    <end type="SOURCE" refId="27"/>    
+    <end type="TARGET" refId="18"/>  
+  </generalization>  
+  <association id="226">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="227" name="arcsModel"/>      
+      <multiplicity id="228" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="229">    
+    <bendpoint x="1137" y="1163"/>    
+    <bendpoint x="1137" y="1676"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="230" name="model"/>      
+      <multiplicity id="231" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

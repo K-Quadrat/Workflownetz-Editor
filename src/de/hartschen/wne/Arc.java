@@ -3,7 +3,7 @@ package de.hartschen.wne;
 import java.awt.*;
 
 /**
- * Die Klasse implementiert den Pfeil.
+ * Die Klasse implementiert die Kanten.
  * 
  * @author Jens Hartschen
  *
@@ -16,17 +16,16 @@ public class Arc {
 	private String id;
 	private String source;
 	private String target;
-	private Math m;
-	private Point from, to; // die zwei Punkte, die die Pfeil-Linie darstellen
+	private Point from, to; // die zwei Punkte, die die Kanten-Linie darstellen
 	private double phi; // Rotationswinkel
 	private Polygon arrow;
-	private double s; // Seitenlaenge des Pfeils
-	private double xOld, yOld; // x-,y-Werte vor der Rotation,relativ zur Pfeilspitze
+	private double s; // Seitenlaenge der Kante
+	private double xOld, yOld; // x-,y-Werte vor der Rotation,relativ zur Kantenpitze
 	private double xNew, yNew; // x-,y-Werte nach der Rotation,absolut
-	private double xHead, yHead; // x-,y-Werte der Pfeilspitze
+	private double xHead, yHead; // x-,y-Werte der Kantenspitze
 
 	/**
-	 * Konstruktor um ein Pfeil Objekt zu erstellen.
+	 * Konstruktor um ein Kanten Objekt zu erstellen.
 	 * 
 	 * @param id
 	 * @param source
@@ -44,14 +43,14 @@ public class Arc {
 		this.from = k1;
 		this.to = k2;
 		this.s = length;
-		phi = m.atan(((double) to.y - (double) from.y) / ((double) to.x - (double) from.x));
+		phi = Math.atan(((double) to.y - (double) from.y) / ((double) to.x - (double) from.x));
 		if (to.x < from.x)
-			phi = phi + m.PI;
-		// den Pfeil zeichnen
+			phi = phi + Math.PI;
+		// die Kante zeichnen
 		arrow = new Polygon();
-		arrow.addPoint(to.x, to.y); // Pfeilspitze
-		// Die beiden anderen Punkte des Pfeils muessen um den Winkel phi relative zur
-		// Pfeilspitze rotiert werden.
+		arrow.addPoint(to.x, to.y); // Kantenspitze
+		// Die beiden anderen Punkte der Kante muessen um den Winkel phi relative zur
+		// Kantenspitze rotiert werden.
 		// x_rot = x*cos(phi) - y*sin(phi)
 		// y_rot = x*sin(phi) + y*cos(phi)
 		xHead = (double) to.x;
@@ -59,13 +58,13 @@ public class Arc {
 		// erster Punkt
 		xOld = (double) to.x - s - xHead;
 		yOld = (double) to.y + s / 2.5 - yHead;
-		xNew = xOld * m.cos(phi) - yOld * m.sin(phi) + xHead;
-		yNew = xOld * m.sin(phi) + yOld * m.cos(phi) + yHead;
+		xNew = xOld * Math.cos(phi) - yOld * Math.sin(phi) + xHead;
+		yNew = xOld * Math.sin(phi) + yOld * Math.cos(phi) + yHead;
 		arrow.addPoint((int) xNew, (int) yNew);
 		// zweiter Punkt
 		yOld = (double) to.y - s / 2.5 - yHead;
-		xNew = xOld * m.cos(phi) - yOld * m.sin(phi) + xHead;
-		yNew = xOld * m.sin(phi) + yOld * m.cos(phi) + yHead;
+		xNew = xOld * Math.cos(phi) - yOld * Math.sin(phi) + xHead;
+		yNew = xOld * Math.sin(phi) + yOld * Math.cos(phi) + yHead;
 		arrow.addPoint((int) xNew, (int) yNew);
 
 	}
@@ -165,7 +164,7 @@ public class Arc {
 	}
 
 	/**
-	 * Die Methode liefert die Pfeilspitze zurück.
+	 * Die Methode liefert die Kantenspitze zurück.
 	 * 
 	 * @return Polygon arrow
 	 */
@@ -174,7 +173,7 @@ public class Arc {
 	}
 
 	/**
-	 * Die Methode setzt die Pfeilspitze.
+	 * Die Methode setzt die Kantenspitze.
 	 * 
 	 * @param arrow
 	 */
@@ -183,7 +182,7 @@ public class Arc {
 	}
 
 	/**
-	 * Die Methode ändert die Koordinaten und Größe des Pfeils.
+	 * Die Methode ändert die Koordinaten und Größe der Kante.
 	 * 
 	 * @param k1
 	 * @param k2
@@ -194,15 +193,15 @@ public class Arc {
 		this.from = k1;
 		this.to = k2;
 		this.s = length;
-		phi = m.atan(((double) to.y - (double) from.y) / ((double) to.x - (double) from.x));
+		phi = Math.atan(((double) to.y - (double) from.y) / ((double) to.x - (double) from.x));
 		if (to.x < from.x)
-			phi = phi + m.PI;
-		// den Pfeil zeichnen
-		// pfeil = new Polygon();
+			phi = phi + Math.PI;
+		// die Kante zeichnen
+		// Kante = new Polygon();
 		arrow.reset();
-		arrow.addPoint(to.x, to.y); // Pfeilspitze
-		// Die beiden anderen Punkte des Pfeils muessen um den Winkel phi relative zur
-		// Pfeilspitze rotiert werden.
+		arrow.addPoint(to.x, to.y); // Kantenspitze
+		// Die beiden anderen Punkte der Kante muessen um den Winkel phi relative zur
+		// Kantenspitze rotiert werden.
 		// x_rot = x*cos(phi) - y*sin(phi)
 		// y_rot = x*sin(phi) + y*cos(phi)
 		xHead = (double) to.x;
@@ -210,25 +209,25 @@ public class Arc {
 		// erster Punkt
 		xOld = (double) to.x - s - xHead;
 		yOld = (double) to.y + s / 2.5 - yHead;
-		xNew = xOld * m.cos(phi) - yOld * m.sin(phi) + xHead;
-		yNew = xOld * m.sin(phi) + yOld * m.cos(phi) + yHead;
+		xNew = xOld * Math.cos(phi) - yOld * Math.sin(phi) + xHead;
+		yNew = xOld * Math.sin(phi) + yOld * Math.cos(phi) + yHead;
 		arrow.addPoint((int) xNew, (int) yNew);
 		// zweiter Punkt
 		yOld = (double) to.y - s / 2.5 - yHead;
-		xNew = xOld * m.cos(phi) - yOld * m.sin(phi) + xHead;
-		yNew = xOld * m.sin(phi) + yOld * m.cos(phi) + yHead;
+		xNew = xOld * Math.cos(phi) - yOld * Math.sin(phi) + xHead;
+		yNew = xOld * Math.sin(phi) + yOld * Math.cos(phi) + yHead;
 		arrow.addPoint((int) xNew, (int) yNew);
 
 	}
 
 	/**
-	 * Die Mathode zeigt ob auf eine Pfeilspitze geklickt wurde.
+	 * Die Mathode zeigt ob auf eine Kantenspitze geklickt wurde.
 	 * 
 	 * @param pX
 	 *            Maus click Koordinate
 	 * @param pY
 	 *            Maus click Koordinate
-	 * @return Ausgewählte Pfeilspitze
+	 * @return Ausgewählte Kantenspitze
 	 */
 	public boolean containsPoint(int pX, int pY) {
 		return Math.abs(this.to.x - pX) <= 30 && Math.abs(this.to.y - pY) <= 30;

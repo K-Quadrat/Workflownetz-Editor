@@ -11,7 +11,7 @@ import javax.swing.*;
  * @author Jens Hartschen
  *
  */
-public class ViewSetName extends JPanel {
+public class ViewSetName {
 
 	public ViewSetName(Node node, IView iView) {
 		super();
@@ -40,8 +40,13 @@ public class ViewSetName extends JPanel {
 
 		frame.add(panel);
 		frame.setVisible(true);
-
+		
 		Action action = new AbstractAction() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// Set new name

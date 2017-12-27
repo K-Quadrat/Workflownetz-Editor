@@ -14,6 +14,11 @@ import javax.swing.JLabel;
 public class StatusBar extends JLabel {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Konstruktor der StatusBar Klasse.
 	 */
 	public StatusBar() {
